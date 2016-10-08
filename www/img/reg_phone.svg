@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="45px" height="71px" viewBox="0 0 45 71" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>phone</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="登录注册" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="手机号注册" transform="translate(-165.000000, -133.000000)">
+            <g id="phone" transform="translate(150.000000, 131.000000)">
+                <rect id="Rectangle-134-Copy-2" fill="#181818" opacity="0" x="0" y="0" width="75" height="75"></rect>
+                <rect id="Rectangle-34" stroke="#FFFFFF" stroke-width="2.11267606" x="17.0454545" y="3.40909091" width="40.9090909" height="68.1818182" rx="3.16901408"></rect>
+                <ellipse id="Oval-7" stroke="#FFFFFF" stroke-width="2.11267606" cx="37.5" cy="61.3636364" rx="3.40909091" ry="3.40909091"></ellipse>
+                <path d="M34.0909091,10.2272727 L40.9090909,10.2272727" id="Path-19" stroke="#FFFFFF" stroke-width="2.11267606" stroke-linecap="round" stroke-linejoin="round"></path>
+            </g>
+        </g>
+    </g>
+</svg>

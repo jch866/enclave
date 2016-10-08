@@ -1,0 +1,72 @@
+{
+        "status": 0,
+        "message": "success",
+        "article": 
+                [{
+                    "art_id": 12,
+                    "art_title": "11",
+                    "art_tag": "11",
+                    "art_description": "11",
+                    "art_thumb": "adam.jpg",
+                    "art_sound": null,
+                    "art_movie": null,
+                    "art_content": "11 < \/p>",
+                    "art_time":"1465285624",
+                    "art_editor":"11",
+                    "art_view":"0",
+                    "cate_id":"1"
+                    },{
+                    "art_id": 12,
+                    "art_title": "11",
+                    "art_tag": "11",
+                    "art_description": "11",
+                    "art_thumb": "adam.jpg",
+                    "art_sound": null,
+                    "art_movie": null,
+                    "art_content": "11 < \/p>",
+                    "art_time":"1465285624",
+                    "art_editor":"11",
+                    "art_view":"0",
+                    "cate_id":"1"
+                    },{
+                    "art_id": 12,
+                    "art_title": "11",
+                    "art_tag": "11",
+                    "art_description": "11",
+                    "art_thumb": "adam.jpg",
+                    "art_sound": null,
+                    "art_movie": null,
+                    "art_content": "11 < \/p>",
+                    "art_time":"1465285624",
+                    "art_editor":"11",
+                    "art_view":"0",
+                    "cate_id":"1"
+                    },{
+                    "art_id": 12,
+                    "art_title": "11",
+                    "art_tag": "11",
+                    "art_description": "11",
+                    "art_thumb": "adam.jpg",
+                    "art_sound": null,
+                    "art_movie": null,
+                    "art_content": "11 < \/p>",
+                    "art_time":"1465285624",
+                    "art_editor":"11",
+                    "art_view":"0",
+                    "cate_id":"1"
+                    },{
+                    "art_id": 12,
+                    "art_title": "11",
+                    "art_tag": "11",
+                    "art_description": "11",
+                    "art_thumb": "adam.jpg",
+                    "art_sound": null,
+                    "art_movie": null,
+                    "art_content": "11 < \/p>",
+                    "art_time":"1465285624",
+                    "art_editor":"11",
+                    "art_view":"0",
+                    "cate_id":"1"
+                    }
+                ]
+    }

@@ -1,0 +1,101 @@
+<ion-view view-title="设置" class="">
+    <!-- <ion-nav-buttons side="left">
+        <span class="iconfont icon-back fontSize backBtn" onclick="javascript:history.go(-1)"></span>
+    </ion-nav-buttons> -->
+    <ion-content>
+        <ion-list class="settings">
+            <ion-toggle toggle-class="toggle-royal" ng-checked="settingsList.msg_push" ng-model="settingsList.msg_push">
+                <div class="msgPush">消息推送</div>
+            </ion-toggle>
+            <ion-toggle ng-checked="settingsList.wifi_autoCache" ng-model="settingsList.wifi_autoCache">
+                <div class="msgPush"> Wi-Fi自动缓存</div>
+                <p>Wi-Fi下缓存每日文章与声音</p>
+            </ion-toggle>
+            <ion-toggle ng-checked="settingsList.network_play" ng-model="settingsList.network_play">
+                <div class="msgPush">使用移动网络播放媒体</div>
+                <p>开启此选项会增加流量消耗</p>
+            </ion-toggle>
+            <ion-item ng-click="clearCache()">
+                <div class="versionCode">
+                    <span ng-bind="appCache"></span> 清除缓存
+                </div>
+            </ion-item>
+            <ion-item ng-click="tuijian()">
+                推荐飞地
+            </ion-item>
+            <ion-item ng-click="givePraise()">
+                给个好评
+            </ion-item>
+            <ion-item>
+                <div class="versionCode"><span>v1.0.0</span>关于飞地 </div>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
+<!-- http://codepen.io/ionic/pen/tfAzj
+  <body ng-controller="MainCtrl">
+    
+    <ion-header-bar class="bar-positive">
+      <h1 class="title">Toggles</h1>
+    </ion-header-bar>
+             
+    <ion-content>
+      
+      <div class="list">
+        
+        <div class="item item-divider"> 
+          Settings
+        </div>
+        
+        <ion-toggle ng-repeat="item in settingsList"
+                    ng-model="item.checked" 
+                    ng-checked="item.checked">
+          {{ item.text }}
+        </ion-toggle>
+        
+        <div class="item">
+          <pre ng-bind="settingsList | json"></pre> 
+        </div>
+        
+        <div class="item item-divider"> 
+          Notifications
+        </div>
+        
+        <ion-toggle ng-model="pushNotification.checked"
+                    ng-change="pushNotificationChange()">
+          Push Notifications
+        </ion-toggle>
+        
+        <div class="item">
+          <pre ng-bind="pushNotification | json"></pre> 
+        </div>
+        
+        <ion-toggle toggle-class="toggle-assertive"
+                    ng-model="emailNotification"
+                    ng-true-value="'Subscribed'"
+                    ng-false-value="'Unubscribed'">
+          Newsletter
+        </ion-toggle>
+        
+        <div class="item">
+          <pre ng-bind="emailNotification | json"></pre> 
+        </div>
+        
+      </div>
+      
+    </ion-content>
+
+
+
+                <li class="item item-toggle">
+                    消息推送
+                    <label class="toggle toggle-balanced">
+                        <input type="checkbox" checked>
+                        <div class="track">
+                            <div class="handle"></div>
+                        </div>
+                    </label>
+            </li>  
+
+  </body>
+</html> -->

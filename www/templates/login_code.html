@@ -1,0 +1,18 @@
+<ion-view class="login_bg" view-title="输入验证码">
+    <ion-nav-buttons side="right">
+        <button class="button" ng-click="completeLogin()">下一步</button>
+    </ion-nav-buttons>
+    <ion-content>
+        <div class="login_box">
+            <div class="reg_logo"><img src="img/logo.svg" alt=""></div>
+            <h1>输入验证码</h1>
+            <div class="code_input">
+                <input type="text" placeholder="验证码" required ng-model="data.code">
+                <input type="hidden" name="_token" ng-model="data.token"> <!-- value="<?php echo csrf_token(); ?>" -->
+            </div>
+            <p>短信已发送。
+                <button ng-click="reSend()" ng-disabled="!sendState">{{sendButTxt}}</button>
+            </p>
+        </div>
+    </ion-content>
+</ion-view>

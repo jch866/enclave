@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="25px" height="25px" viewBox="0 0 25 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>play</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="play">
+            <g id="Shape">
+                <polygon points="0 0 25 0 25 25 0 25"></polygon>
+                <path d="M12.9246812,9.79086995 C10.3638296,8.1612371 8,6 8,6 L8,20 C8,20 9.95665367,18.1108517 12.9246812,16.2221069 C15.8927087,14.3333621 19,13 19,13 C19,13 15.4855328,11.4205028 12.9246812,9.79086995 Z" fill="#000000"></path>
+            </g>
+        </g>
+    </g>
+</svg>

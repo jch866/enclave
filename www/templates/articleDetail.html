@@ -1,0 +1,72 @@
+<ion-view view-title="文章详情"> 
+<!--     <ion-nav-buttons side="left">
+      <span class="iconfont icon-back fontSize backBtn" onclick="javascript:history.go(-1)"></span>
+    </ion-nav-buttons> -->
+    <ion-nav-buttons side="right">
+       <span class="iconfont icon-share fontSize" ng-click="share()"></span>
+       <span class="iconfont icon-comment fontSize" ng-click="pubComment()"></span>
+        <span ng-class="{true:'icon-shoucanghou comment-red', false:'icon-shoucang'}[flag.isAdd]" class="iconfont fontSize" ng-model="flag.isAdd" ng-click="add()"></span>
+    </ion-nav-buttons>
+    <ion-content>
+    <div class="articleWrap">
+          <div class="articlePic" ng-bind-html="html | to_trusted">
+          <!-- <div class="articlePic" on-render-finish>
+           
+          <div ng-if="hasMedia">
+              <img  alt="" ng-src="{{imgUrl+item.art_thumb}}">
+          </div>
+          <div ng-if="!hasMedia">
+          <div id="art_media"></div>
+           </div> -->
+          <!-- on-render-finish="renderMedia()" -->
+          <!-- <div id="art_media" ></div> -->
+          <!-- <img  alt="" ng-src="{{imgUrl+item.art_thumb}}"> -->
+          </div><!-- src="img/adam.jpg" -->
+          <div class="contentArticle">
+              <h1>{{item.art_title}}</h1>
+              <div class="author">{{item.art_editor}}<time>{{item.art_time | toDate}}</time></div>
+              <div class="articleCon" ng-bind-html="item.art_content"></div>
+          </div>
+    </div>
+<div class="comments">
+    <h3>- Comment 评论 (3) -  </h3>
+    <ul>
+        <li>
+            <div class="avatar"><img src="img/mike.png" alt=""></div>
+            <div class="detail">
+                <div class="title"><time>5分钟前</time>马大帅</div>
+                <p>久闻鲱鱼罐头名声，知道它气味不好闻，但肉质细嫩。据说在瑞典,每年八月的第三个周四,人们会专门为品尝鲱鱼举行派对。因为这是腌鲱鱼味道最好的时候。“在温暖而短暂的夏夜里,瑞典人在花园里摆好桌椅,然后把一道道鲱鱼端上桌,大饱口福,饮酒歌唱。</p>
+                <div class="like"><i class="iconfont icon-like"></i>15</div>
+            </div>
+        </li>
+        <li>
+            <div class="avatar"><img src="img/mike.png" alt=""></div>
+            <div class="detail">
+                <div class="title"><time>5分钟前</time>马大帅</div>
+                <p>久闻鲱鱼罐头名声，知道它气味不好闻，但肉质细嫩。据说在瑞典,每年八月的第三个周四,人们会专门为品尝鲱鱼举行派对。因为这是腌鲱鱼味道最好的时候。“在温暖而短暂的夏夜里,瑞典人在花园里摆好桌椅,然后把一道道鲱鱼端上桌,大饱口福,饮酒歌唱。</p>
+                <div class="like"><i class="iconfont icon-like"></i>15</div>
+            </div>
+        </li>
+        <li>
+            <div class="avatar"><img src="img/mike.png" alt=""></div>
+            <div class="detail">
+                <div class="title"><time>5分钟前</time>马大帅</div>
+                <p>久闻鲱鱼罐头名声，知道它气味不好闻，但肉质细嫩。据说在瑞典,每年八月的第三个周四,人们会专门为品尝鲱鱼举行派对。因为这是腌鲱鱼味道最好的时候。“在温暖而短暂的夏夜里,瑞典人在花园里摆好桌椅,然后把一道道鲱鱼端上桌,大饱口福,饮酒歌唱。</p>
+                <div class="like"><i class="iconfont icon-like"></i>15</div>
+                <div class="commentsBox"> 
+                    <div class="singleCom">
+                        <div class="title">马苏德<span>·1分钟前</span></div>
+                        <p>人无癖不可与交，以其无深情也</p>
+                    </div>
+                    <div class="singleCom">
+                        <div class="title">马苏德<span>·1分钟前</span></div>
+                        <p>所谓“癖”，是更深于喜爱的执着，或是一种根深蒂固的信念。</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+    </ion-content>
+</ion-view>
+

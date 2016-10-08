@@ -1,0 +1,8 @@
+INDEX VERSION 1.126+F:\Enclave\.metadata\.plugins\org.eclipse.jdt.core
+1945169093.index
+1509401460.index
+2300127349.index
+475098746.index
+2434657659.index
+715257351.index
+1686168963.index

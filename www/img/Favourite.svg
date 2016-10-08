@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="40px" height="37px" viewBox="0 0 40 37" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>favourite big</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="飞地1.0" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="drawer" transform="translate(-44.000000, -446.000000)">
+            <g id="收藏">
+                <g transform="translate(38.000000, 438.000000)">
+                    <g id="favourite-/-big">
+                        <g id="favourite">
+                            <polygon id="Shape" points="0 0 50 0 50 50 0 50"></polygon>
+                            <path d="M35,8 C31.52,8 28.18,9.62 26,12.18 C23.82,9.62 20.48,8 17,8 C10.84,8 6,12.84 6,19 C6,26.56 12.8,32.72 23.1,42.08 L26,44.7 L28.9,42.06 C39.2,32.72 46,26.56 46,19 C46,12.84 41.16,8 35,8 L35,8 Z M26,42.2206879 L25.8,42.0206879 C16.28,33.4006879 8.59518559,26.2054945 8.59518559,19 C8.59518559,15 11.8593658,10.1903006 16.8871959,10.1903006 C21.915026,10.1903006 23.9733785,12.1913423 25.352855,13.8796722 L26.5475343,13.8796722 C27.9438775,12.1959158 28.9327481,10.1903006 35.1063798,10.1903006 C41.2800115,10.1903006 43.3760942,15 43.3760948,19 C43.3760961,27.4967085 35.72,33.4006879 26.2,42.0206879 L26,42.2206879 Z" id="Shape" fill="#FFFFFF"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

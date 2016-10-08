@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>飞地传媒|飞地书局</title>
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/reset.css" rel="stylesheet">
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+    <script src="js/web-storage-cache.min.js"></script>
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="js/ng-cordova.min.js"></script>
+    <script src="cordova.js"></script>
+    <script src="js/config.js"></script>
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/filter.js"></script>
+    <!-- jwplayer js -->
+    <script src="js/jwplayer.js"></script>
+    <script src="js/jquery-3.1.0.min.js"></script>
+    <!-- <script src="js/videoPlay.js"></script> -->
+    <script>jwplayer.key = "0SIqZ6qZs+T0/lLkD+ISn/8JHaWniRyb1hu0cg==";</script>
+    
+</head>
+
+<body ng-app="starter">
+  <ion-side-menus>
+        <ion-side-menu-content>
+            <ion-nav-bar class="bar-stable">
+                <ion-nav-back-button class="iconfont icon-back button-clear">
+                </ion-nav-back-button>
+                <ion-nav-buttons side="left">
+                    <button class="button button-clear iconfont icon-drawer" menu-toggle="left">
+                    </button>
+                </ion-nav-buttons>
+            </ion-nav-bar>
+            <ion-nav-view></ion-nav-view>
+        </ion-side-menu-content>
+        <ion-side-menu side="left" width="150" class="leftSideMenu" ng-controller="sideMenuCtrl">
+            <ul>    
+                <li menu-close><img ng-src="{{user.avatar}}" alt="" ng-click="openLogin()" src="img/avatar.png">
+                    <p>{{user.nickname?user.nickname:'登录/注册'}}</p>
+                </li>
+                <li menu-close ng-click="goMessage()">
+                    <img src="img/Message.svg" alt="">
+                        <p>消息</p>
+                </li>
+                <li menu-close  ng-click="goComment()">
+                    <img src="img/Comment.svg" alt="">
+                        <p>评论</p>
+                </li>
+                <li menu-close  ng-click="goFav()">
+                    <img src="img/Favourite.svg" alt="">
+                        <p>收藏</p>
+                </li>
+                <li menu-close  ng-click="goSetting()">
+                  <img src="img/Settings.svg" alt="">
+                        <p>设置</p>
+                </li>
+            </ul>
+        </ion-side-menu>
+    </ion-side-menus> 
+</body>
+
+</html>

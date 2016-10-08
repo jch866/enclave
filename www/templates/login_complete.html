@@ -1,0 +1,23 @@
+<ion-view class="login_bg" view-title="完善用户信息">
+     <ion-nav-buttons side="right">
+                <button ng-click="complete()" class="button">完成</button>
+    </ion-nav-buttons>
+    <ion-content>
+        <div class="login_infor">
+            <div class="camera">
+                <div class="upAvatar" ng-click="changeAvatar()">
+                    <img ng-src="{{userInfo.avatar}}" alt=""  id="myImage" src="img/avatar.png">
+                </div>
+              </div>
+            <div class="infor_list">
+                <ul>
+                    <li><input type="text" placeholder="昵称" ng-model="userInfo.name" ></li>
+                    <!-- ng-keyup="validateNickName()" <span ng-show="" ng-class="">此昵称已被占用</span>-->
+                    <li><input type="text" placeholder="性别(选填)"  ng-model="userInfo.sex" "></li><!-- ng-keyup="validateSex() -->
+                    <li><input type="text" placeholder="生日(选填)"  ng-model="userInfo.birthday" ></li><!-- ng-keyup="validateBirth()" -->
+                </ul>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
+<!-- </ion-modal-view> -->

@@ -1,0 +1,36 @@
+<ion-view view-title="首页"> <!--   -->
+<!-- <i menu-toggle="left" class="mySideToggle iconfont icon-drawer"></i> -->
+<!--     <ion-nav-bar>
+        <ion-nav-back-button class="button-clear"><i class="iconfont icon-back"></i></ion-nav-back-button>
+    </ion-nav-bar>  -->
+ <!-- <ion-header-bar no-tap-scroll='true | false' align-title >...</ion-header-bar> -->
+ <!--  <ion-nav-buttons side="left">
+   <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  -->
+  <ion-content class="padding">
+   <ion-refresher pulling-text="下拉刷新..."  on-refresh="doRefresh()">
+  </ion-refresher>
+   <ion-list class="list-borderless">
+    <ion-item ng-repeat="item in items" class="item">
+         <div class="textPic">
+        <a href="#/article/{{item.art_id}}" ng-click=""><img ng-src="{{imgUrl+item.art_thumb}}" alt=""></a>
+         </div>
+            <div class="imgShowMore">
+                <div class="authorInfor">
+                    <div>{{item.art_editor}}</div>
+                    <div>{{item.art_time | toDate}}</div>
+                </div>
+                <a href="#/article/{{item.art_id}}" ng-click=""><h2>{{item.art_title}}</h2></a>
+                <div class="hits">
+                    <span><i class="iconfont icon-shoucang fontSize"></i><em>{{item.collectionCount}}</em></span>
+                    <span><i class="iconfont icon-comment fontSize"></i> <em>{{item.art_view}}</em></span>
+                    <span>{{item.art_view}} 阅读</span>
+                </div>
+          </div>
+         <!--  <ion-infinite-scroll ng-if="!hasmore" on-infinite="loadMore()" distance="1%">
+        </ion-infinite-scroll> -->
+    </ion-item>
+  </ion-list> 
+</ion-content>
+</ion-view>
