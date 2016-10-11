@@ -91,7 +91,7 @@ angular.module('starter.services', [])
         });
     }
 
-    this.doRefresh = function($this) {
+    this.doRefresh = function($this) {  //todo
         console.log("正在执行refresh操作...");
         var url = server.domain + "?callback=JSON_CALLBACK";
         //使用jsonp的方式请求
@@ -171,6 +171,7 @@ angular.module('starter.services', [])
     }
 })
 .service('FavService', function($http) {
+
     var token=wsCache.get("userToken");
     //获取收藏列表
     this.getFav = function (page) {
@@ -188,6 +189,45 @@ angular.module('starter.services', [])
       return $http.post(url);
     }
 })
+.service('ComService', function($http) {
+    //回复评论
+    this.pubCom = function(id, type, source_id, content, pid) {
+        var url = urls.pubComment;
+        var data = {
+            user_id: id, //用户id
+            type: type, //回复的是文章还是其它类型
+            source_id: source_id, //文章的id
+            content: content, //回复内容
+            pid: pid //判断是不是回复的评论
+        };
+        console.log(data);
+        return $http.post(url, data);
+    };
+    //获取单篇文章评论列表
+    this.getSingleCom = function(type, source_id, page, count) {
+        var url = urls.getComment+"?source_id=" + source_id + "&type=" + type + "&page=" + page + "&count=" + count;
+        return $http.get(url);
+        // var data = {
+        //     type:type,// 评论的类型
+        //     source_id:source_id,//文章ID
+        //     page:page,  //默认第一页
+        //     count:count  //每页数量，默认10条
+        // };
+        // console.log(data);
+       
+        //return $http.get(url, data);
+    };
+
+    //删除评论
+    this.delCom = function() {
+
+    };
+    //查看评论
+    this.delCom = function() {
+
+    };
+})
+
 .factory('httpInterceptor',function () {  //拦截器
             return {
                 request:function(config){//请求发出去之前

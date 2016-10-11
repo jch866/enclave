@@ -206,7 +206,7 @@ color:rgba(255,255,255,0.50);}
 .comments li .detail{flex:1;}
 .comments li .detail .title{ }
 .comments li .detail .title time{float:right;}
-.comments li .detail p{opacity:0.69;font-size:14px;color:#000000;line-height:20px;}
+.comments li .detail p{opacity:0.69;font-size:14px;color:#000000;line-height:20px;word-break: break-all}
 .comments li .detail .like{display: flex;justify-content:flex-end}
 
 .commentsBox{padding: 8px;background:#ededed}
@@ -250,7 +250,7 @@ color:rgba(255,255,255,0.50);}
 .artquote_reply img{display:inline-block;   width: 46px;height: 46px;border-radius: 50%;margin: 0 10px 0 0; border: 1px solid black;}
 
 .commentArea {padding: 10px;}
-.commentArea textarea{}
+.commentArea textarea{width: 100%;border-bottom: 1px solid #ededed;}
 .defBtn{width: 70px;text-align: center;line-height: 33px;}
 .sendcolor{color:#3f72af;}
 

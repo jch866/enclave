@@ -29,17 +29,17 @@
           </div>
     </div>
 <div class="comments">
-    <h3>- Comment 评论 (3) -  </h3>
+    <h3>- 评论 ({{currentArticleComTotal}}) -  </h3>
     <ul>
-        <li>
-            <div class="avatar"><img src="img/mike.png" alt=""></div>
+            <li ng-repeat = "item in currentArticleComList">
+            <div class="avatar"><img src="img/mike.png" ng-src = "{{item.author.avatar}}" alt=""></div>
             <div class="detail">
-                <div class="title"><time>5分钟前</time>马大帅</div>
-                <p>久闻鲱鱼罐头名声，知道它气味不好闻，但肉质细嫩。据说在瑞典,每年八月的第三个周四,人们会专门为品尝鲱鱼举行派对。因为这是腌鲱鱼味道最好的时候。“在温暖而短暂的夏夜里,瑞典人在花园里摆好桌椅,然后把一道道鲱鱼端上桌,大饱口福,饮酒歌唱。</p>
+                <div class="title"><time>{{item.publishTime | toDate}}</time>{{item.author.nickname}}</div>
+                <p>{{item.content}}</p>
                 <div class="like"><i class="iconfont icon-like"></i>15</div>
             </div>
-        </li>
-        <li>
+            </li>
+        <!-- <li>
             <div class="avatar"><img src="img/mike.png" alt=""></div>
             <div class="detail">
                 <div class="title"><time>5分钟前</time>马大帅</div>
@@ -64,7 +64,7 @@
                     </div>
                 </div>
             </div>
-        </li>
+        </li> -->
     </ul>
 </div>
     </ion-content>

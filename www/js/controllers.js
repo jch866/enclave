@@ -440,15 +440,19 @@ myApp.controller('settingCtrl', function($scope, $state) {
     };
 });
 myApp.controller('articleDetailCtrl', function($scope, $state, $stateParams, $ionicActionSheet, 
-    $ionicPopup, $timeout, getArticleList, ArticleService,FavService) {
-    var art = getArticleList.all();
-    $scope.items = art;
+    $ionicPopup, $timeout, getArticleList, ArticleService,FavService,ComService) {
+    
+    var artId=0;
+    var type = "article";
+    var page=1;
+    var count=10;
     $scope.imgUrl = urls.imgUrl;
     console.log($stateParams);
     var id = $stateParams.art_id;
     ArticleService.getDetails(id).success(function(resp) {
         console.log(resp);
         $scope.item = resp.result;
+        artId = resp.result.art_id;
         mediaOption.file = resp.result.art_media;
         mediaOption.image = $scope.imgUrl + resp.result.art_thumb;
         if(resp.result.art_media){
@@ -458,15 +462,54 @@ myApp.controller('articleDetailCtrl', function($scope, $state, $stateParams, $io
             //$scope.hasMedia=false;
             $scope.html = '<img  alt="" src="'+$scope.imgUrl+$scope.item.art_thumb+'">'
         }
-    }).error(function(error) { console.log(error); })
+    }).success(function(){
+        ComService.getSingleCom(type, artId, page, count).success(function(resp){
+        console.log(resp);
+        if(resp.code==200){
+            $scope.currentArticleComList = resp.result.data;
+            $scope.currentArticleComTotal = resp.result.pageInfo.total
+        };
+        //resp.code==400
+        //{status: "error", code: 400, message: "type字段不能为空"}
+        }).error(function(error){
+
+        });
+    }).error(function(error) { console.log(error);})
 
     console.log(mediaOption.media);
 
     $scope.$on('$ionicView.enter',function(){
       console.log("$ionicView.enter");
-      jwplayer("art_media").setup(mediaOption);
+      var media = $("#art_media");
+      if(media){   //todo 多切换几个文章试试有无报错
+          jwplayer("art_media").setup(mediaOption);
+        } 
+      
       //音频播放背景图片的问题
     });
+    $scope.$on('refreshCom',function(){
+        ComService.getSingleCom(type, artId, page, count).success(function(resp){
+        console.log(resp);
+        if(resp.code==200){
+            $scope.currentArticleComList = resp.result.data;
+            $scope.currentArticleComTotal = resp.result.pageInfo.total
+        };
+        //resp.code==400
+        //{status: "error", code: 400, message: "type字段不能为空"}
+        }).error(function(error){
+
+        });
+    });
+
+
+    // //获取评论
+    // var type = "article",page=1,count=10;
+    // ComService.getSingleCom(type, artId, page, count).success(function(resp){
+    //     console.log(resp);
+    // }).error(function(error){
+
+    // });
+
     // $scope.renderMedia=function(){
     //     jwplayer("art_media").setup({
     //         flashplayer: 'js/player.swf',
@@ -506,8 +549,6 @@ myApp.controller('articleDetailCtrl', function($scope, $state, $stateParams, $io
         //FavService.getFav().success().error();
     };
     $scope.pubComment = function() {
-        var a= $scope.item;
-        console.log(a);
         $state.go("comment_pub",{data:$scope.item});
 
         // if(window.localStorage[cache.logined]==="true"){
@@ -566,12 +607,47 @@ myApp.controller('articleDetailCtrl', function($scope, $state, $stateParams, $io
     // };
 });
 //发布评论
-myApp.controller('pubCommentCtrl', function($scope,$state,$stateParams) {
+myApp.controller('pubCommentCtrl', function($scope, $state, $stateParams, ComService, $ionicHistory, $ionicPopup) {
     $scope.imgUrl = urls.imgUrl;
     var data = $stateParams.data;
     $scope.item = data;
-    
+    $scope.pubCom = {
+        content: ""
+    }
+
+    $scope.art_public = function() {
+        var content = $scope.pubCom.content;
+        var id = window.localStorage[cache.userId] - 0;
+        var type = "article";
+        var source_id = $scope.item.art_id;
+        var pid = pid || 0;
+        var page = 1;
+        var count = 10;
+        ComService.pubCom(id, type, source_id, content, pid).success(function(resp) {
+            console.log(resp);
+            if (resp.code == 200) {
+                $ionicPopup.alert({ title: '提示', template: resp.message });
+                $ionicHistory.goBack();
+                //重新获取评论列表
+                $scope.$emit("refreshCom")
+                // ComService.getSingleCom(type, source_id, page, count).success(function(resp) {
+                //     console.log(resp);
+                //     if (resp.code == 200) {
+                //         //这里的$scope作用域不一样 ？？？
+                //         $scope.currentArticleComList = resp.result.data;
+                //         $scope.currentArticleComTotal = resp.result.pageInfo.total
+                //     };
+                //     //resp.code==400
+                //     //{status: "error", code: 400, message: "type字段不能为空"}
+                // }).error(function(error) {})
+            }
+        }).error(function(error) {
+            console.log(error);
+        });
+    }
+
 })
+
 
 
 // 用户中心

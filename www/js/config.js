@@ -19,7 +19,8 @@ var urls = {
     updateUserAvatar: hostName+"updateUserAvatar", //上传用户头像    user_id avatar  post
     getOtherUserInfo: hostName+"getOtherUserInfomation", //获取他人信息
     like: hostName+"addOrCancelLikeRecord", //文章点赞
-    getComment: hostName+"postComment", //文章评论
+    pubComment: hostName+"postComment", //文章评论
+    getComment: hostName+"getCommentList", //获取文章评论列表
     fav: hostName+"getCollectionList", //获取收藏列表
     favAddDel: hostName+"addOrCancelCollectArticleInfo", //文章收藏
     //unRead: hostName+"addOrCancelLikeRecord", //获取未读信息列表
@@ -28,6 +29,7 @@ var urls = {
 //     favoriteAdd: server.domain + '/favorite/add?',
 //     favoriteDelete: server.domain + '/favorite/delete?',
 }
+
 
 var wsCache = new WebStorageCache();
 var DELEY = 300;//验证码发送间隔时间
