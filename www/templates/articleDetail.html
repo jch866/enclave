@@ -30,15 +30,19 @@
     </div>
 <div class="comments">
     <h3>- 评论 ({{currentArticleComTotal}}) -  </h3>
-    <ul>
-            <li ng-repeat = "item in currentArticleComList">
+    <div class="noComments">
+         <span ng-if="!hasComment" ng-bind="noComment"></span>
+    </div>
+   
+    <ul ng-if="hasComment">
+        <li ng-repeat = "item in currentArticleComList">
             <div class="avatar"><img src="img/mike.png" ng-src = "{{item.author.avatar}}" alt=""></div>
             <div class="detail">
                 <div class="title"><time>{{item.publishTime | toDate}}</time>{{item.author.nickname}}</div>
                 <p>{{item.content}}</p>
                 <div class="like"><i class="iconfont icon-like"></i>15</div>
-            </div>
-            </li>
+        </div>
+    </li>
         <!-- <li>
             <div class="avatar"><img src="img/mike.png" alt=""></div>
             <div class="detail">
@@ -66,6 +70,7 @@
             </div>
         </li> -->
     </ul>
+    
 </div>
     </ion-content>
 </ion-view>

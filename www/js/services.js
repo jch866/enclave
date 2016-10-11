@@ -222,8 +222,14 @@ angular.module('starter.services', [])
     this.delCom = function() {
 
     };
+   
     //查看评论
     this.delCom = function() {
+
+    };
+
+    //登录后查看个人评论
+    this.myComList = function() {
 
     };
 })

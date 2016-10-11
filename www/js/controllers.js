@@ -466,9 +466,15 @@ myApp.controller('articleDetailCtrl', function($scope, $state, $stateParams, $io
         ComService.getSingleCom(type, artId, page, count).success(function(resp){
         console.log(resp);
         if(resp.code==200){
+            $scope.hasComment=true;
             $scope.currentArticleComList = resp.result.data;
             $scope.currentArticleComTotal = resp.result.pageInfo.total
         };
+        if(resp.code==404){
+            $scope.hasComment=false;
+            $scope.currentArticleComTotal = 0;
+            $scope.noComment = resp.message //没有任何评论信息
+        }
         //resp.code==400
         //{status: "error", code: 400, message: "type字段不能为空"}
         }).error(function(error){
@@ -477,7 +483,32 @@ myApp.controller('articleDetailCtrl', function($scope, $state, $stateParams, $io
     }).error(function(error) { console.log(error);})
 
     console.log(mediaOption.media);
+    
+    /**
+     及时更新最新的评论 监听beforeEnter
+     */
+    $scope.$on('$ionicView.beforeEnter',function(){
+        ComService.getSingleCom(type, artId, page, count).success(function(resp){
+        console.log(resp);
+        if(resp.code==200){
+            $scope.hasComment=true;
+            $scope.currentArticleComList = resp.result.data;
+            $scope.currentArticleComTotal = resp.result.pageInfo.total
+        };
+        if(resp.code==404){
+            $scope.hasComment=false;
+            $scope.currentArticleComTotal = 0;
+            $scope.noComment = resp.message //没有任何评论信息
+        }
+        //resp.code==400
+        //{status: "error", code: 400, message: "type字段不能为空"}
+        }).error(function(error){
 
+        });
+    })
+    /**
+     判断当时的媒体是视频音频还是图片
+     */
     $scope.$on('$ionicView.enter',function(){
       console.log("$ionicView.enter");
       var media = $("#art_media");
@@ -487,19 +518,19 @@ myApp.controller('articleDetailCtrl', function($scope, $state, $stateParams, $io
       
       //音频播放背景图片的问题
     });
-    $scope.$on('refreshCom',function(){
-        ComService.getSingleCom(type, artId, page, count).success(function(resp){
-        console.log(resp);
-        if(resp.code==200){
-            $scope.currentArticleComList = resp.result.data;
-            $scope.currentArticleComTotal = resp.result.pageInfo.total
-        };
-        //resp.code==400
-        //{status: "error", code: 400, message: "type字段不能为空"}
-        }).error(function(error){
+    // $scope.$on('refreshCom',function(){
+    //     ComService.getSingleCom(type, artId, page, count).success(function(resp){
+    //     console.log(resp);
+    //     if(resp.code==200){
+    //         $scope.currentArticleComList = resp.result.data;
+    //         $scope.currentArticleComTotal = resp.result.pageInfo.total
+    //     };
+    //     //resp.code==400
+    //     //{status: "error", code: 400, message: "type字段不能为空"}
+    //     }).error(function(error){
 
-        });
-    });
+    //     });
+    // });
 
 
     // //获取评论
@@ -549,16 +580,16 @@ myApp.controller('articleDetailCtrl', function($scope, $state, $stateParams, $io
         //FavService.getFav().success().error();
     };
     $scope.pubComment = function() {
-        $state.go("comment_pub",{data:$scope.item});
+        //$state.go("comment_pub",{data:$scope.item});
 
-        // if(window.localStorage[cache.logined]==="true"){
-        //      $state.go("comment_pub",{data:$scope.item});
-        //  }else{
-        //    var tip = $ionicPopup.show({title: '提示',template: "请登录!"})
-        //         $timeout(function() {
-        //         tip.close(); 
-        //     }, 1000)
-        //  }
+        if(window.localStorage[cache.logined]==="true"){
+             $state.go("comment_pub",{data:$scope.item});
+         }else{
+           var tip = $ionicPopup.show({title: '提示',template: "请登录!"})
+                $timeout(function() {
+                tip.close(); 
+            }, 1000)
+         }
        
     };
     // $scope.share = function(title, desc, url, thumb){
@@ -628,18 +659,6 @@ myApp.controller('pubCommentCtrl', function($scope, $state, $stateParams, ComSer
             if (resp.code == 200) {
                 $ionicPopup.alert({ title: '提示', template: resp.message });
                 $ionicHistory.goBack();
-                //重新获取评论列表
-                $scope.$emit("refreshCom")
-                // ComService.getSingleCom(type, source_id, page, count).success(function(resp) {
-                //     console.log(resp);
-                //     if (resp.code == 200) {
-                //         //这里的$scope作用域不一样 ？？？
-                //         $scope.currentArticleComList = resp.result.data;
-                //         $scope.currentArticleComTotal = resp.result.pageInfo.total
-                //     };
-                //     //resp.code==400
-                //     //{status: "error", code: 400, message: "type字段不能为空"}
-                // }).error(function(error) {})
             }
         }).error(function(error) {
             console.log(error);
@@ -648,6 +667,9 @@ myApp.controller('pubCommentCtrl', function($scope, $state, $stateParams, ComSer
 
 })
 
+myApp.controller('commentListCtrl', function($scope, $state, $stateParams, ComService, $ionicHistory, $ionicPopup) {
+    //ComService.myComList().success(function(resp){}).error(function(error){})
+})
 
 
 // 用户中心

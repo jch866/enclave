@@ -74,9 +74,10 @@ enclaveApp.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvid
     }).state('comment_reply', { //评论 回复
         url: '/comment_reply',
         templateUrl: 'templates/comment_reply.html'
-    }).state('comment', { //评论 回复
+    }).state('comment', { //个人评论列表
         url: '/comment',
-        templateUrl: 'templates/comment.html'
+        templateUrl: 'templates/comment.html',
+        controller: 'commentListCtrl'
     }).state('favourite', { //收藏
         url: '/favourite',
         templateUrl: 'templates/favourite.html'

@@ -199,6 +199,7 @@ color:rgba(255,255,255,0.50);}
 .articleCon p{opacity:0.8;font-size:16px;line-height:26px}
 
 .comments{background:#ffffff;border:1px solid #ededed; margin-top: 20px; padding: 20px 0 0 20px}
+.noComments{text-align: center;font-size: 0.8rem; line-height: 1.8rem}
 .comments h3{font-size:14px;color:rgba(0,0,0,0.50);}
 .comments li{display: flex; border-bottom: 1px solid #ededed;padding: 15px 20px 15px 0;}
 .comments li .avatar{flex:0 0 60px;}
