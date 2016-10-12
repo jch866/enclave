@@ -6,7 +6,7 @@ angular.module('starter.services', [])
         $http.get(urls.getArticles).success(function(data) {
               console.log(data);
             var length = data.result.length;
-            for (var i = 0; i < 3; i++) {
+            for (var i = 0; i < 10; i++) {
                 articles[i] = data.result[i];
             }
         }).error(function(err) {
@@ -229,8 +229,9 @@ angular.module('starter.services', [])
     };
 
     //登录后查看个人评论
-    this.myComList = function() {
-
+    this.myComList = function(user_id,page,count) {
+        var url = urls.getMessage+"?user_id=" + user_id+"&page=" + page + "&count=" + count;
+        return $http.get(url);
     };
 })
 

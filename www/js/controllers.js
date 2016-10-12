@@ -668,7 +668,24 @@ myApp.controller('pubCommentCtrl', function($scope, $state, $stateParams, ComSer
 })
 
 myApp.controller('commentListCtrl', function($scope, $state, $stateParams, ComService, $ionicHistory, $ionicPopup) {
-    //ComService.myComList().success(function(resp){}).error(function(error){})
+    var user_id=window.localStorage[cache.userId] - 0;
+    var page = 1;
+    var count = 10;
+    ComService.myComList(user_id,page,count).success(function(resp){
+            console.log(resp);
+            if(resp.code==200){
+            $scope.myComment=true;
+            //$scope.currentArticleComList = resp.result.data;
+            //$scope.currentArticleComTotal = resp.result.pageInfo.total
+        };
+        if(resp.code==404){
+            $scope.myComment=false;
+            //$scope.currentArticleComTotal = 0;
+            //$scope.noComment = resp.message //没有任何评论信息
+        }
+        }).error(function(error){
+            
+        })
 })
 
 
