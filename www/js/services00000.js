@@ -349,3 +349,26 @@ $scope.$on('$ionicView.unloaded', function() {
 <div class="-mob-share-ui-bg"></div>
 <script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=1797b4778c086"></script>
 <!--MOB SHARE END-->
+
+
+梦里都是你的柔情似水  17:46:18
+1、安装插件，运行命令 cordova-hcp build，配置好WWW目录下的chcp.json
+2、修改配置文件config.xml 加上config-file url="http://www.abc.com/www/chcp.json"
+3、打包 安装
+4、修改本地WWW文件  运行命令cordova-hcp build    改了chcp.json文件，所以要再次修改url   
+5、复制WWW目录到服务器www.abc.com/下面
+6、重启APP两次
+少  17:46:25
+1.改URL服务器地址，2.上传www.3,打包安装(这里的配置就有服务器的config url)
+好的，谢谢了
+就是通过config url里面的东西来判断对比 
+少  17:47:38
+cordova-hcp build 只运行一次就可以了吧
+梦里都是你的柔情似水  17:47:53
+初始化运行一次  修改以后运行一次
+少  17:48:18
+我明白了，感谢你了
+
+cordova-hcp build 这里，可以换成ionic build吗
+梦里都是你的柔情似水  17:48:46
+没试过

@@ -1,79 +1,15 @@
 angular.module('starter.services', [])
 
 .service('getArticleList', function($http, BaseService) {
-    var articles = [];
-    this.all = function() {
-        $http.get(urls.getArticles).success(function(data) {
-              console.log(data);
-            var length = data.result.length;
-            for (var i = 0; i < 10; i++) {
-                articles[i] = data.result[i];
-            }
-        }).error(function(err) {
-            console.log(err);
-        });
-        return articles;
+    this.getArticles = function(userId,page,count){
+        var urlStr = urls.getArticles;
+        var url = userId ? urlStr+"?page="+page+"&count="+count+"&user_id="+userId : urlStr+"?page="+page+"&count="+count;
+        return $http.get(url);
     };
-    this.remove = function(id) {
-        articles.splice(articles.indexOf(id), 1);
-    };
-    this.get = function(artId) {
-        for (var i = 0; i < articles.length; i++) {
-            if (articles[i].art_id === parseInt(artId)) {
-                return articles[i];
-            }
-        }
-        return null;
-    };
+
     this.doRefresh = function() {
         BaseService.doRefresh();
     };
-    var webData = {
-        "status": 0,
-        "message": "返回成功",
-        "article": [{
-            "art_id": 12,
-            "art_title": "11",
-            "art_tag": "11",
-            "art_description": "11",
-            "art_thumb": "uploads\/20160612111414200.jpg",
-            "art_sound": null,
-            "art_movie": null,
-            "art_content": "11 < \/p>",
-            "art_time": "1465285624",
-            "art_editor": "11",
-            "art_view": "0",
-            "cate_id": "1"
-        },{
-            "art_id": 12,
-            "art_title": "11",
-            "art_tag": "11",
-            "art_description": "11",
-            "art_thumb": "uploads\/20160612111414200.jpg",
-            "art_sound": null,
-            "art_movie": null,
-            "art_content": "11 < \/p>",
-            "art_time": "1465285624",
-            "art_editor": "11",
-            "art_view": "0",
-            "cate_id": "1"
-        },{
-            "art_id": 12,
-            "art_title": "11",
-            "art_tag": "11",
-            "art_description": "11",
-            "art_thumb": "uploads\/20160612111414200.jpg",
-            "art_sound": null,
-            "art_movie": null,
-            "art_content": "11 < \/p>",
-            "art_time": "1465285624",
-            "art_editor": "11",
-            "art_view": "0",
-            "cate_id": "1"
-        }]
-    };
-    //测试用
-    this.data= webData.article;
 })
 .service('BaseService', function($http) {
     this.loadMore = function($this) {

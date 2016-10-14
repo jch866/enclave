@@ -1,5 +1,9 @@
 [
   {
+    "file": "chcp111.json",
+    "hash": "97b7d69541e4ed1bb318a55999c36b70"
+  },
+  {
     "file": "css/iconfont.eot",
     "hash": "770603926e0cd0b1cf57371f4256bb72"
   },
@@ -177,7 +181,7 @@
   },
   {
     "file": "js/controllers.js",
-    "hash": "1092c11dbd4a865e9223763e98bce579"
+    "hash": "b5c86215f8d5cefbd17cfbb952a2265d"
   },
   {
     "file": "js/filter.js",
@@ -201,11 +205,11 @@
   },
   {
     "file": "js/services.js",
-    "hash": "089a96cfd45e734343edb7348764a826"
+    "hash": "0bd2c49b022eb8038026703f86a27e53"
   },
   {
     "file": "js/services00000.js",
-    "hash": "bb30d0308532e665e3fa842ab7b990a1"
+    "hash": "c0ea57536e8ce7636512c3ad0a2787d3"
   },
   {
     "file": "js/videoPlay.js",
@@ -485,7 +489,7 @@
   },
   {
     "file": "templates/articleDetail.html",
-    "hash": "a6266927a408e2efc608fba2cf01c862"
+    "hash": "88e2846e0cbd89a8893c4a54c1bf7223"
   },
   {
     "file": "templates/articleVedio.html",
@@ -513,7 +517,7 @@
   },
   {
     "file": "templates/home.html",
-    "hash": "e0f4f31b23f672b2351d7ab7332fcb04"
+    "hash": "370ed0729f4ddfc5277bd548dc578d06"
   },
   {
     "file": "templates/home1.html",
@@ -565,7 +569,7 @@
   },
   {
     "file": "templates/userCenter.html",
-    "hash": "074829e81d6f258f98f3da2eab58b027"
+    "hash": "9ba5ecbc664a6af31410b73e9450d980"
   },
   {
     "file": "templates/validate_code.html",

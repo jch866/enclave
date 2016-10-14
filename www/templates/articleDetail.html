@@ -24,7 +24,8 @@
           </div><!-- src="img/adam.jpg" -->
           <div class="contentArticle">
               <h1>{{item.art_title}}</h1>
-              <div class="author">{{item.art_editor}}<time>{{item.art_time | toDate}}</time></div>
+              <div class="author">{{item.art_editor}}<time>{{item.art_time}}</time></div>
+              <!-- {{item.art_time | toDate}} -->
               <div class="articleCon" ng-bind-html="item.art_content"></div>
           </div>
     </div>
@@ -33,7 +34,6 @@
     <div class="noComments">
          <span ng-if="!hasComment" ng-bind="noComment"></span>
     </div>
-   
     <ul ng-if="hasComment">
         <li ng-repeat = "item in currentArticleComList">
             <div class="avatar"><img src="img/mike.png" ng-src = "{{item.author.avatar}}" alt=""></div>

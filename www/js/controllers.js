@@ -1,13 +1,56 @@
 var myApp = angular.module('starter.controllers', []);
-myApp.controller('homeCtrl', function($scope, $ionicTabsDelegate, getArticleList, $http) {
-
-    //console.log(getArticleList);
-    var art = getArticleList.all();
-    // console.log(art);
+myApp.controller('homeCtrl', function($scope, $ionicTabsDelegate, getArticleList, $http,$ionicPopup,$timeout) {
+    //.success(function(resp){console.log(resp);}).error(function(error){console.log(error);})
     $scope.imgUrl = urls.imgUrl;
+    var userId = window.localStorage[cache.userId];
+    var page=1,count=10;
+    var isLock=false;
+    $scope.items = [];
+
+    getArticleList.getArticles(userId,page,count).success(function(resp){
+            console.log(resp);
+            $scope.items = resp.result.data;
+    }).error(function(error){
+            console.log(error);
+    });
+
+    $scope.loadMore = function() {
+    if (isLock) return;
+    isLock = true;
+    getArticleList.getArticles(userId, page, count).success(function(resp) {
+        if (resp.code == "200") {
+            if (resp.result.data.length > 0) {
+                $scope.items = resp.result.data.concat($scope.items);
+                //page++;
+            } else {
+                console.log("没有数据了...")
+                isLock = true;
+            }
+        } else if (resp.code == "404") {
+            var tip = $ionicPopup.alert({ title: '提示', template: "文章显示完毕！" });
+            $timeout(function() {
+                tip.close();
+            }, 1000)
+        }
+
+    }).finally(function(error) {
+        isLock = false;
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+        $scope.$broadcast('scroll.refreshComplete');
+    });
+};
+
+    $scope.doRefresh = function () {
+        page++;
+        $scope.loadMore();
+    }
+
+    // $scope.doRefresh = function() {
+    //     $scope.$broadcast("scroll.refreshComplete");
+    // };
+    // 
     //测试用静态数据
-    $scope.array = getArticleList.data;
-    $scope.items = art;
+    //$scope.items = art;
     // $scope.doRefresh=function(){
     //     getArticleList.doRefresh();
     //     $scope.$broadcast("scoll.refreshComplete")
@@ -23,58 +66,8 @@ myApp.controller('homeCtrl', function($scope, $ionicTabsDelegate, getArticleList
     //          state.go("")
     //     }
     // }
-    // $scope.doRefresh = function() {
-    //     $http.get('/new-items').success(function(newItems) {
-    //         $scope.items = newItems;
-    //     }).finally(function() {
-    //         // 停止广播ion-refresher
-    //         $scope.$broadcast('scroll.refreshComplete');
-    //     });  
-    // };
-
-
-
-
-    //  $scope.items = [];
-
-    $scope.doRefresh = function() {
-        // $http.get(urls.getArticles).success(function(data) {
-        //     console.log(data);
-        //     $scope.items.concat(data.result);
-        // }).error(function(err) {
-        //     console.log(err);
-        // });
-
-        var array = $scope.array;
-        //$scope.items=$scope.items.concat(array);
-        Array.prototype.unshift.apply($scope.items, array);
-        $scope.$broadcast("scroll.refreshComplete");
-    };
-
-    // var page = 1,isLock=false;
-    // $scope.items = [];
-    // $scope.loadMore = function () {
-    //     if(isLock)return;
-    //     isLock=true;
-    //     getArticleList.getList(classify[0].url, page).success(function (response) {
-    //         console.log(page)
-    //         if (response.tngou.length == 0) {
-    //             $scope.hasmore = true;
-    //             return;
-    //         }
-    //         page++;
-    //         $scope.items = $scope.items.concat(response.tngou);
-    //     }).finally(function (error) {
-    //         isLock = false;
-    //         $scope.$broadcast('scroll.infiniteScrollComplete');
-    //         $scope.$broadcast('scroll.refreshComplete');
-    //     });
-    // };
-    // $scope.doRefresh = function () {
-    //     page = 1;
-    //     $scope.items = [];
-    //     $scope.loadMore();
-    // }
+    
+   
 });
 
 
@@ -102,12 +95,9 @@ myApp.controller('loginCtrl', function($scope, AccountService, $state,$ionicPopu
                     return;
                 }else{
                     var sendSeconds = new Date().getTime();
-                    // var wsCache = new WebStorageCache();
-                    window.localStorage[cache.sendCodeTime] = sendSeconds;
-                    //wsCache.set("sendCodeTime", sendSeconds); //时间戳   todo设置过期时间
+                    window.localStorage[cache.sendCodeTime] = sendSeconds;//时间戳   todo设置过期时间
                     $state.go("loginCode", { phone: $scope.phone.tel });
                 }
-
             }).error(function(error) {
                 console.log(error);
             });
@@ -149,36 +139,31 @@ myApp.controller('loginCodeCtrl', function($scope,$rootScope, $stateParams, $sta
             AccountService.login(phone, code).success(function(resp) {
                 console.log(resp);
                 //{status: "error", code: 404, message: "昵称还没有设置"}
+                //{status: "success", code: 200, message: "登录成功",result:{}}
                 //{status: "error", code: 403, message: "登录失败, 登录验证码错误"}
                 if (resp.code == "200") {
-                    window.localStorage[cache.logined]="true";
-                    window.localStorage[cache.token]=resp.result.token;
-                    window.localStorage[cache.userId]=resp.result.id;
-                  
-                    if(resp.result.nickname){
-                        // 相当于AccountService.getUserInfo(id);此处已经返回userinfo
-                        // 这是用户登录后
-                        window.localStorage[cache.user] = JSON.stringify(resp.result);
-                        $rootScope.user = AccountService.getCacheUser();
-                        $state.go("home");
-                        $ionicPopup.alert({ title: '提示', template:"登录成功"  }) 
-                        $ionicHistory.nextViewOptions({
-                          disableAnimate: false,
-                          disableBack: true
-                        });
-                    }else{
-                        $state.go("loginComplete");
-                    }
-                    
-                    //第几次登录，判断要不要进入完善信息页
-                   // AccountService.getUserInfo(resp.result.id);
-                   // var a = AccountService.getCacheUser().nickname
-                    // if(a){
-                    // return}else{
-                    // $state.go("loginComplete");
-                    // }
-                     
-                    
+                        window.localStorage[cache.logined]="true";
+                        window.localStorage[cache.token]=resp.result.token;
+                        window.localStorage[cache.userId]=resp.result.id;
+                        if(resp.message=="注册成功"){   //resp.result.nickname 也可以判断
+                            $state.go("loginComplete");
+                        }
+                        if(resp.message=="登录成功"){
+                            if(resp.result.nickname){
+                                window.localStorage[cache.user] = JSON.stringify(resp.result);
+                                $rootScope.user = AccountService.getCacheUser();
+                                $state.go("home");
+                                $ionicPopup.alert({ title: '提示', template:"登录成功"  }) 
+                                $ionicHistory.nextViewOptions({
+                                  disableAnimate: false,
+                                  disableBack: true
+                                });
+                            }else{
+                                $ionicPopup.alert({ title: '提示', template:"昵称为空!重新登录"  }) 
+                                
+                            }
+                            
+                        }
                 }else if (resp.code == "403") {
                     $ionicPopup.alert({ title: '提示', template: resp.message });
                 }else if (resp.code == "404") { //|| !resp.result.nickname
@@ -186,22 +171,12 @@ myApp.controller('loginCodeCtrl', function($scope,$rootScope, $stateParams, $sta
                     window.localStorage[cache.token]=resp.result.token;
                     window.localStorage[cache.userId]=resp.result.id;
                     $state.go("loginComplete");
-                }else {
+                }
+                    
                     // {status: "success", code: 200, message: "注册成功", 
                     // result: {token: "eyJ0eXPwOY", expiryTime: "1474518492", 
                     // id: 6} }
-                    window.localStorage[cache.logined]="true";
-                    window.localStorage[cache.token]=resp.result.token;
-                    window.localStorage[cache.userId]=resp.result.id;
-                    // wsCache.set("logined", true);
-                    // wsCache.set("userToken", resp.result.token);
-                    // wsCache.set("userId", resp.result.id);
-                    $state.go("loginComplete");
-                    console.log(window.localStorage[cache.token]+"----regSuccess");
-                }
-                // else if (resp.code == "404" || !resp.result.nickname) {
-                //     $state.go("loginComplete");
-                // } 
+
             }).error(function(error) { 
                 $ionicPopup.alert({title: '提示', template:"网络连接错误"});
                 removeInfo();
@@ -247,8 +222,8 @@ myApp.controller('loginCodeCtrl', function($scope,$rootScope, $stateParams, $sta
 
 myApp.controller('loginCompleteCtrl', function($scope,$rootScope, $ionicPopup, $cordovaCamera, $ionicActionSheet,AccountService, $state, 
     $ionicHistory, $location) {
-    var token =window.localStorage[cache.token] 
-    var id = window.localStorage[cache.userId]  
+    var token =window.localStorage[cache.token];
+    var id = window.localStorage[cache.userId] ;
     // console.log(token+"----complete");
     $scope.userInfo  = {
         avatar:"",
@@ -368,12 +343,17 @@ myApp.controller('loginCompleteCtrl', function($scope,$rootScope, $ionicPopup, $
 });
 
 myApp.controller('sideMenuCtrl', function($scope,$rootScope, $location, $anchorScroll, $ionicModal, AccountService, $http, $state) {
-     var _user = AccountService.getCacheUser();
-     $rootScope.user = (_user == undefined)?{}: _user;
-     // $rootScope.user={}      //avatar:"img/ben.png"
+      $scope.$on('$ionicView.beforeEnter',function(){
+        var _user = AccountService.getCacheUser();
+        $rootScope.user = (_user == undefined)?{}: _user;
+      })
+     // var _user = AccountService.getCacheUser();
+     // $rootScope.user = (_user == undefined)?{}: _user;
+
     $scope.openLogin = function() {
         var logined=window.localStorage[cache.logined];
-        if (logined=="true") {
+        var _user  = AccountService.getCacheUser();
+        if (logined=="true" && _user.nickname) {
             $state.go("usercenter");
         } else {
             $state.go("login");
