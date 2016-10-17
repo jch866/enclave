@@ -1,19 +1,94 @@
 var myApp = angular.module('starter.controllers', []);
-myApp.controller('homeCtrl', function($scope, $ionicTabsDelegate, getArticleList, $http,$ionicPopup,$timeout) {
-    //.success(function(resp){console.log(resp);}).error(function(error){console.log(error);})
-    $scope.imgUrl = urls.imgUrl;
-    var userId = window.localStorage[cache.userId];
-    var page=1,count=10;
-    var isLock=false;
-    $scope.items = [];
+myApp.controller('homeCtrl', function($scope, $ionicTabsDelegate, getArticleList, $http, $ionicPopup, $timeout, $cordovaDatePicker, $rootScope, $cordovaNetwork) {
+            //.success(function(resp){console.log(resp);}).error(function(error){console.log(error);})
+            $scope.imgUrl = urls.imgUrl;
+            var userId = window.localStorage[cache.userId];
+            var page = 1,
+                count = 10;
+            var isLock = false;
+            $scope.items = [];
 
-    getArticleList.getArticles(userId,page,count).success(function(resp){
-            console.log(resp);
-            $scope.items = resp.result.data;
-    }).error(function(error){
-            console.log(error);
-    });
+            getArticleList.getArticles(userId, page, count).success(function(resp) {
+                console.log(resp);
+                $scope.items = resp.result.data;
+            }).error(function(error) {
+                console.log(error);
+            });
 
+            // 
+                    // document.addEventListener("deviceready", function () {
+
+                    //         $scope.network = $cordovaNetwork.getNetwork();
+                    //         $scope.isOnline = $cordovaNetwork.isOnline();
+                    //         $scope.$apply();
+
+                    //         // listen for Online event
+                    //         $rootScope.$on('$cordovaNetwork:online', function(event, networkState){
+                    //             $scope.isOnline = true;
+                    //             $scope.network = $cordovaNetwork.getNetwork();
+
+                    //             $scope.$apply();
+                    //         })
+
+                    //         // listen for Offline event
+                    //         $rootScope.$on('$cordovaNetwork:offline', function(event, networkState){
+                    //             console.log("got offline");
+                    //             $scope.isOnline = false;
+                    //             $scope.network = $cordovaNetwork.getNetwork();
+
+                    //             $scope.$apply();
+                    //         })
+
+                    //   }, false); 
+            //
+            // $ionicPlatform.ready(function() {
+            //     $scope.onNetwork = function() {
+            //     var type = $cordovaNetwork.getNetwork()
+            //     $scope.type = type;//"cellular""wifi"
+            //     var isOnline = $cordovaNetwork.isOnline()
+            //     $scope.isOnline = isOnline;
+            //     var isOffline = $cordovaNetwork.isOffline()
+            //     $scope.isOffline = isOffline;
+            //     // listen for Online event
+            //     $rootScope.$on('$cordovaNetwork:online', function(event, networkState) {
+            //         var onlineState = networkState;
+            //         console.log(onlineState);
+            //     })
+
+            //     // listen for Offline event
+            //     $rootScope.$on('$cordovaNetwork:offline', function(event, networkState) {
+            //         var offlineState = networkState;
+            //         console.log(onlineState);
+            //     })
+            //     }
+            // })
+            
+
+
+
+     $scope.ShowDate=function(){
+        var options = {
+            date: new Date(),
+            mode: 'date', // or 'time'
+            minDate: new Date() - 10000,
+            allowOldDates: true,
+            allowFutureDates: false,
+            doneButtonLabel: 'DONE',
+            doneButtonColor: '#F2F3F4',
+            cancelButtonLabel: 'CANCEL',
+            cancelButtonColor: '#000000'
+          };
+
+      //document.addEventListener("deviceready", function () {
+
+        $cordovaDatePicker.show(options).then(function(date){
+             console.log(',,,$cordovaDatePicker.show,,,', $cordovaDatePicker.show);
+            alert(date);
+            $scope.SelectDate = date;
+        });
+        //}, false);
+    }
+    
     $scope.loadMore = function() {
     if (isLock) return;
     isLock = true;
@@ -32,7 +107,6 @@ myApp.controller('homeCtrl', function($scope, $ionicTabsDelegate, getArticleList
                 tip.close();
             }, 1000)
         }
-
     }).finally(function(error) {
         isLock = false;
         $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -123,64 +197,49 @@ myApp.controller('loginCtrl', function($scope, AccountService, $state,$ionicPopu
 
     };
 });
-myApp.controller('loginCodeCtrl', function($scope,$rootScope, $stateParams, $state, $ionicPopup, AccountService, $timeout,$ionicHistory) {
+myApp.controller('loginCodeCtrl', function($scope, $rootScope, $stateParams, $state, $ionicPopup, AccountService, $timeout, $ionicHistory) {
     var phone = $stateParams.phone;
     $scope.data = {
-        code: ""
-    }
-    //{"status":0,"message":"发送成功"}
+            code: ""
+        }
+        //{"status":0,"message":"发送成功"}
     $scope.completeLogin = function() {
         var code = $scope.data.code;
         var codeReg = /^\d{6}$/;
         if (!codeReg.test(code)) {
-            $ionicPopup.alert({ title: '提示', template:"请输入有效的验证码！"})
+            $ionicPopup.alert({ title: '提示', template: "请输入有效的验证码！" })
             return false;
         } else {
             AccountService.login(phone, code).success(function(resp) {
                 console.log(resp);
-                //{status: "error", code: 404, message: "昵称还没有设置"}
-                //{status: "success", code: 200, message: "登录成功",result:{}}
-                //{status: "error", code: 403, message: "登录失败, 登录验证码错误"}
+                // {code:200,message:"检验成功",result:null,status:"success"}
                 if (resp.code == "200") {
-                        window.localStorage[cache.logined]="true";
-                        window.localStorage[cache.token]=resp.result.token;
-                        window.localStorage[cache.userId]=resp.result.id;
-                        if(resp.message=="注册成功"){   //resp.result.nickname 也可以判断
-                            $state.go("loginComplete");
-                        }
-                        if(resp.message=="登录成功"){
-                            if(resp.result.nickname){
-                                window.localStorage[cache.user] = JSON.stringify(resp.result);
-                                $rootScope.user = AccountService.getCacheUser();
-                                $state.go("home");
-                                $ionicPopup.alert({ title: '提示', template:"登录成功"  }) 
-                                $ionicHistory.nextViewOptions({
-                                  disableAnimate: false,
-                                  disableBack: true
-                                });
-                            }else{
-                                $ionicPopup.alert({ title: '提示', template:"昵称为空!重新登录"  }) 
-                                
-                            }
-                            
-                        }
-                }else if (resp.code == "403") {
+                     window.localStorage[cache.smsId] = resp.result.id;
+                    if (resp.result && resp.result.nickname) {
+                        window.localStorage[cache.logined] = "true";
+                        window.localStorage[cache.token] = resp.result.token;
+                        window.localStorage[cache.userId] = resp.result.user_id;
+                        window.localStorage[cache.user] = JSON.stringify(resp.result);
+                        $rootScope.user = AccountService.getCacheUser();
+                        $state.go("home");
+                        $ionicPopup.alert({ title: '提示', template: "登录成功" })
+                        $ionicHistory.nextViewOptions({
+                            disableAnimate: false,
+                            disableBack: true
+                        });
+                    } else {
+                        $state.go("loginComplete");
+                    }
+                } else if (resp.code == "403") {
                     $ionicPopup.alert({ title: '提示', template: resp.message });
-                }else if (resp.code == "404") { //|| !resp.result.nickname
-                    window.localStorage[cache.logined]="true";
-                    window.localStorage[cache.token]=resp.result.token;
-                    window.localStorage[cache.userId]=resp.result.id;
-                    $state.go("loginComplete");
                 }
-                    
-                    // {status: "success", code: 200, message: "注册成功", 
-                    // result: {token: "eyJ0eXPwOY", expiryTime: "1474518492", 
-                    // id: 6} }
+                //  else if (resp.code == "404") { //|| !resp.result.nickname
+                //     $state.go("loginComplete");
+                // }
 
-            }).error(function(error) { 
-                $ionicPopup.alert({title: '提示', template:"网络连接错误"});
+            }).error(function(error) {
+                $ionicPopup.alert({ title: '提示', template: "服务器错误" });
                 removeInfo();
-                //console.log(error); 
             });
         }
 
@@ -220,36 +279,19 @@ myApp.controller('loginCodeCtrl', function($scope,$rootScope, $stateParams, $sta
 });
 
 
-myApp.controller('loginCompleteCtrl', function($scope,$rootScope, $ionicPopup, $cordovaCamera, $ionicActionSheet,AccountService, $state, 
+myApp.controller('loginCompleteCtrl', function($scope,$rootScope,$cordovaDatePicker, $ionicPopup, $cordovaCamera, $ionicActionSheet,AccountService, $state, 
     $ionicHistory, $location) {
-    var token =window.localStorage[cache.token];
-    var id = window.localStorage[cache.userId] ;
-    // console.log(token+"----complete");
+    // var token =window.localStorage[cache.token];
+     var token ="";
+     var userId ="";
+     var smsId = window.localStorage[cache.smsId]-0 ;
     $scope.userInfo  = {
-        avatar:"",
+        avatar:curUser.avatar,//curUser.avatar
         name: "",
-        sex: null,
-        birthday:null
+        sex: "女",
+        birthday:"19990101"
     } 
     var userInfo = $scope.userInfo;
-    var avlidate = function(){
-        var regName=/^[a-zA-Z\u4e00-\u9fa5][a-zA-Z0-9_\u4E00-\u9FA5]{1,15}$/;
-        var regSex= /^['男'|'女']$/;
-        var regBirth=/^(19|20)\d{2}(1[0-2]|0[1-9])(0[1-9]|[1-2][0-9]|3[0-1])$/;
-
-        if(!userInfo.name||!regName.test(userInfo.name)){
-            $ionicPopup.alert({ title: '提示', template: "昵称由字母、数字、下划线和中文组成，以中文或字母开头，长度为2-16位"});
-            return false;
-        }
-        if(userInfo.sex && !regSex.test(userInfo.sex)){
-            $ionicPopup.alert({ title: '提示', template: "选填，‘男’或者‘女’"});
-             return false;;
-        }
-        if(userInfo.birthday && !regBirth.test(userInfo.birthday)){
-            $ionicPopup.alert({ title: '提示', template: "选填，生日格式:19990101"});
-            return false;;
-        }
-    };
     $scope.complete = function() {
        // var reg = /[a-zA-Z0-9]{1,10}|[\u4e00-\u9fa5]{1,5}/g;
         var regName=/^[a-zA-Z\u4e00-\u9fa5][a-zA-Z0-9_\u4E00-\u9FA5]{1,15}$/;
@@ -268,15 +310,19 @@ myApp.controller('loginCompleteCtrl', function($scope,$rootScope, $ionicPopup, $
             $ionicPopup.alert({ title: '提示', template: "选填，生日格式:19990101"});
             return false;;
         }
-        AccountService.uploadUser(token, id, userInfo).success(function(resp) {
+        AccountService.uploadUser(userInfo,smsId).success(function(resp) {
             console.log(resp);
             //{status: "error", code: 4003, message: "user不存在"}
             if (resp.code == "200") {
             $ionicPopup.alert({ title: '提示', template:"注册成功"  }) 
                 $state.go("home");
+               //resp.result.user_id
+                window.localStorage[cache.logined] = "true";
+                token = window.localStorage[cache.token] = resp.result.token;
+                userId = window.localStorage[cache.userId] = resp.result.user_id;
                 //这是用户首次注册成功后，保存信息
-                id && AccountService.getUserInfo(id);
-                $rootScope.user = AccountService.getCacheUser();
+                userId && AccountService.getUserInfo(userId);
+                //$rootScope.user = AccountService.getCacheUser();
                  $ionicHistory.nextViewOptions({
                   disableAnimate: false,
                   disableBack: true
@@ -290,10 +336,11 @@ myApp.controller('loginCompleteCtrl', function($scope,$rootScope, $ionicPopup, $
                 $ionicPopup.alert({ title: '提示', template:"有问题"  }) //resp.message
             }
         }).error(function(error) {
-            $ionicPopup.alert({ title: '提示', template:"连接网络失败" })//error
+            $ionicPopup.alert({ title: '提示', template:"服务器错误" })//error
         })
 
     }
+
     var callCamera = function(sourceType) {
         var options = {
             quality: 100, //图片质量 100为最佳
@@ -353,7 +400,7 @@ myApp.controller('sideMenuCtrl', function($scope,$rootScope, $location, $anchorS
     $scope.openLogin = function() {
         var logined=window.localStorage[cache.logined];
         var _user  = AccountService.getCacheUser();
-        if (logined=="true" && _user.nickname) {
+        if (logined=="true" && _user && _user.nickname) {
             $state.go("usercenter");
         } else {
             $state.go("login");
@@ -374,14 +421,12 @@ myApp.controller('sideMenuCtrl', function($scope,$rootScope, $location, $anchorS
 });
 
 myApp.controller('usercenterCtrl', function($scope,$rootScope, AccountService, $state, $ionicHistory, $ionicPopup,$ionicActionSheet) {
-
-    var id = window.localStorage[cache.userId];
-    console.log(id);
-    
-    AccountService.getUserInfo(id);
-    $scope.user = AccountService.getCacheUser();//取localstorage的值
+    var userId = window.localStorage[cache.userId];
+    console.log(userId);
+    AccountService.getUserInfo(userId); //切换用户时
+    $scope.user =  $rootScope.user = AccountService.getCacheUser();//取localstorage的值
     $scope.doRefresh = function() {
-        AccountService.getUserInfo(id);
+        AccountService.getUserInfo(userId);
         $scope.$broadcast('scroll.refreshComplete');
     }
 
@@ -421,11 +466,14 @@ myApp.controller('settingCtrl', function($scope, $state) {
 });
 myApp.controller('articleDetailCtrl', function($scope, $state, $stateParams, $ionicActionSheet, 
     $ionicPopup, $timeout, getArticleList, ArticleService,FavService,ComService) {
-    
+    var replayList = $scope.replyCommentList = [];
+    var curList = $scope.currentArticleComList = [];
+     
     var artId=0;
     var type = "article";
     var page=1;
     var count=10;
+    $scope.hasMedia=true;
     $scope.imgUrl = urls.imgUrl;
     console.log($stateParams);
     var id = $stateParams.art_id;
@@ -436,18 +484,34 @@ myApp.controller('articleDetailCtrl', function($scope, $state, $stateParams, $io
         mediaOption.file = resp.result.art_media;
         mediaOption.image = $scope.imgUrl + resp.result.art_thumb;
         if(resp.result.art_media){
-           // $scope.hasMedia=true;
-            $scope.html = '<div id="art_media"></div>'
+           $scope.hasMedia=true;
+            //$scope.html = '<div id="art_media"></div>'
         }else{
-            //$scope.hasMedia=false;
-            $scope.html = '<img  alt="" src="'+$scope.imgUrl+$scope.item.art_thumb+'">'
+            $scope.hasMedia=false;
+            //$scope.html = '<img  alt="" src="'+$scope.imgUrl+$scope.item.art_thumb+'">'
         }
     }).success(function(){
         ComService.getSingleCom(type, artId, page, count).success(function(resp){
         console.log(resp);
         if(resp.code==200){
             $scope.hasComment=true;
-            $scope.currentArticleComList = resp.result.data;
+            var data = resp.result.data;// len = data.length;
+            angular.forEach(data, function(item) {
+                 if (item.extendsAuthor) {
+                     $scope.replyCommentList.push(item)
+                 } else {
+                     $scope.currentArticleComList.push(item);
+                 }
+             });
+
+            // for(var i=0;i < len; i++){
+            //     if(data[i].extendsAuthor){
+            //         $scope.replyCommentList.push(data[i])
+            //         continue;
+            //     }
+            //     $scope.currentArticleComList.push(data[i]);
+            // }
+            //$scope.currentArticleComList =  
             $scope.currentArticleComTotal = resp.result.pageInfo.total
         };
         if(resp.code==404){
@@ -491,46 +555,15 @@ myApp.controller('articleDetailCtrl', function($scope, $state, $stateParams, $io
      */
     $scope.$on('$ionicView.enter',function(){
       console.log("$ionicView.enter");
-      var media = $("#art_media");
-      if(media){   //todo 多切换几个文章试试有无报错
+      //var media = $("#art_media");
+      if($scope.hasMedia){   //todo 多切换几个文章试试有无报错
           jwplayer("art_media").setup(mediaOption);
         } 
-      
       //音频播放背景图片的问题
     });
-    // $scope.$on('refreshCom',function(){
-    //     ComService.getSingleCom(type, artId, page, count).success(function(resp){
-    //     console.log(resp);
-    //     if(resp.code==200){
-    //         $scope.currentArticleComList = resp.result.data;
-    //         $scope.currentArticleComTotal = resp.result.pageInfo.total
-    //     };
-    //     //resp.code==400
-    //     //{status: "error", code: 400, message: "type字段不能为空"}
-    //     }).error(function(error){
-
-    //     });
-    // });
-
 
     // //获取评论
-    // var type = "article",page=1,count=10;
-    // ComService.getSingleCom(type, artId, page, count).success(function(resp){
-    //     console.log(resp);
-    // }).error(function(error){
 
-    // });
-
-    // $scope.renderMedia=function(){
-    //     jwplayer("art_media").setup({
-    //         flashplayer: 'js/player.swf',
-    //         file: 'media/play.mp4',
-    //         width: 500,
-    //         height: 350,
-    //         image: 'img/ben.png',
-    //         dock: false
-    //     });
-    // }
     // $scope.$on("onRenderFinished",function(onRenderFinishedEvent){
     //     var thePlayer = jwplayer("art_media").setup({
     //         flashplayer: 'js/player.swf',
@@ -571,6 +604,18 @@ myApp.controller('articleDetailCtrl', function($scope, $state, $stateParams, $io
             }, 1000)
          }
        
+    };
+    $scope.replyCom = function(){
+        var $this = this;
+        console.log($this.comment);
+        //针对用户的判断是不是本人  TODO
+        //if(当前id==pid){
+            //是本人，直接无视
+       // }else{
+
+        //}
+        
+        $state.go("comment_reply",{data:$this.comment});
     };
     // $scope.share = function(title, desc, url, thumb){
     //    var hideSheet =  $ionicActionSheet.show({
@@ -617,6 +662,39 @@ myApp.controller('articleDetailCtrl', function($scope, $state, $stateParams, $io
     //     })
     // };
 });
+//回复评论
+myApp.controller('replyCommentCtrl', function($scope, $state, $stateParams, ComService, $ionicHistory, $ionicPopup) {
+    $scope.imgUrl = urls.imgUrl;
+    var data = $stateParams.data;
+    $scope.commentItem = data;
+    $scope.replyComment = {
+        content: ""
+    }
+    console.log($scope.commentItem );
+    $scope.reply_send = function() {
+        var content = $scope.replyComment.content;
+        var userId = window.localStorage[cache.userId] - 0;
+        var type = "article";
+        var source_id = $scope.commentItem.sourceId;
+        var pid = $scope.commentItem.id || 0;
+        var page = 1;
+        var count = 10;
+        ComService.pubCom(userId, type, source_id, content, pid).success(function(resp) {
+            console.log(resp);
+            if (resp.code == 404) {
+               $ionicPopup.alert({ title: '提示', template:"没有找到当前source_id下pid对应的评论信息"}); 
+            }
+            if (resp.code == 200) {
+                $ionicPopup.alert({ title: '提示', template: resp.message });
+                $ionicHistory.goBack();
+            }
+        }).error(function(error) {
+            console.log(error);
+        });
+    }
+
+})
+
 //发布评论
 myApp.controller('pubCommentCtrl', function($scope, $state, $stateParams, ComService, $ionicHistory, $ionicPopup) {
     $scope.imgUrl = urls.imgUrl;
@@ -628,14 +706,17 @@ myApp.controller('pubCommentCtrl', function($scope, $state, $stateParams, ComSer
 
     $scope.art_public = function() {
         var content = $scope.pubCom.content;
-        var id = window.localStorage[cache.userId] - 0;
+        var userId = window.localStorage[cache.userId] - 0;
         var type = "article";
         var source_id = $scope.item.art_id;
         var pid = pid || 0;
         var page = 1;
         var count = 10;
-        ComService.pubCom(id, type, source_id, content, pid).success(function(resp) {
+        ComService.pubCom(userId, type, source_id, content, pid).success(function(resp) {
             console.log(resp);
+            if (resp.code == 4003) {
+                $ionicPopup.alert({ title: '提示', template: resp.message });
+            }
             if (resp.code == 200) {
                 $ionicPopup.alert({ title: '提示', template: resp.message });
                 $ionicHistory.goBack();

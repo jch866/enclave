@@ -3,21 +3,22 @@
         <ion-nav-button onclick="javascript:history.go(-1)"  class="defBtn">取消</ion-nav-button>
     </ion-nav-buttons> -->
     <ion-nav-buttons side="right">
-        <ion-nav-button  class="defBtn sendcolor">发送</ion-nav-button>
+        <ion-nav-button  class="defBtn sendcolor" ng-click="reply_send()">发送</ion-nav-button>
     </ion-nav-buttons>
     <ion-content>
         <div class="commentDetail">
             <div class="artquote_reply">
-            <img src="img/adam.jpg" alt="">
+            <!-- <img src="img/adam.jpg" alt="" ng-src="commentItem.author.avatar"> -->
+           <img ng-src="{{commentItem.author.avatar}}" alt="">
                 <div class="artTitle">
-                    <p>萧乾父</p>
-                    <h2>火柴盒地球仪火柴盒地球仪火火柴盒地球仪</h2>
+                    <p>{{commentItem.author.nickname}}</p>
+                    <h2>{{commentItem.content}}</h2>
                 </div>
             </div>
         </div>
         <div class="commentArea">
             <form action="">
-                <textarea name="" id="" cols="30" rows="10" placeholder="评论区"></textarea>
+                <textarea name="" id="" rows="10" placeholder="评论区" ng-model="replyComment.content"></textarea>
             </form>
         </div>
     </ion-content>

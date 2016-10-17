@@ -1,5 +1,5 @@
 var enclaveApp = angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'starter.filter','ngCordova']);
-enclaveApp.run(function($ionicPlatform) {
+enclaveApp.run(function($ionicPlatform,$cordovaNetwork, $rootScope) {
     // if(window.localStorage[cache.token]){
     //     $http.defaults.headers.common.Authorization = 'Bearer '+window.localStorage[cache.token];
     // }
@@ -73,7 +73,9 @@ enclaveApp.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvid
         controller: 'pubCommentCtrl'
     }).state('comment_reply', { //评论 回复
         url: '/comment_reply',
-        templateUrl: 'templates/comment_reply.html'
+        params:{'data':null},
+        templateUrl: 'templates/comment_reply.html',
+        controller: 'replyCommentCtrl'
     }).state('comment', { //个人评论列表
         url: '/comment',
         templateUrl: 'templates/comment.html',

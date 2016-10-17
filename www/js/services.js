@@ -40,7 +40,7 @@ angular.module('starter.services', [])
         });
     }
 })
-.service('AccountService', function($http,$ionicPopup) {
+.service('AccountService', function($http,$ionicPopup,$rootScope) {
     var $this = this;
     // 获取缓存用户信息
     this.getCacheUser = function() {
@@ -56,6 +56,7 @@ angular.module('starter.services', [])
                 console.log(resp);
                 if (resp.code == 200) {
                     window.localStorage[cache.user] = JSON.stringify(resp.result);
+                    $rootScope.user = $this.getCacheUser();
                 } else {
                     $ionicPopup.alert({
                         title: '提示',
@@ -68,29 +69,27 @@ angular.module('starter.services', [])
         }
         //发送手机号和验证码登录
     this.login = function(phone, code) {
-            var url = urls.login + "identifier=" + phone + "&credential=" + code;
-            return $http.post(url);
+            var url = urls.login;
+            var data = {
+                type:"mobile",
+                identifier:phone,
+                credential:code
+            }
+        return $http.post(url,data);
         }
         //设置用户信息
-    this.uploadUser = function(token, id, obj) {
-            // var url = urls.setUserInfo + "?token=" + token + "&user_id=" + id + "&avatar=" + obj.avatar + "&nickname=" + obj.name + "&sex=" + obj.sex + "&birthday=" + obj.birthday;
+    this.uploadUser = function(obj,id) {//id为注册短信返回的ID
             var url = urls.setUserInfo;
             var data = {
-                    user_id: id,
+                    id: id,
+                    type:"mobile",
                     avatar: obj.avatar,
                     nickname: obj.name,
                     sex: obj.sex,
                     birthday: obj.birthday
                 }
-                // return $http.post(url,data,headers);
+                console.log(data+"设置用户信息");
             return $http.post(url, data);
-            // var req={
-            //  method:'POST',
-            //  url:'',
-            //  headers:{},
-            //  data:{}
-            // };
-            // $http(req).then(function(){},function(){})
         }
 
         // 注册
@@ -143,6 +142,7 @@ angular.module('starter.services', [])
     this.getSingleCom = function(type, source_id, page, count) {
         var url = urls.getComment+"?source_id=" + source_id + "&type=" + type + "&page=" + page + "&count=" + count;
         return $http.get(url);
+        
         // var data = {
         //     type:type,// 评论的类型
         //     source_id:source_id,//文章ID
@@ -150,7 +150,6 @@ angular.module('starter.services', [])
         //     count:count  //每页数量，默认10条
         // };
         // console.log(data);
-       
         //return $http.get(url, data);
     };
 

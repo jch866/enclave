@@ -372,3 +372,14 @@ cordova-hcp build 只运行一次就可以了吧
 cordova-hcp build 这里，可以换成ionic build吗
 梦里都是你的柔情似水  17:48:46
 没试过
+ //{status: "error", code: 404, message: "昵称还没有设置"}
+                //{status: "success", code: 200, message: "登录成功",result:{}}
+                //{status: "error", code: 403, message: "登录失败, 登录验证码错误"}
+            
+                    //window.localStorage[cache.logined]="true";
+                    //window.localStorage[cache.token]=resp.result.token;
+                    //window.localStorage[cache.userId]=resp.result.id;
+                    //                    
+                    // {status: "success", code: 200, message: "注册成功", 
+                    // result: {token: "eyJ0eXPwOY", expiryTime: "1474518492", 
+                    // id: 6} }
