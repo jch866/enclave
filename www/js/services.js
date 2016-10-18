@@ -164,9 +164,12 @@ angular.module('starter.services', [])
     };
 
     //登录后查看个人评论
-    this.myComList = function(user_id,page,count) {
-        var url = urls.getMessage+"?user_id=" + user_id+"&page=" + page + "&count=" + count;
-        return $http.get(url);
+    this.getSelfComment = function(user_id) {
+        var url = urls.getSelfComment;
+        var data = {
+            user_id:user_id
+        }
+       return $http.post(url,data);
     };
 })
 

@@ -32,23 +32,40 @@
                 <span ng-if="!hasComment" ng-bind="noComment"></span>
             </div>
             <ul ng-if="hasComment">
-                <li ng-repeat="comment in currentArticleComList" ng-click="replyCom()">
+            <li ng-repeat="comment in comments" ng-click="replyCom()">
+                    <div class="avatar"><img src="img/mike.png" ng-src="{{comment.avatar}}" alt=""></div>
+                    <div class="detail">
+                        <div class="title">
+                            <time>{{comment.publishTime*1000 | date:"yyyy-MM-dd HH:mm"}}</time>{{comment.nickname}}</div>
+                        <p>{{comment.content}}</p>
+                        <div class="like"><i class="iconfont icon-like"></i>15</div>
+                        <div class="commentsBox" ng-hide="{{comment.comments.length==0}}"> 
+                            <div class="singleCom" ng-repeat="reply in comment.comments">
+                                <div class="title">{{reply.nickname}}<span> -- {{reply.publishTime*1000 | date:"yyyy-MM-dd HH:mm"}}</span></div>
+                                    <p>{{reply.content}}</p>
+                                </div>
+                        </div> 
+                    </div>
+                </li>
+               <!--  <li ng-repeat="comment in currentArticleComList" ng-click="replyCom()">
                     <div class="avatar"><img src="img/mike.png" ng-src="{{comment.author.avatar}}" alt=""></div>
                     <div class="detail">
                         <div class="title">
-                            <time>{{comment.publishTime | toDate}}</time>{{comment.author.nickname}}</div>
+                            <time>{{comment.publishTime*1000 | date:"yyyy-MM-dd HH:mm"}}</time>{{comment.author.nickname}}</div>
                         <p>{{comment.content}}</p>
                         <div class="like"><i class="iconfont icon-like"></i>15</div>
                         <div class="commentsBox" ng-if="replyCommentList"> 
                             <div class="singleCom" ng-repeat="reply in replyCommentList">
                                 <div ng-if="reply.pid == comment.id">
-                                    <div class="title">{{reply.author.nickname}}<span>{{reply.publishTime | toDate}}</span></div>
+                                <div class="title">{{reply.author.nickname}}<span> -- {{reply.publishTime*1000 | date:"yyyy-MM-dd HH:mm"}}</span></div>
                                     <p>{{reply.content}}</p>
                                 </div>
                             </div>
                         </div> 
                     </div>
-                </li>
+                </li> -->
+                 </ul>
+        </div>
                 <!-- <li>
             <div class="avatar"><img src="img/mike.png" alt=""></div>
             <div class="detail">
@@ -75,7 +92,6 @@
                 </div>
             </div>
         </li>   -->
-            </ul>
-        </div>
+           
     </ion-content>
 </ion-view>

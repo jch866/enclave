@@ -407,15 +407,18 @@ myApp.controller('sideMenuCtrl', function($scope,$rootScope, $location, $anchorS
         }
     }
     $scope.goMessage = function() {
+        //TODO 判断是否登录
         $state.go("message");
     }
     $scope.goFav = function() {
+        //TODO 判断是否登录
         $state.go("favourite");
     }
     $scope.goSetting = function() {
         $state.go("setting");
     }
     $scope.goComment = function() {
+        //TODO 判断是否登录
         $state.go("comment");
     }
 });
@@ -477,56 +480,66 @@ myApp.controller('articleDetailCtrl', function($scope, $state, $stateParams, $io
     $scope.imgUrl = urls.imgUrl;
     console.log($stateParams);
     var id = $stateParams.art_id;
+
+    function getComments() {
     ArticleService.getDetails(id).success(function(resp) {
         console.log(resp);
         $scope.item = resp.result;
         artId = resp.result.art_id;
         mediaOption.file = resp.result.art_media;
         mediaOption.image = $scope.imgUrl + resp.result.art_thumb;
-        if(resp.result.art_media){
-           $scope.hasMedia=true;
-            //$scope.html = '<div id="art_media"></div>'
-        }else{
-            $scope.hasMedia=false;
-            //$scope.html = '<img  alt="" src="'+$scope.imgUrl+$scope.item.art_thumb+'">'
+        if (resp.result.art_media) {
+            $scope.hasMedia = true;
+        } else {
+            $scope.hasMedia = false;
         }
-    }).success(function(){
-        ComService.getSingleCom(type, artId, page, count).success(function(resp){
-        console.log(resp);
-        if(resp.code==200){
-            $scope.hasComment=true;
-            var data = resp.result.data;// len = data.length;
-            angular.forEach(data, function(item) {
-                 if (item.extendsAuthor) {
-                     $scope.replyCommentList.push(item)
-                 } else {
-                     $scope.currentArticleComList.push(item);
-                 }
-             });
+    }).success(function() {
+        ComService.getSingleCom(type, artId, page, count).success(function(resp) {
+            console.log(resp);
+            if (resp.code == 200) {
+                $scope.hasComment = true;
+                var data = resp.result.data.reverse(); // len = data.length;
+                var comments = [];
+                angular.forEach(data, function(item) {
+                    console.log(item.pid);
+                    var c = {
+                        id: item.id,
+                        nickname: item.author.nickname,
+                        avatar: item.author.avatar,
+                        content: item.content,
+                        publishTime: item.publishTime,
+                        sourceId: item.sourceId,
+                        comments: []
+                    };
+                    var isChild = false;
 
-            // for(var i=0;i < len; i++){
-            //     if(data[i].extendsAuthor){
-            //         $scope.replyCommentList.push(data[i])
-            //         continue;
-            //     }
-            //     $scope.currentArticleComList.push(data[i]);
-            // }
-            //$scope.currentArticleComList =  
-            $scope.currentArticleComTotal = resp.result.pageInfo.total
-        };
-        if(resp.code==404){
-            $scope.hasComment=false;
-            $scope.currentArticleComTotal = 0;
-            $scope.noComment = resp.message //没有任何评论信息
-        }
-        //resp.code==400
-        //{status: "error", code: 400, message: "type字段不能为空"}
-        }).error(function(error){
+                    for (var i = 0; i < comments.length; i++) {
+                        if (item.pid == comments[i].id) {
+                            isChild = true;
+                            comments[i].comments.push(c)
+                            break;
+                        }
+                    }
+                    if (isChild == false) {
+                        comments.push(c);
+                    }
+                });
+                $scope.comments = comments.reverse();
+                $scope.currentArticleComTotal = resp.result.pageInfo.total
+            };
+            if (resp.code == 404) {
+                $scope.hasComment = false;
+                $scope.currentArticleComTotal = 0;
+                $scope.noComment = resp.message //没有任何评论信息
+            }
+            //resp.code==400
+            //{status: "error", code: 400, message: "type字段不能为空"}
+        }).error(function(error) {console.log(error);});
+    }).error(function(error) { console.log(error); })
+}
 
-        });
-    }).error(function(error) { console.log(error);})
 
-    console.log(mediaOption.media);
+    //console.log(mediaOption.media);
     
     /**
      及时更新最新的评论 监听beforeEnter
@@ -554,6 +567,7 @@ myApp.controller('articleDetailCtrl', function($scope, $state, $stateParams, $io
      判断当时的媒体是视频音频还是图片
      */
     $scope.$on('$ionicView.enter',function(){
+        getComments();
       console.log("$ionicView.enter");
       //var media = $("#art_media");
       if($scope.hasMedia){   //todo 多切换几个文章试试有无报错
@@ -727,22 +741,22 @@ myApp.controller('pubCommentCtrl', function($scope, $state, $stateParams, ComSer
     }
 
 })
-
+//个人评论列表
 myApp.controller('commentListCtrl', function($scope, $state, $stateParams, ComService, $ionicHistory, $ionicPopup) {
     var user_id=window.localStorage[cache.userId] - 0;
-    var page = 1;
-    var count = 10;
-    ComService.myComList(user_id,page,count).success(function(resp){
+    // var page = 1;
+    // var count = 10;
+    ComService.getSelfComment(user_id).success(function(resp){
             console.log(resp);
             if(resp.code==200){
-            $scope.myComment=true;
+            $scope.hasCommentMsg=true;
             //$scope.currentArticleComList = resp.result.data;
             //$scope.currentArticleComTotal = resp.result.pageInfo.total
         };
         if(resp.code==404){
-            $scope.myComment=false;
+            $scope.hasCommentMsg=false;
             //$scope.currentArticleComTotal = 0;
-            //$scope.noComment = resp.message //没有任何评论信息
+            $scope.CommentMsg = resp.message //没有任何评论信息
         }
         }).error(function(error){
             

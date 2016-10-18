@@ -1,48 +1,22 @@
 <!-- 我的评论 -->
 <ion-view view-title="评论">
-    <!-- <ion-nav-buttons side="left">
-        <ion-nav-button onclick="javascript:history.go(-1)"  class="defBtn">取消</ion-nav-button>
-    </ion-nav-buttons> -->
-    <!--  <ion-nav-buttons side="right">
-        <ion-nav-button  class="defBtn sendcolor">发送</ion-nav-button>
-    </ion-nav-buttons> -->
     <ion-content>
-        <div class="commentList">
+        <div ng-if="!hasCommentMsg" class="noComMsg">
+            <span ng-bind="CommentMsg" ></span>
+        </div>
+        <div class="commentList" ng-if="hasCommentMsg">
             <ul>
-                <li class="comItem">
+                <li class="comItem" >
+                <!-- ng-repeat="" -->
                     <div class="comContent">
                         <div class="user_name">
                             <time>刚刚</time>安瓦尔
                         </div>
                         <div class="user_com">速写一直是一门想要学会的手艺速写一直是一门想要学会的手艺</div>
                     </div>
-                    <div class="comArticle">
+                    <div class="comArticle" href="#/article/{{item.art_id}}">
                         <div class="art_author">萧乾父</div>
                         <div class="art_title">在绘画中享受这个时代在绘画中享受这个时代在绘画中享受这个时代</div>
-                    </div>
-                </li>
-                 <li class="comItem">
-                    <div class="comContent">
-                        <div class="user_name">
-                            <time>刚刚</time>安瓦尔
-                        </div>
-                        <div class="user_com">速写一直是一门想要学会的手艺速写一直是一门想要学会的手艺</div>
-                    </div>
-                    <div class="comArticle">
-                        <div class="art_author">萧乾父</div>
-                        <div class="art_title">在绘画中享受这个时代在绘画中享受这个时代在绘画中享受这个时代</div>
-                    </div>
-                </li>
-                 <li class="comItem">
-                    <div class="comContent">
-                        <div class="user_name">
-                            <time>刚刚</time>安瓦尔
-                        </div>
-                        <div class="user_com">速写一直是一门想要学会的手艺速写一直是一门想要学会的手艺</div>
-                    </div>
-                    <div class="comArticle">
-                        <div class="art_author">萧乾父</div>
-                        <div class="art_title">在绘画中享受这个时代在绘画中享受这绘画中享受这个时代</div>
                     </div>
                 </li>
             </ul>

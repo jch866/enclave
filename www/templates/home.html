@@ -19,7 +19,7 @@
             <div class="imgShowMore">
                 <div class="authorInfor">
                     <div>{{item.art_editor}}</div>
-                    <div>{{item.art_time | toDate}}</div>
+                    <div>{{item.art_time*1000 | date:"yyyy年MM月dd日"}}</div>
                 </div>
                 <a href="#/article/{{item.art_id}}" ng-click=""><h2>{{item.art_title}}</h2></a>
                 <div class="hits">

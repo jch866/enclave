@@ -22,6 +22,7 @@ var urls = {
     pubComment: hostName+"postComment", //文章评论
     getComment: hostName+"getCommentList", //获取文章评论列表
     getMessage: hostName+"getMessageList", //获取会员评论列表
+    getSelfComment: hostName+"getCommentBySelf", //获取会员评论列表
     fav: hostName+"getCollectionList", //获取收藏列表
     favAddDel: hostName+"addOrCancelCollectArticleInfo", //文章收藏
     //unRead: hostName+"addOrCancelLikeRecord", //获取未读信息列表

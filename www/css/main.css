@@ -238,6 +238,7 @@ color:rgba(255,255,255,0.50);}
 /* font-size:18px; */
 
 /* 我的评论 */
+.noComMsg{text-align: center; padding: 10px;}
 .commentList{color:#000000;font-size: 0.8rem;line-height: 150%;}
 .commentList .comItem{padding: 15px 20px; border-bottom: 1px solid #ededed;}
 .comItem .comContent{padding-bottom: 7px;}
