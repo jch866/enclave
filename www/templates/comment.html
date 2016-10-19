@@ -6,17 +6,16 @@
         </div>
         <div class="commentList" ng-if="hasCommentMsg">
             <ul>
-                <li class="comItem" >
-                <!-- ng-repeat="" -->
+                <li class="comItem"  ng-repeat="item in selfComList"  >
                     <div class="comContent">
                         <div class="user_name">
-                            <time>刚刚</time>安瓦尔
+                             <time>{{item.publishTime*1000 | date:"yyyy年MM月dd日"}}</time>{{item.byUser.nickname}}
                         </div>
-                        <div class="user_com">速写一直是一门想要学会的手艺速写一直是一门想要学会的手艺</div>
+                        <div class="user_com">{{item.content}}</div>
                     </div>
                     <div class="comArticle" href="#/article/{{item.art_id}}">
-                        <div class="art_author">萧乾父</div>
-                        <div class="art_title">在绘画中享受这个时代在绘画中享受这个时代在绘画中享受这个时代</div>
+                        <div class="art_author">{{item.sourceEditor}}</div>
+                        <div class="art_title">{{item.sourceTitle}}</div>
                     </div>
                 </li>
             </ul>

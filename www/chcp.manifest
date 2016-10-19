@@ -25,7 +25,7 @@
   },
   {
     "file": "css/main.css",
-    "hash": "c0b72dc5e6a630f68905efb1a5d2c232"
+    "hash": "48ea3336c99e6dbd685b1c3ea0502646"
   },
   {
     "file": "css/reset.css",
@@ -37,7 +37,7 @@
   },
   {
     "file": "data/art.json",
-    "hash": "fedd0aa7dff9353246a592609aeb399c"
+    "hash": "dee28bd21072d7f8c794aee08bf8c0c1"
   },
   {
     "file": "img/adam.jpg",
@@ -177,11 +177,11 @@
   },
   {
     "file": "js/config.js",
-    "hash": "24d6b1c9bb65baebb5e5dda59f71973d"
+    "hash": "dceab26e1162e1a8a99f52a034b132ed"
   },
   {
     "file": "js/controllers.js",
-    "hash": "3cd9db5c0859e8c4943da97c79dc1fb2"
+    "hash": "da88b2ebe5f1dd35c17e1dce417087f4"
   },
   {
     "file": "js/filter.js",
@@ -205,7 +205,7 @@
   },
   {
     "file": "js/services.js",
-    "hash": "4197af6e9a51a9312bbc11ece19c5183"
+    "hash": "4a90302ae36260da49485e91591ba040"
   },
   {
     "file": "js/services00000.js",
@@ -489,7 +489,7 @@
   },
   {
     "file": "templates/articleDetail.html",
-    "hash": "da4b7895f220ca92d3b741649c3f73c0"
+    "hash": "6fe5ed05203c68b1cf1545213d48d82a"
   },
   {
     "file": "templates/articleVedio.html",
@@ -505,7 +505,7 @@
   },
   {
     "file": "templates/comment.html",
-    "hash": "3d9d43a77f8f4265f8e4396a02871629"
+    "hash": "0cb03ebfaeb44c23c619827c40be219a"
   },
   {
     "file": "templates/favourite.html",

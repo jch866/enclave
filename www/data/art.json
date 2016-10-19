@@ -1,72 +1,59 @@
 {
-        "status": 0,
-        "message": "success",
-        "article": 
-                [{
-                    "art_id": 12,
-                    "art_title": "11",
-                    "art_tag": "11",
-                    "art_description": "11",
-                    "art_thumb": "adam.jpg",
-                    "art_sound": null,
-                    "art_movie": null,
-                    "art_content": "11 < \/p>",
-                    "art_time":"1465285624",
-                    "art_editor":"11",
-                    "art_view":"0",
-                    "cate_id":"1"
-                    },{
-                    "art_id": 12,
-                    "art_title": "11",
-                    "art_tag": "11",
-                    "art_description": "11",
-                    "art_thumb": "adam.jpg",
-                    "art_sound": null,
-                    "art_movie": null,
-                    "art_content": "11 < \/p>",
-                    "art_time":"1465285624",
-                    "art_editor":"11",
-                    "art_view":"0",
-                    "cate_id":"1"
-                    },{
-                    "art_id": 12,
-                    "art_title": "11",
-                    "art_tag": "11",
-                    "art_description": "11",
-                    "art_thumb": "adam.jpg",
-                    "art_sound": null,
-                    "art_movie": null,
-                    "art_content": "11 < \/p>",
-                    "art_time":"1465285624",
-                    "art_editor":"11",
-                    "art_view":"0",
-                    "cate_id":"1"
-                    },{
-                    "art_id": 12,
-                    "art_title": "11",
-                    "art_tag": "11",
-                    "art_description": "11",
-                    "art_thumb": "adam.jpg",
-                    "art_sound": null,
-                    "art_movie": null,
-                    "art_content": "11 < \/p>",
-                    "art_time":"1465285624",
-                    "art_editor":"11",
-                    "art_view":"0",
-                    "cate_id":"1"
-                    },{
-                    "art_id": 12,
-                    "art_title": "11",
-                    "art_tag": "11",
-                    "art_description": "11",
-                    "art_thumb": "adam.jpg",
-                    "art_sound": null,
-                    "art_movie": null,
-                    "art_content": "11 < \/p>",
-                    "art_time":"1465285624",
-                    "art_editor":"11",
-                    "art_view":"0",
-                    "cate_id":"1"
-                    }
-                ]
+    "status": "success",
+    "code": 200,
+    "message": "获取评论列表成功",
+    "result": {
+        "pageInfo": {
+            "total": 2,
+            "currentPage": 1
+        },
+        "data": [
+            {
+                "byUser": {
+                    "id": 4,
+                    "nickname": "了了了了了",
+                    "avatar": "http://api.enclavemedia.cn/uploads/user/avatar/d0835054529e5abc7135a82888c96359.png",
+                    "sex": "0"
+                },
+                "toUser": {
+                    "id": 3,
+                    "nickname": "绝世二哥",
+                    "avatar": "http://api.enclavemedia.cn/uploads/user/avatar/12083b8af442bd0b461ebf332e8c8862.png",
+                    "sex": "0"
+                },
+                "id": 2,
+                "messageType": "comment",
+                "type": "article",
+                "sourceId": "37",
+                "content": "你这",
+                "looked": "0",
+                "publishTime": "1476782995",
+                "sourceTitle": "测试文章11",
+                "sourceEditor": "飞地"
+            },
+            {
+                "byUser": {
+                    "id": 4,
+                    "nickname": "了了了了了",
+                    "avatar": "http://api.enclavemedia.cn/uploads/user/avatar/d0835054529e5abc7135a82888c96359.png",
+                    "sex": "0"
+                },
+                "toUser": {
+                    "id": 3,
+                    "nickname": "绝世二哥",
+                    "avatar": "http://api.enclavemedia.cn/uploads/user/avatar/12083b8af442bd0b461ebf332e8c8862.png",
+                    "sex": "0"
+                },
+                "id": 1,
+                "messageType": "comment",
+                "type": "article",
+                "sourceId": "37",
+                "content": "iOS 10",
+                "looked": "0",
+                "publishTime": "1476782986",
+                "sourceTitle": "测试文章11",
+                "sourceEditor": "飞地"
+            }
+        ]
     }
+}

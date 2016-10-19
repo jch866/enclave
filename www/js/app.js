@@ -51,17 +51,10 @@ enclaveApp.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvid
         url: '/usercenter',
         templateUrl: 'templates/userCenter.html',
         controller: 'usercenterCtrl'
-    }).state('register', {
-        url: '/register',
-        templateUrl: 'templates/register.html',
-        controller: 'registerCtrl'
     }).state('setting', { //设置
         url: '/setting',
         templateUrl: 'templates/setting.html',
         controller: 'settingCtrl'
-    }).state('lib', { //文库
-        url: '/lib',
-        templateUrl: 'templates/lib.html'
     }).state('message', { //消息
         url: '/message',
         templateUrl: 'templates/message.html',
