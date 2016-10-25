@@ -36,8 +36,12 @@
     "hash": "84a33cf00d95bc1e3617cc35262f7e94"
   },
   {
+    "file": "data/art.js",
+    "hash": "493a0aab2feebdb76446cd5fe7a165d3"
+  },
+  {
     "file": "data/art.json",
-    "hash": "dee28bd21072d7f8c794aee08bf8c0c1"
+    "hash": "3900c3165e047b046122631a957c5012"
   },
   {
     "file": "img/adam.jpg",
@@ -173,15 +177,15 @@
   },
   {
     "file": "js/app.js",
-    "hash": "8292203cac3a560faa2dce1454315c0e"
+    "hash": "8384e7c05bada202a9f9d9f92d545367"
   },
   {
     "file": "js/config.js",
-    "hash": "dceab26e1162e1a8a99f52a034b132ed"
+    "hash": "e61e8392f67b0a43dd18fbeea9c4c705"
   },
   {
     "file": "js/controllers.js",
-    "hash": "da88b2ebe5f1dd35c17e1dce417087f4"
+    "hash": "0ee08f0c59ff490e6cd6c2c29d99fac9"
   },
   {
     "file": "js/filter.js",
@@ -205,23 +209,7 @@
   },
   {
     "file": "js/services.js",
-    "hash": "4a90302ae36260da49485e91591ba040"
-  },
-  {
-    "file": "js/services00000.js",
-    "hash": "2a8161a5253329169f77a416efbd3b08"
-  },
-  {
-    "file": "js/videoPlay.js",
-    "hash": "04d1a2de1748974d080e162dbffa9ee5"
-  },
-  {
-    "file": "js/videoPlay1.js",
-    "hash": "e4d0ee952af45328b2babaa66622bc98"
-  },
-  {
-    "file": "js/videoPlay2.js",
-    "hash": "04d1a2de1748974d080e162dbffa9ee5"
+    "hash": "2219aa9c7a905e8891b4e9f6cd1bfcd5"
   },
   {
     "file": "js/web-storage-cache.min.js",
@@ -484,16 +472,8 @@
     "hash": "d41d8cd98f00b204e9800998ecf8427e"
   },
   {
-    "file": "media.html",
-    "hash": "565bdf4c049617aa27a03bd89613a004"
-  },
-  {
     "file": "templates/articleDetail.html",
-    "hash": "6fe5ed05203c68b1cf1545213d48d82a"
-  },
-  {
-    "file": "templates/articleVedio.html",
-    "hash": "1dcfe98fdca5c248a6bac893a548a2a8"
+    "hash": "20107e9235f8c030e1165f434753059f"
   },
   {
     "file": "templates/comment_pub.html",
@@ -501,27 +481,19 @@
   },
   {
     "file": "templates/comment_reply.html",
-    "hash": "a71ed1b86b7e6349fafbbb4c0b6d09cf"
+    "hash": "705bf2f7b1cc2c907cee8ea766083190"
   },
   {
     "file": "templates/comment.html",
-    "hash": "0cb03ebfaeb44c23c619827c40be219a"
+    "hash": "5735c6923795e63a1736727bee519c3c"
   },
   {
     "file": "templates/favourite.html",
-    "hash": "b185c80383a7b9bf6087044c1827877b"
-  },
-  {
-    "file": "templates/finish_reg.html",
-    "hash": "842ca7e71c69cb111b35e351ad425b94"
+    "hash": "74f274d882fce153fae0995d399c6bb3"
   },
   {
     "file": "templates/home.html",
     "hash": "238012f52969933ed9211f6fe5bd8cd5"
-  },
-  {
-    "file": "templates/home1.html",
-    "hash": "07619b571fed63f626d6b245f759a56d"
   },
   {
     "file": "templates/lib.html",
@@ -537,11 +509,7 @@
   },
   {
     "file": "templates/login.html",
-    "hash": "b800af1eac4c13ac13690dea359cdcca"
-  },
-  {
-    "file": "templates/menu11111111.html",
-    "hash": "1fee8a08456e08e71d4e74c4a23eca02"
+    "hash": "1dfe7eea795a22974144cbf3112cbc3a"
   },
   {
     "file": "templates/message.html",
@@ -549,11 +517,7 @@
   },
   {
     "file": "templates/more.html",
-    "hash": "6b7086b8495f9a887b312e231aae4bb5"
-  },
-  {
-    "file": "templates/register.html",
-    "hash": "932a07b2e2b15e7791711a61770f46a1"
+    "hash": "840e19e8dc02ff37a36deef01cad72fa"
   },
   {
     "file": "templates/setting.html",
@@ -565,14 +529,10 @@
   },
   {
     "file": "templates/upload_avatar.html",
-    "hash": "26194aac5c388122306da8ed74f7cb4a"
+    "hash": "8db94770feaa343e3bf8b02387e3e21d"
   },
   {
     "file": "templates/userCenter.html",
-    "hash": "9ba5ecbc664a6af31410b73e9450d980"
-  },
-  {
-    "file": "templates/validate_code.html",
-    "hash": "59df75eaba1ad1804e35286dc4e4196f"
+    "hash": "9bcc9e1f7044fad95925ca60f7465d34"
   }
 ]

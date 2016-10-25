@@ -33,6 +33,7 @@ enclaveApp.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvid
     })
     .state('article', {
         url: '/article/:art_id',
+        //params:{'data':null},
         templateUrl: 'templates/articleDetail.html',
         controller: 'articleDetailCtrl'
     }).state('login', {
@@ -75,10 +76,12 @@ enclaveApp.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvid
         controller: 'commentListCtrl'
     }).state('favourite', { //收藏
         url: '/favourite',
-        templateUrl: 'templates/favourite.html'
+        templateUrl: 'templates/favourite.html',
+        controller: 'favListCtrl'
     });
     $urlRouterProvider.otherwise('/home');
 });
+
 // .state('tab.home', {
 //         url: '/home',
 //         views: {

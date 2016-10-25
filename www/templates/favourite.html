@@ -3,45 +3,30 @@
         <span class="iconfont icon-back fontSize backBtn" onclick="javascript:history.go(-1)"></span>
     </ion-nav-buttons> -->
    <ion-content>
-          <div class="favourite">
+    <div ng-if="!favFlag" class="noComMsg">
+        <div>暂时没有收藏任何文章！</div>
+    </div>
+          <div class="favourite" ng-if="favFlag">
             <ul>
-              <li>
+              <li ng-repeat = "item in favData" ng-click="goDetails(item.art_id)">
                   <div class="chapterPic">
-                    <img src="img/max.png" alt="">
+                    <img ng-src="{{item.art_thumb}}" alt="">
                   </div>
                   <div class="chapterDetail">
                         <div class="author">
-                            <span class="pubName">森子</span> 
-                            <span class="pubDate">2016年5月29日</span>
+                            <span class="pubName">{{item.art_editor}}</span> 
+                            <span class="pubDate">{{item.art_time*1000 | date:"yyyy年MM月dd日"}}</span>
+                            <!-- {{item.art_time*1000 | date:"yyyy年MM月dd日"}} -->
                         </div>
-                        <h2>塔与漩涡塔与漩涡塔与漩涡塔与漩涡塔与漩涡塔与漩涡塔与漩涡塔与漩涡塔与漩涡塔与漩涡</h2>
+                        <h2>{{item.art_title}}</h2>
                         <div class="author">
                             <span class="add">
-                            <i class="icon ion-ios-heart-outline"></i> 104 <i class="icon ion-ios-chatbubble-outline"></i> 24
+                            <i class="icon ion-ios-heart-outline"></i> {{item.collectionCount}}<i class="icon ion-ios-chatbubble-outline"></i> {{item.commentCount}}
                             </span> 
-                            <span class="reads">1799阅读</span>
+                            <span class="reads">{{item.view}} 阅读</span>
                         </div>
                   </div>
               </li>
-              <li>
-                  <div class="chapterPic">
-                    <img src="img/adam.jpg" alt="">
-                  </div>
-                  <div class="chapterDetail">
-                        <div class="author">
-                            <span class="pubName">森子</span> 
-                            <span class="pubDate">2016年5月29日</span>
-                        </div>
-                        <h2>塔与漩涡塔与漩</h2>
-                        <div class="author">
-                            <span class="add">
-                            <i class="icon ion-ios-heart-outline"></i> 104 <i class="icon ion-ios-chatbubble-outline"></i> 24
-                            </span> 
-                            <span class="reads">1799阅读</span>
-                        </div>
-                  </div>
-              </li>
-
             </ul>
           </div>
     </ion-content>

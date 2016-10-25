@@ -5,7 +5,7 @@
     <ion-nav-buttons side="right">
         <span class="iconfont icon-share fontSize" ng-click="share()"></span>
         <span class="iconfont icon-comment fontSize" ng-click="pubComment()"></span>
-        <span ng-class="{true:'icon-shoucanghou comment-red', false:'icon-shoucang'}[flag.isAdd]" class="iconfont fontSize" ng-model="flag.isAdd" ng-click="add()"></span>
+        <span ng-class="{true:'icon-shoucanghou comment-red', false:'icon-shoucang'}[flag.isAdd]" class="iconfont fontSize" ng-model="flag.isAdd" ng-click="addFavorites()"></span>
     </ion-nav-buttons>
     <ion-content>
         <div class="articleWrap">
@@ -19,8 +19,8 @@
             </div>
             <div class="contentArticle">
                 <h1>{{item.art_title}}</h1>
-                <div class="author">{{item.art_editor}}
-                    <time>{{item.art_time}}</time>
+                <div class="author">{{item.art_editor}} - 
+                    <time>{{item.art_time*1000 | date:"yyyy年MM月dd日"}}</time>
                 </div>
                 <!-- {{item.art_time | toDate}} -->
                 <div class="articleCon" ng-bind-html="item.art_content"></div>

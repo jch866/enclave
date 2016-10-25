@@ -23,7 +23,7 @@ var urls = {
     getComment: hostName+"getCommentList", //获取文章评论列表
     getMessage: hostName+"getMessageList", //获取会员评论列表
     getSelfComment: hostName+"getCommentBySelf", //获取会员评论列表
-    fav: hostName+"getCollectionList", //获取收藏列表
+    favList: hostName+"getCollectionList", //获取收藏列表
     favAddDel: hostName+"addOrCancelCollectArticleInfo", //文章收藏
     //unRead: hostName+"addOrCancelLikeRecord", //获取未读信息列表
     imgUrl: "http://api.enclavemedia.cn/"
@@ -31,7 +31,7 @@ var urls = {
 //     favoriteAdd: server.domain + '/favorite/add?',
 //     favoriteDelete: server.domain + '/favorite/delete?',
 }
-
+var abc = 0;
 
 var wsCache = new WebStorageCache();
 var DELEY = 300;//验证码发送间隔时间
