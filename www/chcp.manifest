@@ -25,7 +25,7 @@
   },
   {
     "file": "css/main.css",
-    "hash": "48ea3336c99e6dbd685b1c3ea0502646"
+    "hash": "f8a60269b8513450f360afdfc6db2190"
   },
   {
     "file": "css/reset.css",
@@ -37,7 +37,7 @@
   },
   {
     "file": "data/art.js",
-    "hash": "493a0aab2feebdb76446cd5fe7a165d3"
+    "hash": "5cf0d322e4cc44a8c66a965661123311"
   },
   {
     "file": "data/art.json",
@@ -173,7 +173,7 @@
   },
   {
     "file": "index.html",
-    "hash": "996f26c110771e71169d997364e5a375"
+    "hash": "ba459d6eeb0c73ca424c39161f936a8d"
   },
   {
     "file": "js/app.js",
@@ -181,11 +181,11 @@
   },
   {
     "file": "js/config.js",
-    "hash": "e61e8392f67b0a43dd18fbeea9c4c705"
+    "hash": "7e4519c1a5ec8afea9213b1bfc3f2b1b"
   },
   {
     "file": "js/controllers.js",
-    "hash": "a789926bde915d9ee6dd6bbe17766bc1"
+    "hash": "c8c9c278a4d63f830866a3d025a5a7c1"
   },
   {
     "file": "js/filter.js",
@@ -209,7 +209,7 @@
   },
   {
     "file": "js/services.js",
-    "hash": "2219aa9c7a905e8891b4e9f6cd1bfcd5"
+    "hash": "43efaaaae5bf70098e5e19616068a3e9"
   },
   {
     "file": "js/web-storage-cache.min.js",
@@ -473,7 +473,7 @@
   },
   {
     "file": "templates/articleDetail.html",
-    "hash": "20107e9235f8c030e1165f434753059f"
+    "hash": "e42800a19ab3741fa9242dbf7c501061"
   },
   {
     "file": "templates/comment_pub.html",
@@ -493,7 +493,7 @@
   },
   {
     "file": "templates/home.html",
-    "hash": "af1792c61ff7c178a767fd2c4c7f55ea"
+    "hash": "3596e9f34ed0bfb6d16cf34a92a5bf11"
   },
   {
     "file": "templates/lib.html",

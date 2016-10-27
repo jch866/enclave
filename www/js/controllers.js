@@ -1,7 +1,6 @@
 var myApp = angular.module('starter.controllers', []);
 myApp.controller('homeCtrl', function($scope, $ionicTabsDelegate, getArticleList, $http, $ionicPopup, $timeout,
-    $cordovaDatePicker, $rootScope, $cordovaNetwork, AccountService, $ionicLoading) {
-    //.success(function(resp){console.log(resp);}).error(function(error){console.log(error);})
+    $cordovaDatePicker, $rootScope, $cordovaNetwork, AccountService, $ionicLoading,$ionicPlatform) {
     $scope.imgUrl = urls.imgUrl;
     var userId = window.localStorage[cache.userId];
     var page = 1,
@@ -9,16 +8,18 @@ myApp.controller('homeCtrl', function($scope, $ionicTabsDelegate, getArticleList
     var isLock = false;
     $scope.items = [];
     $scope.hasMore = true;
-
-
     var fresh = function() {
         return getArticleList.getArticles(userId, 1, count).success(function(resp) {
             console.log(resp);
             if (resp.code == "200") {
                 $scope.items = resp.result.data;
+                window.localStorage[articleCache.list] = JSON.stringify(resp.result.data);
+                $scope.hasContent = true;
                 $scope.hasMore = true;
                 page = 2;
-            } else {
+            } else{ 
+                $scope.hasContent = false;
+                $scope.hasMore = false;
                 //当页面加载不到文件的时候;应该提示客户
             }
         }).error(function(error) {
@@ -26,6 +27,9 @@ myApp.controller('homeCtrl', function($scope, $ionicTabsDelegate, getArticleList
         })
     }
     fresh();
+    if(window.localStorage[articleCache.list]){
+        $scope.items = angular.fromJson(window.localStorage[articleCache.list])
+    }else{fresh()};
 
     $scope.$on('$ionicView.beforeEnter', function() {
         var _user = AccountService.getCacheUser();
@@ -34,8 +38,6 @@ myApp.controller('homeCtrl', function($scope, $ionicTabsDelegate, getArticleList
 
 
     $scope.loadMore = function() {
-        if (isLock) return;
-        //if (isLock){$scope.$broadcast('scroll.infiniteScrollComplete');return} ;
         getArticleList.getArticles(userId, page, count).success(function(resp) {
             if (resp.code == "200") {
                 if (resp.result.data.length > 0) {
@@ -43,7 +45,7 @@ myApp.controller('homeCtrl', function($scope, $ionicTabsDelegate, getArticleList
                     page++;
                 } else {
                     console.log("没有数据了...")
-                    isLock = true;
+                        //isLock = true;
                     $scope.hasMore = false;
                 }
             } else if (resp.code == "404") {
@@ -68,6 +70,8 @@ myApp.controller('homeCtrl', function($scope, $ionicTabsDelegate, getArticleList
             $scope.$broadcast('scroll.refreshComplete');
         })
     }
+ 
+
 });
 
 myApp.controller('loginCtrl', function($scope, AccountService, $state, $ionicPopup, $ionicHistory) {
@@ -316,7 +320,7 @@ myApp.controller('usercenterCtrl', function($scope, $rootScope, AccountService, 
     var userId = window.localStorage[cache.userId];
     console.log(userId);
     AccountService.getUserInfo(userId); //切换用户时
-    $scope.user = $rootScope.user = AccountService.getCacheUser(); //取localstorage的值
+    $rootScope.user = AccountService.getCacheUser(); //取localstorage的值
     $scope.doRefresh = function() {
         AccountService.getUserInfo(userId);
         $scope.$broadcast('scroll.refreshComplete');
@@ -362,11 +366,24 @@ myApp.controller('articleDetailCtrl', function($scope, $state, $stateParams, $io
     var count = 10;
     $scope.hasMedia = true;
     $scope.imgUrl = urls.imgUrl;
-    console.log($stateParams);
+    //console.log($stateParams);
     var art_id = $stateParams.art_id - 0;
     //var isAdd = $stateParams.data?$stateParams.data.isAdd:false;
     var userId = window.localStorage[cache.userId] ? (window.localStorage[cache.userId] - 0) : undefined;
 
+    //点赞功能 
+   // $scope.addLike = false;
+    $scope.getLike = function(comment){
+        var type = "comment";
+        var comment_id = comment.id;
+        ComService.addDelLike(userId,type,comment_id).success(function(resp){
+            console.log(resp);
+            //$scope.addLike = true;
+            comment.likecount = resp.result.count;          
+        }).error(function(error){
+            console.log("点赞：error");
+        })
+    }
     function getComments() {
         ArticleService.getDetails(art_id, userId).success(function(resp) {
             console.log(resp);
@@ -391,10 +408,10 @@ myApp.controller('articleDetailCtrl', function($scope, $state, $stateParams, $io
                             content: item.content,
                             publishTime: item.publishTime,
                             sourceId: item.sourceId,
+                            likecount: item.likecount,
                             comments: []
                         };
                         var isChild = false;
-
                         for (var i = 0; i < comments.length; i++) {
                             if (item.pid == comments[i].id) {
                                 isChild = true;
@@ -407,7 +424,7 @@ myApp.controller('articleDetailCtrl', function($scope, $state, $stateParams, $io
                         }
                     });
                     $scope.comments = comments.reverse();
-                    $scope.currentArticleComTotal = resp.result.pageInfo.total
+                    $scope.currentArticleComTotal = resp.result.pageInfo.total;
                 };
                 if (resp.code == 404) {
                     $scope.hasComment = false;
@@ -421,14 +438,14 @@ myApp.controller('articleDetailCtrl', function($scope, $state, $stateParams, $io
      及时更新最新的评论 监听beforeEnter
      */
     $scope.$on('$ionicView.beforeEnter', function() {
-            console.log("$ionicView.beforeEnter");
+           // console.log("$ionicView.beforeEnter");
             getComments();
         })
         /**
          判断当时的媒体是视频音频还是图片
          */
     $scope.$on('$ionicView.enter', function() {
-        console.log("$ionicView.enter");
+        //console.log("$ionicView.enter");
         if ($scope.hasMedia) { //todo 多切换几个文章试试有无报错
             jwplayer("art_media").setup(mediaOption);
         }
@@ -438,10 +455,8 @@ myApp.controller('articleDetailCtrl', function($scope, $state, $stateParams, $io
         AccountService.goState("comment_pub", $scope.item);
     };
     $scope.replyCom = function() {
-        var $this = this;
-        console.log($this.comment);
+         AccountService.goState("comment_reply", this.comment);
         //针对用户的判断是不是本人 id==pid  TODO
-        $state.go("comment_reply", { data: $this.comment });
     };
     /**
      * 添加收藏
@@ -453,27 +468,37 @@ myApp.controller('articleDetailCtrl', function($scope, $state, $stateParams, $io
     };
     $scope.addFavorites = function() {
         //todo login状态
-        FavService.addDelFav(userId, art_id).success(function(resp) {
-            console.log(resp);
-            //add cancel
-            $scope.flag.isAdd = (resp.result.type == "add") ? true : false;
-        }).success(function() {
-            $scope.flag.tipTest = $scope.flag.isAdd ? "收藏成功" : "取消收藏";
+        if (window.localStorage[cache.logined] === "false") {
             $ionicLoading.show({
-                template: $scope.flag.tipTest,
+                template: "请登录!",
                 noBackdrop: true
             })
             $timeout(function() {
                 $ionicLoading.hide();
             }, 1000)
-        }).error(function() {
-            console.log("添加收藏失败");
-        })
+        } else {
+            FavService.addDelFav(userId, art_id).success(function(resp) {
+                console.log(resp);
+                //add cancel
+                $scope.flag.isAdd = (resp.result.type == "add") ? true : false;
+            }).success(function() {
+                $scope.flag.tipTest = $scope.flag.isAdd ? "收藏成功" : "取消收藏";
+                $ionicLoading.show({
+                    template: $scope.flag.tipTest,
+                    noBackdrop: true
+                })
+                $timeout(function() {
+                    $ionicLoading.hide();
+                }, 1000)
+            }).error(function() {
+                console.log("添加收藏失败");
+            })
+        }
     };
 
 });
 //收藏列表
-myApp.controller('favListCtrl', function($scope, $state, $stateParams, $ionicHistory, $ionicPopup, FavService) {
+myApp.controller('favListCtrl', function($scope, $state, $stateParams, $ionicHistory, $ionicPopup, FavService,$ionicLoading,$timeout) {
     var user_id = window.localStorage[cache.userId] - 0;
     var page = 1,
         count = 10;
@@ -489,6 +514,15 @@ myApp.controller('favListCtrl', function($scope, $state, $stateParams, $ionicHis
                 $scope.favData = resp.result.data;
             } else {
                 $scope.favFlag = false;
+            }
+            if(resp.code==400){
+                 $ionicLoading.show({
+                    template: "用户不存在！",
+                    noBackdrop: true
+                })
+                $timeout(function() {
+                    $ionicLoading.hide();
+                }, 1000)
             }
         }).error(function() {
             console.log("获取收藏列表失败");
@@ -516,8 +550,6 @@ myApp.controller('replyCommentCtrl', function($scope, $state, $stateParams, ComS
         var type = "article";
         var source_id = $scope.commentItem.sourceId;
         var pid = $scope.commentItem.id || 0;
-        var page = 1;
-        var count = 10;
         ComService.pubCom(userId, type, source_id, content, pid).success(function(resp) {
             console.log(resp);
             if (resp.code == 404) {
@@ -547,8 +579,6 @@ myApp.controller('pubCommentCtrl', function($scope, $state, $stateParams, ComSer
             var type = "article";
             var source_id = $scope.item.art_id;
             var pid = pid || 0;
-            var page = 1;
-            var count = 10;
             ComService.pubCom(userId, type, source_id, content, pid).success(function(resp) {
                 console.log(resp);
                 if (resp.code == 4003) {
@@ -563,8 +593,8 @@ myApp.controller('pubCommentCtrl', function($scope, $state, $stateParams, ComSer
         }
 
     })
-    //个人评论列表
-myApp.controller('commentListCtrl', function($scope, $state, $stateParams, ComService, $ionicHistory, $ionicPopup) {
+//个人评论列表
+myApp.controller('commentListCtrl', function($scope, $state, $stateParams, ComService, $ionicHistory, $ionicPopup, $ionicLoading, $timeout) {
     var user_id = window.localStorage[cache.userId] - 0;
     ComService.getSelfComment(user_id).success(function(resp) {
         console.log(resp);
@@ -576,8 +606,24 @@ myApp.controller('commentListCtrl', function($scope, $state, $stateParams, ComSe
             $scope.hasCommentMsg = false;
             $scope.CommentMsg = resp.message
         }
+        if (resp.code == 4003) {
+            $scope.hasCommentMsg = false;
+            $ionicLoading.show({
+                template: "用户不存在！",
+                noBackdrop: true
+            })
+            $timeout(function() {
+                $ionicLoading.hide();
+            }, 1000)
+        }
     }).error(function(error) {
-
+         $ionicLoading.show({
+                template: "请求数据失败，稍后再试",
+                noBackdrop: true
+            })
+            $timeout(function() {
+                $ionicLoading.hide();
+            }, 1000)
     })
     $scope.goDetails = function(id) {
         $state.go("article", {
@@ -586,4 +632,8 @@ myApp.controller('commentListCtrl', function($scope, $state, $stateParams, ComSe
     }
 })
 
+myApp.controller('BaseCtrl', function($scope, $ionicHistory) {
+
+});
 myApp.controller('messageCtrl', function($scope, $ionicHistory) {});
+

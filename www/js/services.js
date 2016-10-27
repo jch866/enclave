@@ -11,7 +11,7 @@ angular.module('starter.services', [])
             BaseService.doRefresh();
         };
     })
-.service('BaseService', function($http) {
+    .service('BaseService', function($http) {
         this.loadMore = function($this) {
             console.log("正在加载更多数据..." + $this.page);
             $http.get($this.url + "?page=" + $this.page + "&rows=" + settings.rows).success(function(response) {
@@ -40,16 +40,19 @@ angular.module('starter.services', [])
             });
         }
     })
-.service('AccountService', function($http, $ionicPopup, $rootScope,$state,$timeout) {
+    .service('AccountService', function($http, $ionicPopup, $rootScope, $state, $timeout, $ionicLoading) {
         var $this = this;
         // 跳转前判断登录状态
         this.goState = function(route, data) {
                 if (window.localStorage[cache.logined] === "true") {
-                    data ? $state.go(route, { data: data }):$state.go(route);
+                    data ? $state.go(route, { data: data }) : $state.go(route);
                 } else {
-                    var tip = $ionicPopup.show({ title: '提示', template: "请登录!" })
+                    $ionicLoading.show({
+                        template: "请登录!",
+                        noBackdrop: true
+                    })
                     $timeout(function() {
-                        tip.close();
+                        $ionicLoading.hide();
                     }, 1000)
                 }
             }
@@ -111,14 +114,14 @@ angular.module('starter.services', [])
     })
 
 .service('ArticleService', function($http) {
-        this.getDetails = function(id,userId) {
+        this.getDetails = function(id, userId) {
             var url = urls.getArticleDetail;
-            url += userId?(id+"&user_id="+userId):id;
+            url += userId ? (id + "&user_id=" + userId) : id;
             return $http.get(url);
-         
+
         }
     })
-.service('FavService', function($http) {
+    .service('FavService', function($http) {
 
         //获取收藏列表
         this.getFavList = function(user_id, page, count) {
@@ -151,7 +154,6 @@ angular.module('starter.services', [])
             //          $ionicHistory.goBack();
             //      }
             //  })
-
             return $http.post(url, data);
         };
         //获取单篇文章评论列表
@@ -168,7 +170,16 @@ angular.module('starter.services', [])
             // console.log(data);
             //return $http.get(url, data);
         };
-
+        //文章评论内容点赞
+        this.addDelLike = function(id,type,source_id) {
+            var url = urls.likeAddDel;
+            var data = {
+                user_id: id, 
+                type: type,
+                source_id: source_id,
+            };
+            return $http.post(url, data);
+        }
         //删除评论
         this.delCom = function() {
 
@@ -222,7 +233,7 @@ angular.module('starter.services', [])
                  }*/
         };
     })
-    .factory('httpService', function($q, $http, $rootScope, $ionicLoading, $ionicPopup, $state, fn) {
+.factory('httpService', function($q, $http, $rootScope, $ionicLoading, $ionicPopup, $state, fn) {
         var httpGet = function(api, params) {
             params = params || {};
             var deferred = $q.defer();

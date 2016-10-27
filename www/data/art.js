@@ -1,3 +1,25 @@
+var addOrCancelLikeRecord.resp = {
+    "status": "success",
+    "code": 200,
+    "message": "点赞成功",
+    "result": {
+        "type": "add",
+        "count": 1
+    }
+}
+
+var addOrCancelLikeRecord.resp = {
+    "status": "success",
+    "code": 200,
+    "message": "取消赞成功",
+    "result": {
+        "type": "cancel",
+        "count": 0
+    }
+}
+
+
+
 var commentlist = {
     "status": "success",
     "code": 200,
@@ -58,19 +80,17 @@ var commentlist = {
 
 
 var favList = {
-    "status":"error",
-    "code":404,
-    "message":"没有任何收藏数据"
-}
-{
-    "status":"success",
-    "code":200,
-    "message":"取消收藏文章信息成功",
-    "result":{
-        "type":"cancel"
+    "status": "error",
+    "code": 404,
+    "message": "没有任何收藏数据"
+} {
+    "status": "success",
+    "code": 200,
+    "message": "取消收藏文章信息成功",
+    "result": {
+        "type": "cancel"
     }
-}
-{
+} {
     "status": "success",
     "code": 200,
     "message": "收藏文章信息成功",
@@ -79,31 +99,33 @@ var favList = {
     }
 }
 var myfav = {
-    "status":"success",
-    "code":200,
-    "message":"查询收藏列表成功",
-    "result":{
-        "pageInfo":{
-            "total":2,
-            "currentPage":1
+    "status": "success",
+    "code": 200,
+    "message": "查询收藏列表成功",
+    "result": {
+        "pageInfo": {
+            "total": 2,
+            "currentPage": 1
         },
-        "data":{
-            "0":{
-                "art_id":37,
-                "art_title":"测试文章11",
-                "art_editor":"飞地",
-                "art_thumb":"http://api.enclavemedia.cn/uploads/20161012115154389.jpg",
-                "view":"257"
+        "data": {
+            "0": {
+                "art_id": 37,
+                "art_title": "测试文章11",
+                "art_editor": "飞地",
+                "art_thumb": "http://api.enclavemedia.cn/uploads/20161012115154389.jpg",
+                "view": "257"
             },
-            "1":{
-                "art_id":36,
-                "art_title":"测试文章10",
-                "art_editor":"飞地",
-                "art_thumb":"http://api.enclavemedia.cn/uploads/20161012115135857.jpg",
-                "view":"54"
+            "1": {
+                "art_id": 36,
+                "art_title": "测试文章10",
+                "art_editor": "飞地",
+                "art_thumb": "http://api.enclavemedia.cn/uploads/20161012115135857.jpg",
+                "view": "54"
             },
-            "commentCount":0,
-            "collectionCount":0
+            "commentCount": 0,
+            "collectionCount": 0
         }
     }
 }
+
+{ status: "error", code: 404, message: "没有获取到任何数据" } { status: "error", code: 4003, message: "user不存在" }

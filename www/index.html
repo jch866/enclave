@@ -17,6 +17,7 @@
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     <!-- cordova script (this will be a 404 during development) -->
     <script src="js/ng-cordova.min.js"></script>
+    <!-- <script src="lib/ngCordova/dist/ng-cordova.js"></script> -->
     <script src="cordova.js"></script>
     <script src="js/config.js"></script>
     <!-- your app's js -->
@@ -47,7 +48,7 @@
         </ion-side-menu-content>
         <ion-side-menu side="left" width="150" class="leftSideMenu" ng-controller="sideMenuCtrl">
             <ul>    
-                <li menu-close><img ng-src="{{user.avatar}}" alt="" ng-click="openLogin()" src="img/avatar.png">
+                <li menu-close><img ng-src="{{user.avatar?user.avatar:'img/avatar.png'}}" alt="" ng-click="openLogin()" src="img/avatar.png">
                     <p>{{user.nickname?user.nickname:'登录/注册'}}</p>
                 </li>
                 <li menu-close ng-click="goMessage()">

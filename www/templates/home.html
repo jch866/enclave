@@ -1,8 +1,12 @@
-<ion-view view-title="飞地ios">
+<ion-view view-title="飞地1">
     <ion-content class="padding">
         <ion-refresher pulling-text="下拉刷新..." on-refresh="doRefresh()">
         </ion-refresher>
-        <ion-list class="list-borderless">
+        <div ng-if="!hasContent"  class="noComMsg">
+            <span></span>
+            <!-- todo最好放一个加载中的图片，做背景 -->
+        </div>
+        <ion-list class="list-borderless" ng-if="hasContent">
             <ion-item ng-repeat="item in items" class="item">
                 <div class="textPic">
                     <a href="#/article/{{item.art_id}}" ng-click=""><img ng-src="{{imgUrl+item.art_thumb}}" alt=""></a>
@@ -18,8 +22,7 @@
                         <span><i class="iconfont icon-comment fontSize"></i> <em>{{item.art_view}}</em></span>
                         <span>{{item.art_view}} 阅读</span>
                     </div>
-                </div>
-               
+                </div>   
             </ion-item>
         </ion-list>
         <ion-infinite-scroll ng-if="hasMore" on-infinite="loadMore()" distance="1%" immediate-check="false" >
