@@ -11,7 +11,7 @@ angular.module('starter.services', [])
             BaseService.doRefresh();
         };
     })
-.service('BaseService', function($http) {
+    .service('BaseService', function($http) {
         this.loadMore = function($this) {
             console.log("正在加载更多数据..." + $this.page);
             $http.get($this.url + "?page=" + $this.page + "&rows=" + settings.rows).success(function(response) {
@@ -29,96 +29,141 @@ angular.module('starter.services', [])
 
         this.doRefresh = function($this) { //todo
             console.log("正在执行refresh操作...");
-            var url = server.domain + "?callback=JSON_CALLBACK";
+            
             //使用jsonp的方式请求
-            $http.get(url).success(function(response) {
+            $http.get($this.urlApi).success(function(response) {
                 console.log(response);
+                $this.items = response.result.categories.data; //不能这么写，不是通用的
                 $this.page = 2;
-                $this.items = response.article;
+                //$this.items = response.article;
                 $this.callback();
                 $this.isload = false;
             });
         }
     })
-.service('AccountService', function($http, $ionicPopup, $rootScope,$state,$timeout) {
-        var $this = this;
-        // 跳转前判断登录状态
-        this.goState = function(route, data) {
-                if (window.localStorage[cache.logined] === "true") {
-                    data ? $state.go(route, { data: data }):$state.go(route);
-                } else {
-                    var tip = $ionicPopup.show({ title: '提示', template: "请登录!" })
-                    $timeout(function() {
-                        tip.close();
-                    }, 1000)
+    .service('categoryDate', function($http, BaseService) {
+        this.getCate = function() {
+           
+            var categoryDate = [{
+                title: "推荐",
+                page: 1,
+                count: 10,
+                type: "article",
+                isload: true,
+                urlApi: urls.getArticles,
+                loadMore: function() {
+                    BaseService.loadMore(this);
+                },
+                doRefresh: function() {
+                    BaseService.doRefresh(this);
+                },
+                callback : function() {
+                   
                 }
-            }
-            // 获取缓存用户信息
-        this.getCacheUser = function() {
-                return angular.fromJson(window.localStorage[cache.user]);
-            }
-            // 获取用户信息
-        this.getUserInfo = function(id) {
-                var url = urls.getUserInfo;
-                var data = {
-                    user_id: id
+            }, {
+                title: "专题",
+                page: 1,
+                count: 5,
+                type: "article",
+                isload: true,
+                urlApi: urls.getCategory+"?have_data=0",
+                loadMore: function() {
+                    BaseService.loadMore(this);
+                },
+                doRefresh: function() {
+                    BaseService.doRefresh(this);
+                },
+                callback: function() {
+                   
                 }
-                $http.post(url, data).success(function(resp) {
-                    console.log(resp);
-                    if (resp.code == 200) {
-                        window.localStorage[cache.user] = JSON.stringify(resp.result);
-                        $rootScope.user = $this.getCacheUser();
-                    } else {
-                        $ionicPopup.alert({
-                            title: '提示',
-                            template: resp.message || '返回个人信息失败'
-                        })
-                    }
-                }).error(function(error) {
-                    console.log("error");
+            }];
+            return categoryDate;
+        }
+    })
+
+
+.service('AccountService', function($http, $ionicPopup, $rootScope, $state, $timeout, $ionicLoading) {
+    var $this = this;
+    // 跳转前判断登录状态
+    this.goState = function(route, data) {
+            if (window.localStorage[cache.logined] === "true") {
+                data ? $state.go(route, { data: data }) : $state.go(route);
+            } else {
+                $ionicLoading.show({
+                    template: "请登录!",
+                    noBackdrop: true
                 })
+                $timeout(function() {
+                    $ionicLoading.hide();
+                }, 1000)
             }
-            //发送手机号和验证码登录
-        this.login = function(phone, code) {
-                var url = urls.login;
-                var data = {
-                    type: "mobile",
-                    identifier: phone,
-                    credential: code
-                }
-                return $http.post(url, data);
-            }
-            //设置用户信息
-        this.uploadUser = function(obj, id) { //id为注册短信返回的ID
-            var url = urls.setUserInfo;
+        }
+        // 获取缓存用户信息
+    this.getCacheUser = function() {
+            return angular.fromJson(window.localStorage[cache.user]);
+        }
+        // 获取用户信息
+    this.getUserInfo = function(id) {
+            var url = urls.getUserInfo;
             var data = {
-                id: id,
-                type: "mobile",
-                avatar: obj.avatar,
-                nickname: obj.name,
-                sex: obj.sex,
-                birthday: obj.birthday
+                user_id: id
             }
-            console.log(data + "设置用户信息");
+            $http.post(url, data).success(function(resp) {
+                console.log(resp);
+                if (resp.code == 200) {
+                    window.localStorage[cache.user] = JSON.stringify(resp.result);
+                    $rootScope.user = $this.getCacheUser();
+                } else {
+                    $ionicPopup.alert({
+                        title: '提示',
+                        template: resp.message || '返回个人信息失败'
+                    })
+                }
+            }).error(function(error) {
+                console.log("error");
+            })
+        }
+        //发送手机号和验证码登录
+    this.login = function(phone, code) {
+            var url = urls.login;
+            var data = {
+                type: "mobile",
+                identifier: phone,
+                credential: code
+            }
             return $http.post(url, data);
         }
-
-        // 注册
-        this.reg = function(phone) {
-            var url = urls.sendCode + phone;
-            return $http.post(url);
+        //设置用户信息
+    this.uploadUser = function(obj, id) { //id为注册短信返回的ID
+        var url = urls.setUserInfo;
+        var data = {
+            id: id,
+            type: "mobile",
+            avatar: obj.avatar,
+            nickname: obj.name,
+            sex: obj.sex,
+            birthday: obj.birthday
         }
-    })
+        console.log(data + "设置用户信息");
+        return $http.post(url, data);
+    }
+
+    // 注册
+    this.reg = function(phone) {
+        var url = urls.sendCode + phone;
+        return $http.post(url);
+    }
+})
 
 .service('ArticleService', function($http) {
-        this.getDetails = function(id,userId) {
+        this.getDetails = function(id, userId) {
             var url = urls.getArticleDetail;
-            url += userId?(id+"&user_id="+userId):id;
+            url += userId ? (id + "&user_id=" + userId) : id;
             return $http.get(url);
-         
+
         }
     })
-.service('FavService', function($http) {
+    .service('FavService', function($http) {
 
         //获取收藏列表
         this.getFavList = function(user_id, page, count) {
@@ -151,7 +196,6 @@ angular.module('starter.services', [])
             //          $ionicHistory.goBack();
             //      }
             //  })
-
             return $http.post(url, data);
         };
         //获取单篇文章评论列表
@@ -168,8 +212,17 @@ angular.module('starter.services', [])
             // console.log(data);
             //return $http.get(url, data);
         };
-
-        //删除评论
+        //文章评论内容点赞
+        this.addDelLike = function(id, type, source_id) {
+                var url = urls.likeAddDel;
+                var data = {
+                    user_id: id,
+                    type: type,
+                    source_id: source_id,
+                };
+                return $http.post(url, data);
+            }
+            //删除评论
         this.delCom = function() {
 
         };

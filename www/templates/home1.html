@@ -1,0 +1,33 @@
+<ion-view view-title="飞地11aa">
+    <ion-content class="padding">
+        <!-- <input type="text" class="inputC" timePicker> -->
+        <!-- <a href="a111.html" >测试</a> -->
+        <ion-refresher pulling-text="下拉刷新..." on-refresh="doRefresh()">
+        </ion-refresher>
+        <div ng-if="!hasContent"  class="noComMsg">
+            <span></span>
+            <!-- todo最好放一个加载中的图片，做背景 -->
+        </div>
+        <ion-list class="list-borderless" ng-if="hasContent">
+            <ion-item ng-repeat="item in items" class="item">
+                <div class="textPic">
+                    <a href="#/article/{{item.art_id}}" ng-click=""><img ng-src="{{imgUrl+item.art_thumb}}" alt=""></a>
+                </div>
+                <div class="imgShowMore">
+                    <div class="authorInfor">
+                        <div>{{item.art_editor}}</div>
+                        <div>{{item.art_time*1000 | date:"yyyy年MM月dd日"}}</div>
+                    </div>
+                    <a href="#/article/{{item.art_id}}" ng-click=""><h2>{{item.art_title}}</h2></a>
+                    <div class="hits">
+                        <span><i class="iconfont icon-shoucang fontSize"></i><em>{{item.collectionCount}}</em></span>
+                        <span><i class="iconfont icon-comment fontSize"></i> <em>{{item.art_view}}</em></span>
+                        <span>{{item.art_view}} 阅读</span>
+                    </div>
+                </div>   
+            </ion-item>
+        </ion-list>
+        <ion-infinite-scroll ng-if="hasMore" on-infinite="loadMore()" distance="1%" immediate-check="false" >
+        </ion-infinite-scroll>
+    </ion-content>
+</ion-view>

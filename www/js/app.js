@@ -36,7 +36,17 @@ enclaveApp.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvid
         //params:{'data':null},
         templateUrl: 'templates/articleDetail.html',
         controller: 'articleDetailCtrl'
-    }).state('login', {
+    })
+    // .state('tab.tab1-details', {
+    //     url: '/tab/tab1-details/:id/:title/:type',
+    //     views: {
+    //       'tab1': {
+    //         templateUrl: 'templates/tab1-details.html',
+    //         controller: 'Tab1DetailsCtrl'
+    //       }
+    //     }
+    //   })
+    .state('login', {
         url: '/login',
         templateUrl: 'templates/login.html',
         controller: 'loginCtrl'

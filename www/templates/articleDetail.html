@@ -3,13 +3,13 @@
       <span class="iconfont icon-back fontSize backBtn" onclick="javascript:history.go(-1)"></span>
     </ion-nav-buttons> -->
     <ion-nav-buttons side="right">
-        <span class="iconfont icon-share fontSize" ng-click="share()"></span>
+        <span class="iconfont icon-share fontSize" ng-click="share()" id="btn"></span>
         <span class="iconfont icon-comment fontSize" ng-click="pubComment()"></span>
         <span ng-class="{true:'icon-shoucanghou comment-red', false:'icon-shoucang'}[flag.isAdd]" class="iconfont fontSize" ng-model="flag.isAdd" ng-click="addFavorites()"></span>
     </ion-nav-buttons>
     <ion-content>
         <div class="articleWrap">
-            <div class="articlePic">
+            <div class="articlePic" id="articleCon">
                 <!-- ng-bind-html="html | to_trusted" -->
                 <!-- <div class="articlePic" on-render-finish>-->
                 <div ng-if="hasMedia">
@@ -32,13 +32,14 @@
                 <span ng-if="!hasComment" ng-bind="noComment"></span>
             </div>
             <ul ng-if="hasComment">
-            <li ng-repeat="comment in comments" ng-click="replyCom()">
+            <li ng-repeat="comment in comments">
                     <div class="avatar"><img src="img/mike.png" ng-src="{{comment.avatar}}" alt=""></div>
                     <div class="detail">
                         <div class="title">
                             <time>{{comment.publishTime*1000 | date:"yyyy-MM-dd HH:mm"}}</time>{{comment.nickname}}</div>
-                        <p>{{comment.content}}</p>
-                        <div class="like"><i class="iconfont icon-like"></i>15</div>
+                        <p  ng-click="replyCom()">{{comment.content}}</p>
+                        <div class="like"><i class="iconfont icon-like" ng-click="getLike(comment)"></i>
+                        {{comment.likecount}}</div>
                         <div class="commentsBox" ng-hide="{{comment.comments.length==0}}"> 
                             <div class="singleCom" ng-repeat="reply in comment.comments">
                                 <div class="title">{{reply.nickname}}<span> -- {{reply.publishTime*1000 | date:"yyyy-MM-dd HH:mm"}}</span></div>
@@ -50,8 +51,5 @@
                
                  </ul>
         </div>
-                
-             
-           
     </ion-content>
 </ion-view>

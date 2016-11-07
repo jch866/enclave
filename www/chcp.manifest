@@ -1,5 +1,9 @@
 [
   {
+    "file": "a111.html",
+    "hash": "5cc4dd42c2d30fcca4f7c01ee7707ba9"
+  },
+  {
     "file": "chcp111.json",
     "hash": "97b7d69541e4ed1bb318a55999c36b70"
   },
@@ -20,16 +24,24 @@
     "hash": "d179f320e6fed1892198cbd88013676e"
   },
   {
+    "file": "css/index.css",
+    "hash": "a06499fbdd9b6e3174c9d6869e2dbe60"
+  },
+  {
     "file": "css/jwSkin.css",
     "hash": "79b048f9776ebe955ba60190a58177a9"
   },
   {
     "file": "css/main.css",
-    "hash": "48ea3336c99e6dbd685b1c3ea0502646"
+    "hash": "f8a60269b8513450f360afdfc6db2190"
   },
   {
     "file": "css/reset.css",
     "hash": "d61154bb48fb085fc5aff64347ccd0e9"
+  },
+  {
+    "file": "css/social.umeng.css",
+    "hash": "81f0e4694065384a204dc09f386278cc"
   },
   {
     "file": "css/style.css",
@@ -37,11 +49,15 @@
   },
   {
     "file": "data/art.js",
-    "hash": "493a0aab2feebdb76446cd5fe7a165d3"
+    "hash": "3dbcf8dbfe183ee8d8913b28f07c46ee"
   },
   {
     "file": "data/art.json",
     "hash": "3900c3165e047b046122631a957c5012"
+  },
+  {
+    "file": "img/a.png",
+    "hash": "05a8469e6c935e91996c2c7f64d31851"
   },
   {
     "file": "img/adam.jpg",
@@ -160,8 +176,108 @@
     "hash": "ec63770605e48b1e2176fd18b5768889"
   },
   {
+    "file": "img/share.png",
+    "hash": "1a1d83cb73e43cc56c873dd59b552a2e"
+  },
+  {
     "file": "img/share.svg",
     "hash": "f8592965d31506d153a829c30fd6f865"
+  },
+  {
+    "file": "img/social.umeng/back.png",
+    "hash": "443dbf0b56209339ea910f1d657b451d"
+  },
+  {
+    "file": "img/social.umeng/send_disable.png",
+    "hash": "5fc13c0b613792e3c5c26ba631b748df"
+  },
+  {
+    "file": "img/social.umeng/send.png",
+    "hash": "326a3e9c7dfdb13b0071df11d751cc0e"
+  },
+  {
+    "file": "img/social.umeng/umeng_socialize_douban_off.png",
+    "hash": "399cb63f65a72890f935c003f5cca260"
+  },
+  {
+    "file": "img/social.umeng/umeng_socialize_douban_on.png",
+    "hash": "086653404afdab92b22fbc9cb905bf66"
+  },
+  {
+    "file": "img/social.umeng/umeng_socialize_facebook.png",
+    "hash": "7d99f5a5902a32cd1761c40a8a3440e9"
+  },
+  {
+    "file": "img/social.umeng/umeng_socialize_gmail.png",
+    "hash": "90e4655ec2f9f7eb2af409c0707397a8"
+  },
+  {
+    "file": "img/social.umeng/umeng_socialize_google.png",
+    "hash": "f927aed5cda1573e169e7a20b9d564cd"
+  },
+  {
+    "file": "img/social.umeng/umeng_socialize_qq_off.png",
+    "hash": "23256cdca96ba858050b1ab1f0e761c5"
+  },
+  {
+    "file": "img/social.umeng/umeng_socialize_qq_on.png",
+    "hash": "9f6f947a1d810921e5f4869ba6320e22"
+  },
+  {
+    "file": "img/social.umeng/umeng_socialize_qzone_off.png",
+    "hash": "1f2f6b15152cef2c9621114101c7c732"
+  },
+  {
+    "file": "img/social.umeng/umeng_socialize_qzone_on.png",
+    "hash": "ddd721b47f63cbf0da13143ea0099bcf"
+  },
+  {
+    "file": "img/social.umeng/umeng_socialize_renren_off.png",
+    "hash": "75962155626896288cf719f6bd364de7"
+  },
+  {
+    "file": "img/social.umeng/umeng_socialize_renren_on.png",
+    "hash": "a31d9d4b2b7a2cba83c6a85836481e3a"
+  },
+  {
+    "file": "img/social.umeng/umeng_socialize_sina_off.png",
+    "hash": "f471d3869e8c1bc8958a3ea4d05daf71"
+  },
+  {
+    "file": "img/social.umeng/umeng_socialize_sina_on.png",
+    "hash": "5e24dd54af68b0aa25b2fb9ad5cd5719"
+  },
+  {
+    "file": "img/social.umeng/umeng_socialize_sms.png",
+    "hash": "c332e610b13b4a5a7cc13e3e540b4e24"
+  },
+  {
+    "file": "img/social.umeng/umeng_socialize_twitter.png",
+    "hash": "5c47c0ac2c68ca0fdf07564c8ead1366"
+  },
+  {
+    "file": "img/social.umeng/umeng_socialize_tx_off.png",
+    "hash": "2086b3c6b7a7f23b870e78d327722186"
+  },
+  {
+    "file": "img/social.umeng/umeng_socialize_tx_on.png",
+    "hash": "7bbe922b029038664d3d8624e213dd65"
+  },
+  {
+    "file": "img/social.umeng/umeng_socialize_wechat_gray.png",
+    "hash": "12d4ed35dbbbebdcbdbe7d61c5fa4ead"
+  },
+  {
+    "file": "img/social.umeng/umeng_socialize_wechat.png",
+    "hash": "64ad4236e04a42af1df37a1473bd7f81"
+  },
+  {
+    "file": "img/social.umeng/umeng_socialize_wxcircle_gray.png",
+    "hash": "82a121dc2075ace84ee57deaed5dd907"
+  },
+  {
+    "file": "img/social.umeng/umeng_socialize_wxcircle.png",
+    "hash": "03b2504c81563939dea499610a7d4e13"
   },
   {
     "file": "img/wblogo.svg",
@@ -173,7 +289,7 @@
   },
   {
     "file": "index.html",
-    "hash": "996f26c110771e71169d997364e5a375"
+    "hash": "a86ac1f0f6be8a47864c71c147508c0b"
   },
   {
     "file": "js/app.js",
@@ -181,11 +297,11 @@
   },
   {
     "file": "js/config.js",
-    "hash": "e61e8392f67b0a43dd18fbeea9c4c705"
+    "hash": "7e4519c1a5ec8afea9213b1bfc3f2b1b"
   },
   {
     "file": "js/controllers.js",
-    "hash": "a789926bde915d9ee6dd6bbe17766bc1"
+    "hash": "4e6d3297f88428dfd8e3e736d79e726f"
   },
   {
     "file": "js/filter.js",
@@ -209,7 +325,7 @@
   },
   {
     "file": "js/services.js",
-    "hash": "2219aa9c7a905e8891b4e9f6cd1bfcd5"
+    "hash": "43efaaaae5bf70098e5e19616068a3e9"
   },
   {
     "file": "js/web-storage-cache.min.js",
@@ -473,7 +589,7 @@
   },
   {
     "file": "templates/articleDetail.html",
-    "hash": "20107e9235f8c030e1165f434753059f"
+    "hash": "519f95f6c15ae632d4a252c6e5354b69"
   },
   {
     "file": "templates/comment_pub.html",
@@ -493,7 +609,7 @@
   },
   {
     "file": "templates/home.html",
-    "hash": "af1792c61ff7c178a767fd2c4c7f55ea"
+    "hash": "452b60adcf58327fce7cba28a90e8f64"
   },
   {
     "file": "templates/lib.html",
@@ -501,15 +617,15 @@
   },
   {
     "file": "templates/login_code.html",
-    "hash": "61fd4a51ff1f9e00a4751d6d895528d3"
+    "hash": "253e866d2b5783cdfbd5f3d2d01e39a5"
   },
   {
     "file": "templates/login_complete.html",
-    "hash": "60671957af266d2cff496a31a400795c"
+    "hash": "947914f0f403b3a721e637ba4297dd4f"
   },
   {
     "file": "templates/login.html",
-    "hash": "1dfe7eea795a22974144cbf3112cbc3a"
+    "hash": "9e514a144ae94c11b21b88a975c52bd9"
   },
   {
     "file": "templates/message.html",

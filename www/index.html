@@ -9,20 +9,20 @@
     <link href="css/style.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
     <link href="css/reset.css" rel="stylesheet">
-    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-    <link href="css/ionic.app.css" rel="stylesheet">
-    -->
+    <link rel="stylesheet" type="text/css" href="css/social.umeng.css" />
     <script src="js/web-storage-cache.min.js"></script>
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     <!-- cordova script (this will be a 404 during development) -->
     <script src="js/ng-cordova.min.js"></script>
+    <!-- <script src="lib/ngCordova/dist/ng-cordova.js"></script> -->
     <script src="cordova.js"></script>
     <script src="js/config.js"></script>
     <!-- your app's js -->
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
+<!--     <script src="js/timePicker.js"></script> -->
     <script src="js/filter.js"></script>
     <!-- jwplayer js -->
     <script src="js/jwplayer.js"></script>
@@ -47,7 +47,7 @@
         </ion-side-menu-content>
         <ion-side-menu side="left" width="150" class="leftSideMenu" ng-controller="sideMenuCtrl">
             <ul>    
-                <li menu-close><img ng-src="{{user.avatar}}" alt="" ng-click="openLogin()" src="img/avatar.png">
+                <li menu-close><img ng-src="{{user.avatar?user.avatar:'img/avatar.png'}}" alt="" ng-click="openLogin()" src="img/avatar.png">
                     <p>{{user.nickname?user.nickname:'登录/注册'}}</p>
                 </li>
                 <li menu-close ng-click="goMessage()">
@@ -68,7 +68,7 @@
                 </li>
             </ul>
         </ion-side-menu>
-    </ion-side-menus> 
+    </ion-side-menus>
 </body>
 
 </html>
