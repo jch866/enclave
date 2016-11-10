@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <ion-view view-title="飞地11aa">
 <ion-slide-box show-pager="ture" delegate-handle="slide1"  on-slide-changed="slideChanged($index)" class="h100">
     <!-- 推荐 -->
@@ -6,13 +7,22 @@
         <!-- <input type="text" class="inputC" timePicker> -->
         <!-- <a href="a111.html" >测试</a> -->
         <ion-refresher pulling-text="下拉刷新..." on-refresh="topTabs[0].doRefresh()">
+=======
+<ion-view view-title="飞地1">
+    <ion-content class="padding">
+        <ion-refresher pulling-text="下拉刷新..." on-refresh="doRefresh()">
+>>>>>>> c6d83150e1a52116fe780887acc9eff41ccac631
         </ion-refresher>
         <div ng-if="!hasContent"  class="noComMsg">
             <span></span>
             <!-- todo最好放一个加载中的图片，做背景 -->
         </div>
         <ion-list class="list-borderless" ng-if="hasContent">
+<<<<<<< HEAD
             <ion-item ng-repeat="item in items.articles" class="item has-header">
+=======
+            <ion-item ng-repeat="item in items" class="item">
+>>>>>>> c6d83150e1a52116fe780887acc9eff41ccac631
                 <div class="textPic">
                     <a href="#/article/{{item.art_id}}" ng-click=""><img ng-src="{{item.art_thumb}}" alt=""></a>
                 </div>
@@ -28,6 +38,7 @@
                         <span>{{item.art_view}} 阅读</span>
                     </div>
                 </div>   
+<<<<<<< HEAD
             </ion-item>
         </ion-list>
         <ion-infinite-scroll ng-if="hasMore" on-infinite="topTabs[0].loadMore()" distance="1%" immediate-check="false" >
@@ -55,6 +66,8 @@
                        <p>{{item.cate_description}}</p> 
                    </div>
                    </a>
+=======
+>>>>>>> c6d83150e1a52116fe780887acc9eff41ccac631
             </ion-item>
         </ion-list>
         <ion-infinite-scroll ng-if="hasMore" on-infinite="topTabs[1].loadMore()" distance="1%" immediate-check="false" >

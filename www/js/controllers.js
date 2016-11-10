@@ -1,7 +1,12 @@
 var myApp = angular.module('starter.controllers', []);
 myApp.controller('homeCtrl', function($scope, $ionicTabsDelegate, getArticleList, $http, $ionicPopup, $timeout,
+<<<<<<< HEAD
     $cordovaDatePicker, $rootScope, $cordovaNetwork, AccountService, $ionicLoading, $ionicPlatform,$ionicSlideBoxDelegate ) {
     //categoryDate, 
+=======
+    $cordovaDatePicker, $rootScope, $cordovaNetwork, AccountService, $ionicLoading,$ionicPlatform) {
+    $scope.imgUrl = urls.imgUrl;
+>>>>>>> c6d83150e1a52116fe780887acc9eff41ccac631
     var userId = window.localStorage[cache.userId];
     var page = 1,
         count = 10;
@@ -19,6 +24,7 @@ myApp.controller('homeCtrl', function($scope, $ionicTabsDelegate, getArticleList
     };
     //items.categories
     $scope.hasMore = true;
+<<<<<<< HEAD
     $scope.currentSlide = "slide1";
     // $scope.topTabs = categoryDate.getCate();
     $scope.slideChanged = function(index) {
@@ -53,16 +59,26 @@ myApp.controller('homeCtrl', function($scope, $ionicTabsDelegate, getArticleList
        // $ionicTabsDelegate.showBar(true);
     });
 
+=======
+>>>>>>> c6d83150e1a52116fe780887acc9eff41ccac631
     var fresh = function() {
         return getArticleList.getArticles(userId, 1, count).success(function(resp) {
             console.log(resp);
             if (resp.code == "200") {
+<<<<<<< HEAD
                 $scope.items.articles = resp.result.data;
+=======
+                $scope.items = resp.result.data;
+>>>>>>> c6d83150e1a52116fe780887acc9eff41ccac631
                 window.localStorage[articleCache.list] = JSON.stringify(resp.result.data);
                 $scope.hasContent = true;
                 $scope.hasMore = true;
                 page = 2;
+<<<<<<< HEAD
             } else {
+=======
+            } else{ 
+>>>>>>> c6d83150e1a52116fe780887acc9eff41ccac631
                 $scope.hasContent = false;
                 $scope.hasMore = false;
                 //当页面加载不到文件的时候;应该提示客户
@@ -72,12 +88,18 @@ myApp.controller('homeCtrl', function($scope, $ionicTabsDelegate, getArticleList
         })
     }
     fresh();
+<<<<<<< HEAD
     var hasArtCache = function($scope) {
         if (window.localStorage[articleCache.list]) {
             $scope.items.articles = angular.fromJson(window.localStorage[articleCache.list])
         } else { fresh() };
     }
     hasArtCache($scope);
+=======
+    if(window.localStorage[articleCache.list]){
+        $scope.items = angular.fromJson(window.localStorage[articleCache.list])
+    }else{fresh()};
+>>>>>>> c6d83150e1a52116fe780887acc9eff41ccac631
 
     $scope.$on('$ionicView.beforeEnter', function() {
         var _user = AccountService.getCacheUser();
@@ -118,7 +140,11 @@ myApp.controller('homeCtrl', function($scope, $ionicTabsDelegate, getArticleList
             $scope.$broadcast('scroll.refreshComplete');
         })
     }
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> c6d83150e1a52116fe780887acc9eff41ccac631
 
 });
 
@@ -467,10 +493,16 @@ myApp.controller('articleDetailCtrl', function($scope, $state, $stateParams, $io
     var page = 1;
     var count = 10;
     $scope.hasMedia = true;
+<<<<<<< HEAD
+=======
+    $scope.imgUrl = urls.imgUrl;
+    //console.log($stateParams);
+>>>>>>> c6d83150e1a52116fe780887acc9eff41ccac631
     var art_id = $stateParams.art_id - 0;
     //var isAdd = $stateParams.data?$stateParams.data.isAdd:false;
     var userId = window.localStorage[cache.userId] ? (window.localStorage[cache.userId] - 0) : undefined;
 
+<<<<<<< HEAD
     //分享 
     $scope.share = function() {
 
@@ -508,6 +540,21 @@ myApp.controller('articleDetailCtrl', function($scope, $state, $stateParams, $io
         })
     }
 
+=======
+    //点赞功能 
+   // $scope.addLike = false;
+    $scope.getLike = function(comment){
+        var type = "comment";
+        var comment_id = comment.id;
+        ComService.addDelLike(userId,type,comment_id).success(function(resp){
+            console.log(resp);
+            //$scope.addLike = true;
+            comment.likecount = resp.result.count;          
+        }).error(function(error){
+            console.log("点赞：error");
+        })
+    }
+>>>>>>> c6d83150e1a52116fe780887acc9eff41ccac631
     function getComments() {
         ArticleService.getDetails(art_id, userId).success(function(resp) {
             console.log(resp);
@@ -562,7 +609,11 @@ myApp.controller('articleDetailCtrl', function($scope, $state, $stateParams, $io
      及时更新最新的评论 监听beforeEnter
      */
     $scope.$on('$ionicView.beforeEnter', function() {
+<<<<<<< HEAD
             // console.log("$ionicView.beforeEnter");
+=======
+           // console.log("$ionicView.beforeEnter");
+>>>>>>> c6d83150e1a52116fe780887acc9eff41ccac631
             getComments();
         })
         /**
@@ -579,7 +630,11 @@ myApp.controller('articleDetailCtrl', function($scope, $state, $stateParams, $io
         AccountService.goState("comment_pub", $scope.item);
     };
     $scope.replyCom = function() {
+<<<<<<< HEAD
         AccountService.goState("comment_reply", this.comment);
+=======
+         AccountService.goState("comment_reply", this.comment);
+>>>>>>> c6d83150e1a52116fe780887acc9eff41ccac631
         //针对用户的判断是不是本人 id==pid  TODO
     };
     /**
@@ -592,7 +647,11 @@ myApp.controller('articleDetailCtrl', function($scope, $state, $stateParams, $io
     };
     $scope.addFavorites = function() {
         //todo login状态
+<<<<<<< HEAD
         if (!window.localStorage[cache.logined] === "true") {
+=======
+        if (window.localStorage[cache.logined] === "false") {
+>>>>>>> c6d83150e1a52116fe780887acc9eff41ccac631
             $ionicLoading.show({
                 template: "请登录!",
                 noBackdrop: true
@@ -622,7 +681,11 @@ myApp.controller('articleDetailCtrl', function($scope, $state, $stateParams, $io
 
 });
 //收藏列表
+<<<<<<< HEAD
 myApp.controller('favListCtrl', function($scope, $state, $stateParams, $ionicHistory, $ionicPopup, FavService, $ionicLoading, $timeout) {
+=======
+myApp.controller('favListCtrl', function($scope, $state, $stateParams, $ionicHistory, $ionicPopup, FavService,$ionicLoading,$timeout) {
+>>>>>>> c6d83150e1a52116fe780887acc9eff41ccac631
     var user_id = window.localStorage[cache.userId] - 0;
     var page = 1,
         count = 10;
@@ -639,8 +702,13 @@ myApp.controller('favListCtrl', function($scope, $state, $stateParams, $ionicHis
             } else {
                 $scope.favFlag = false;
             }
+<<<<<<< HEAD
             if (resp.code == 400) {
                 $ionicLoading.show({
+=======
+            if(resp.code==400){
+                 $ionicLoading.show({
+>>>>>>> c6d83150e1a52116fe780887acc9eff41ccac631
                     template: "用户不存在！",
                     noBackdrop: true
                 })
@@ -715,7 +783,11 @@ myApp.controller('pubCommentCtrl', function($scope, $state, $stateParams, ComSer
         }
 
     })
+<<<<<<< HEAD
     //个人评论列表
+=======
+//个人评论列表
+>>>>>>> c6d83150e1a52116fe780887acc9eff41ccac631
 myApp.controller('commentListCtrl', function($scope, $state, $stateParams, ComService, $ionicHistory, $ionicPopup, $ionicLoading, $timeout) {
     var user_id = window.localStorage[cache.userId] - 0;
     ComService.getSelfComment(user_id).success(function(resp) {
@@ -739,6 +811,7 @@ myApp.controller('commentListCtrl', function($scope, $state, $stateParams, ComSe
             }, 1000)
         }
     }).error(function(error) {
+<<<<<<< HEAD
         $ionicLoading.show({
             template: "请求数据失败，稍后再试",
             noBackdrop: true
@@ -746,6 +819,15 @@ myApp.controller('commentListCtrl', function($scope, $state, $stateParams, ComSe
         $timeout(function() {
             $ionicLoading.hide();
         }, 1000)
+=======
+         $ionicLoading.show({
+                template: "请求数据失败，稍后再试",
+                noBackdrop: true
+            })
+            $timeout(function() {
+                $ionicLoading.hide();
+            }, 1000)
+>>>>>>> c6d83150e1a52116fe780887acc9eff41ccac631
     })
     $scope.goDetails = function(id) {
         $state.go("article", {
@@ -758,3 +840,4 @@ myApp.controller('BaseCtrl', function($scope, $ionicHistory) {
 
 });
 myApp.controller('messageCtrl', function($scope, $ionicHistory) {});
+

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var data = {
     //专题查询
     "status": "success",
@@ -79,6 +80,8 @@ var data = {
 }
 
 
+=======
+>>>>>>> c6d83150e1a52116fe780887acc9eff41ccac631
 var addOrCancelLikeRecord.resp = {
     "status": "success",
     "code": 200,
@@ -209,6 +212,7 @@ var myfav = {
     }
 }
 
+<<<<<<< HEAD
 var data = { status: "error", code: 404, message: "没有获取到任何数据" } { status: "error", code: 4003, message: "user不存在" }
 
 
@@ -222,3 +226,6 @@ myApp.controller('fileCtrl', function ($scope,$cordovaFile) {
           // error
       });
 })
+=======
+{ status: "error", code: 404, message: "没有获取到任何数据" } { status: "error", code: 4003, message: "user不存在" }
+>>>>>>> c6d83150e1a52116fe780887acc9eff41ccac631

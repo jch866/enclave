@@ -1,7 +1,11 @@
 /* Empty. Add your own CSS if you like */
 
 .inputC{width:100%;border:1px solid green!important}
+<<<<<<< HEAD
 .h100{height: 100%;}
+=======
+
+>>>>>>> c6d83150e1a52116fe780887acc9eff41ccac631
 body{font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;}
 html {font-size:10px} 
 @media screen and (min-width:480px) and (max-width:639px) { html { font-size: 15px } } 

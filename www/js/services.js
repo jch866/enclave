@@ -11,7 +11,7 @@ angular.module('starter.services', [])
             BaseService.doRefresh();
         };
     })
-.service('BaseService', function($http) {
+    .service('BaseService', function($http) {
         this.loadMore = function($this) {
             console.log("正在加载更多数据..." + $this.page);
             $http.get($this.urlApi + "?page=" + $this.page + "&rows=" + settings.rows).then(function(response) {
@@ -45,6 +45,7 @@ angular.module('starter.services', [])
             });
         }
     })
+<<<<<<< HEAD
 // .service('categoryDate', function($http, BaseService) {
 //     this.getCate = function() {
 //         var categoryDate = [{
@@ -115,6 +116,47 @@ angular.module('starter.services', [])
                 $ionicLoading.show({
                     template: "请登录!",
                     noBackdrop: true
+=======
+    .service('AccountService', function($http, $ionicPopup, $rootScope, $state, $timeout, $ionicLoading) {
+        var $this = this;
+        // 跳转前判断登录状态
+        this.goState = function(route, data) {
+                if (window.localStorage[cache.logined] === "true") {
+                    data ? $state.go(route, { data: data }) : $state.go(route);
+                } else {
+                    $ionicLoading.show({
+                        template: "请登录!",
+                        noBackdrop: true
+                    })
+                    $timeout(function() {
+                        $ionicLoading.hide();
+                    }, 1000)
+                }
+            }
+            // 获取缓存用户信息
+        this.getCacheUser = function() {
+                return angular.fromJson(window.localStorage[cache.user]);
+            }
+            // 获取用户信息
+        this.getUserInfo = function(id) {
+                var url = urls.getUserInfo;
+                var data = {
+                    user_id: id
+                }
+                $http.post(url, data).success(function(resp) {
+                    console.log(resp);
+                    if (resp.code == 200) {
+                        window.localStorage[cache.user] = JSON.stringify(resp.result);
+                        $rootScope.user = $this.getCacheUser();
+                    } else {
+                        $ionicPopup.alert({
+                            title: '提示',
+                            template: resp.message || '返回个人信息失败'
+                        })
+                    }
+                }).error(function(error) {
+                    console.log("error");
+>>>>>>> c6d83150e1a52116fe780887acc9eff41ccac631
                 })
                 $timeout(function() {
                     $ionicLoading.hide();
@@ -186,6 +228,7 @@ angular.module('starter.services', [])
 
         }
     })
+<<<<<<< HEAD
 .service('cateService', function($http) {
     this.getCateList = function(have_data,cate_id){
         var url = urls.getCategory + "?have_data="+have_data+"&cate_id="+cate_id;
@@ -193,6 +236,8 @@ angular.module('starter.services', [])
     }
       
 })
+=======
+>>>>>>> c6d83150e1a52116fe780887acc9eff41ccac631
     .service('FavService', function($http) {
 
         //获取收藏列表
@@ -243,6 +288,7 @@ angular.module('starter.services', [])
             //return $http.get(url, data);
         };
         //文章评论内容点赞
+<<<<<<< HEAD
         this.addDelLike = function(id, type, source_id) {
                 var url = urls.likeAddDel;
                 var data = {
@@ -253,6 +299,18 @@ angular.module('starter.services', [])
                 return $http.post(url, data);
             }
             //删除评论
+=======
+        this.addDelLike = function(id,type,source_id) {
+            var url = urls.likeAddDel;
+            var data = {
+                user_id: id, 
+                type: type,
+                source_id: source_id,
+            };
+            return $http.post(url, data);
+        }
+        //删除评论
+>>>>>>> c6d83150e1a52116fe780887acc9eff41ccac631
         this.delCom = function() {
 
         };
@@ -305,7 +363,7 @@ angular.module('starter.services', [])
                  }*/
         };
     })
-    .factory('httpService', function($q, $http, $rootScope, $ionicLoading, $ionicPopup, $state, fn) {
+.factory('httpService', function($q, $http, $rootScope, $ionicLoading, $ionicPopup, $state, fn) {
         var httpGet = function(api, params) {
             params = params || {};
             var deferred = $q.defer();

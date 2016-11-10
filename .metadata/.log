@@ -7275,6 +7275,7 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY org.eclipse.ui 2 2 2016-10-26 11:13:07.086
 !MESSAGE Invalid property category path: ValidationPropertiesPage (bundle: org.eclipse.wst.xml.ui, propertyPage: org.eclipse.wst.xml.ui.propertyPage.project.validation)
+<<<<<<< HEAD
 !SESSION 2016-11-01 15:42:34.089 -----------------------------------------------
 eclipse.buildId=M20130204-1200
 java.version=1.8.0_101
@@ -7312,3 +7313,5 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY org.eclipse.core.resources 4 567 2016-11-01 15:43:10.469
 !MESSAGE The project description file (.project) for 'CordovaLib' is missing.  This file contains important information about the project.  The project will not function properly until this file is restored.
+=======
+>>>>>>> c6d83150e1a52116fe780887acc9eff41ccac631

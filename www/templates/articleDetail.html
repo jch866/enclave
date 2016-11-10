@@ -33,7 +33,11 @@
                     <div class="detail">
                         <div class="title">
                             <time>{{comment.publishTime*1000 | date:"yyyy-MM-dd HH:mm"}}</time>{{comment.nickname}}</div>
+<<<<<<< HEAD
                         <p ng-click="replyCom()">{{comment.content}}</p>
+=======
+                        <p  ng-click="replyCom()">{{comment.content}}</p>
+>>>>>>> c6d83150e1a52116fe780887acc9eff41ccac631
                         <div class="like"><i class="iconfont icon-like" ng-click="getLike(comment)"></i>
                         {{comment.likecount}}</div>
                         <div class="commentsBox" ng-hide="{{comment.comments.length==0}}"> 
