@@ -49,11 +49,7 @@
   },
   {
     "file": "data/art.js",
-<<<<<<< HEAD
-    "hash": "3dbcf8dbfe183ee8d8913b28f07c46ee"
-=======
     "hash": "5cf0d322e4cc44a8c66a965661123311"
->>>>>>> c6d83150e1a52116fe780887acc9eff41ccac631
   },
   {
     "file": "data/art.json",
@@ -293,12 +289,9 @@
   },
   {
     "file": "index.html",
-<<<<<<< HEAD
-    "hash": "a86ac1f0f6be8a47864c71c147508c0b"
-=======
+ 
     "hash": "ba459d6eeb0c73ca424c39161f936a8d"
->>>>>>> c6d83150e1a52116fe780887acc9eff41ccac631
-  },
+   },
   {
     "file": "js/app.js",
     "hash": "8384e7c05bada202a9f9d9f92d545367"
@@ -309,12 +302,9 @@
   },
   {
     "file": "js/controllers.js",
-<<<<<<< HEAD
-    "hash": "4e6d3297f88428dfd8e3e736d79e726f"
-=======
+ 
     "hash": "c8c9c278a4d63f830866a3d025a5a7c1"
->>>>>>> c6d83150e1a52116fe780887acc9eff41ccac631
-  },
+   },
   {
     "file": "js/filter.js",
     "hash": "424e12a2a38ac3e4473d93c4d1659043"
@@ -601,11 +591,8 @@
   },
   {
     "file": "templates/articleDetail.html",
-<<<<<<< HEAD
-    "hash": "519f95f6c15ae632d4a252c6e5354b69"
-=======
     "hash": "e42800a19ab3741fa9242dbf7c501061"
->>>>>>> c6d83150e1a52116fe780887acc9eff41ccac631
+
   },
   {
     "file": "templates/comment_pub.html",
@@ -625,11 +612,8 @@
   },
   {
     "file": "templates/home.html",
-<<<<<<< HEAD
-    "hash": "452b60adcf58327fce7cba28a90e8f64"
-=======
+
     "hash": "3596e9f34ed0bfb6d16cf34a92a5bf11"
->>>>>>> c6d83150e1a52116fe780887acc9eff41ccac631
   },
   {
     "file": "templates/lib.html",
