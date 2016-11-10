@@ -1,7 +1,7 @@
 /* Empty. Add your own CSS if you like */
 
 .inputC{width:100%;border:1px solid green!important}
-
+.h100{height: 100%;}
 body{font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;}
 html {font-size:10px} 
 @media screen and (min-width:480px) and (max-width:639px) { html { font-size: 15px } } 
@@ -40,8 +40,8 @@ html {font-size:10px}
 margin: 2px 0 0 0;padding: 0 12px;height: 28px; vertical-align: top;text-align: center;text-overflow: ellipsis;  cursor: pointer;
 /* min-width: 52px;    min-height: 47px;    border-width: 1px;    border-style: solid;    border-radius: 4px; */   }
 .leftSideMenu{font-family:Helvetica;background-image:linear-gradient(-180deg, #3b3f5a 0%, #1c1e2e 100%);width:125px;overflow-y:auto;}
-.leftSideMenu a{color:white;text-decoration: none}
-.leftSideMenu li{width: 100%;text-align: center;color: white;margin-top: 50px;opacity:0.5}
+.leftSideMenu a{color:#fff;text-decoration: none}
+.leftSideMenu li{width: 100%;text-align: center;color: #fff;margin-top: 50px;opacity:0.5}
 .leftSideMenu li:first-child{margin-top: 40px;}
 .leftSideMenu li:first-child img{border:2px solid #ffffff;box-shadow:0px 1px 2px 0px rgba(0,0,0,0.24), 0px 1px 4px 0px rgba(0,0,0,0.12);
 width:78px;height:78px;border-radius:100%;}
@@ -50,6 +50,8 @@ width:78px;height:78px;border-radius:100%;}
 .ionTab{max-width: 50px; color: #000;}
 .tab-item{margin:0 25px;}
 .mt10{margin-top: 10px;}
+
+
 
 
 
@@ -125,8 +127,8 @@ line-height: 62px;width: 100%;text-align: center;color: #fff;}
 .selectCancel{ font-size: 0.9rem}
 .platform-android .action-sheet .button{text-align: center;}
 /* 之前的登录页面  S*/
-/* .login_box{width: 80%;margin:0 auto;color: white; height: 100%;overflow:hidden}
-.login_box a{color: white;}
+/* .login_box{width: 80%;margin:0 auto;color: #fff; height: 100%;overflow:hidden}
+.login_box a{color: #fff;}
 .relative_pos{position: relative;}
 .login_bg{background-image:radial-gradient(50% 95%, #5c8eca 26%, #3868a2 96%);width: 100%;height: 100%}
 .reg_logo{text-align: center;margin-top: 80px;}
@@ -147,7 +149,7 @@ color:rgba(255,255,255,0.50);}
 .third_head{width: 100%;text-align: center}
 .footer_bar{border: 0;padding: 0;height: 40px;}
 .noAccount  {bottom:0;right: 0;left: 0;position: absolute;height: 40px;line-height: 40px;text-align: center;}
-.noAccount a{color:white;}
+.noAccount a{color:#fff;}
 
 .login_logo{width:100%;padding: 35px 0 0 0;display: flex;justify-content: space-around}
 .login_logo span{  width: 20%;height: 20%; text-align: center;}
@@ -183,7 +185,7 @@ color:rgba(255,255,255,0.50);}
 
 /* article 文章详情页 */
 .rightIcon span{font-size: 32px;}
-.fontSize{font-size: 26px;margin: 8px 6px 0 0;}
+.fs26{font-size: 26px;margin: 8px 6px 0 0;}
 .articleWrap{}
 .contentArticle{color:#000000;padding: 10px 20px 20px 10px}
 /* .contentArticle h1{font-size:1.2rem;} */
@@ -198,7 +200,6 @@ color:rgba(255,255,255,0.50);}
 .articleCon p{opacity:0.8;font-size:16px;line-height:26px}
 
 .comments{background:#ffffff;border:1px solid #ededed; margin-top: 20px; padding: 20px 0 0 20px}
-.noComments{text-align: center;font-size: 0.8rem; line-height: 1.8rem}
 .comments h3{font-size:14px;color:rgba(0,0,0,0.50);}
 .comments li{display: flex; border-bottom: 1px solid #ededed;padding: 15px 20px 15px 0;}
 .comments li .avatar{flex:0 0 60px;}
@@ -220,11 +221,12 @@ color:rgba(255,255,255,0.50);}
 /* 消息  */
 .msgWrap{padding:10px 20px;}
 .msgWrap li.msgBox{margin: 15px 0 0 0;}
-.msgWrap li.msgBox .time{ text-align: center;font-size:12px;color:rgba(0,0,0,0.50)}
+.msgWrap li.msgBox .time{ text-align: center;font-size:12px;line-height: 1.5rem;color: #8B8687;}
 .msgWrap li.msgBox .content{display: flex;padding: 5px 0 0 0;}
 .msgWrap li.msgBox .content .avatar{flex:0 0 50px; margin-right: 10px;}
 .msgWrap li.msgBox .content .avatar img{border-radius: 100%; height: 46px;width: 46px}
-.msgWrap li.msgBox .content .msg{padding: 15px 20px;width: 100%; background:#ededed;border-radius:0px 10px 10px 10px;}
+.msgWrap li.msgBox .content .msg{padding: 15px 20px;width: 100%; background:#fff;  line-height: 22px;
+box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.10);border-radius: 2px;font-size: 15px;color: #404146;}
  
 
 /* 文章评论  发布 和 回复 */
@@ -237,7 +239,7 @@ color:rgba(255,255,255,0.50);}
 /* font-size:18px; */
 
 /* 我的评论 */
-.noComMsg{text-align: center; padding: 10px;}
+.noComMsg{text-align: center;font-size: 0.8rem; line-height: 1.8rem;padding: 10px;}
 .commentList{color:#000000;font-size: 0.8rem;line-height: 150%;}
 .commentList .comItem{padding: 15px 20px; border-bottom: 1px solid #ededed;}
 .comItem .comContent{padding-bottom: 7px;}
@@ -298,7 +300,9 @@ color:rgba(255,255,255,0.50);}
 .icon-fdvideo:before { content: "\e608"; }
 .icon-drawer:before { content: "\e604"; }
 .icon-after-like:before { content: "\e61b"; }
-
+.fs16{font-size: 16px;}
+.fs32{font-size: 32px;}
+.fs22{font-size: 22px;}
 
 /* 自定义图标 end */
 /* 针对action-sheet-cancel不出来的情况，复写css */
@@ -307,17 +311,166 @@ color:rgba(255,255,255,0.50);}
 }
 
 
+/* 新改样式，字体图标过后酌情处理*/
+
+/* 下拉时的分类标签 */
+.content{background: #F3F3F3;}
+.typeSelect{padding: 10px; display: flex;height: 60px;background: #F3F3F3;}
+.typeSelect .tName{flex:1;line-height:40px;}
+.typeSelect .tCate{flex:0 0 160px;border-radius: 5px;}
+.typeSelect .tCate li{float: left;width: 40px;height:40px;background-size:cover;overflow: hidden;}
+.typeSelect .tCate li.type_all{background-image: url('../img/all.png')}
+.typeSelect .tCate li.type_article{background-image: url('../img/article.png')}
+.typeSelect .tCate li.type_voice{background-image: url('../img/voice.png')}
+.typeSelect .tCate li.type_video{background-image: url('../img/video.png')}
+.typeSelect .tCate li:nth-child(1).active{background-image: url('../img/all_se.png')}
+.typeSelect .tCate li:nth-child(2).active{background-image: url('../img/article_se.png')}
+.typeSelect .tCate li:nth-child(3).active{background-image: url('../img/voice_se.png')}
+.typeSelect .tCate li:nth-child(4).active{background-image: url('../img/video_se.png')}
+
+/* 推荐列表  */
+.recommendList{}
+.recommendList ul li{background:#fff;margin-bottom: 10px;height: 100%;overflow: hidden;}
+.recommendList ul li div.articleLabel{width: 60px;margin:0 auto 17px auto;height: 23px;line-height: 23px;background: #404146; text-align: center;color: #fff;font-size: 12px;}
+.recommendList ul li div.articleImg,.topicBody .articleImg{margin-top:20px; position: relative;height: 100%;overflow: hidden;text-align: center;}
+.recommendList ul li div.articleImg .play,.topicBody .articleImg .play,
+.selfFav li div.favImg div.play{
+  left: 0;    top: 0;    margin: auto;    bottom: 0;    right: 0;  position:absolute;
+/* left:50%;top:50%;margin-top:-30px;margin-left:-30px; */
+width:60px;height:60px;z-index:1; 
+background:rgba(255,255,255,0.5) url("../img/play_homepage.png") center center no-repeat;border-radius: 50%;
+background-size: cover;} 
+.recommendList ul li h1,
+.recommendList ul li h2{text-align: center;font-size: 22px;color: #404146;width: 90%;margin: 0 auto;line-height: 140%;}
+.recommendList ul li h1{font-size: 22px;color: #404146;}
+.recommendList ul li hr{width: 30%;margin:8px auto 9px auto;background: #404146;height: 1px;font-size: 0;}
+.recommendList ul li h2{font-size: 14px;color: #8B8687; }
+.recommendList ul li img{width: 100%;vertical-align: top;}
+/* max-width:600px; */
+
+
+/* 新的侧边栏 */
+.sideMenu{width: 210px;}
+.sideMenu .sideAvatar{ border-bottom: 1px solid #E3DEDE;display: flex; align-items: center; height: 80px;padding: 0 0 0 15px;}
+.sideMenu .sideAvatar span{padding: 0 0 0 13px;}
+.sideMenu .sideAvatar img{border-radius: 50%;width: 40px;height: 40px;}
+.sideMenu ul{padding: 0 0 0 20px;}
+.sideMenu ul li{height: 30px;line-height: 30px;padding:  30px 0 30px 50px;position: relative;}
+.sideMenu ul li:first-child{ background: url('../img/messageN.png') left center no-repeat;background-size: 30px 30px}
+.sideMenu ul li:nth-child(2){ background: url('../img/commentN.png') left center no-repeat;background-size: 30px 30px}
+.sideMenu ul li:nth-child(3){background: url('../img/favouriteN.png') left center no-repeat;background-size: 30px 30px }
+.sideMenu ul li:nth-child(4){ background: url('../img/settingsN.png') left center no-repeat;background-size: 30px 30px}
+.sideMenu ul li div{position: absolute;background: #f05d4d;height: 30px;width: 30px; border-radius: 50%;
+  right: 0;margin:auto;top: 0; bottom: 0;font-size: 10px;color: #fff; line-height: 30px;text-align: center;}
 
 
 
+/* 专题列表 */
+
+.cateList{}
+.cateList{position: relative;height: 100%;overflow: hidden; text-align: center;margin-bottom: 5px;padding: 0}
+.cateList h1,
+.cateList p{color: #FFFFFF;text-shadow: 0px 2px 4px rgba(0,0,0,0.75);text-align: left;}
+.cateList h1{font-size: 28px;line-height:40px;padding: 0 0 5px 0;}
+.cateList p{font-size: 14px;line-height: 20px;}
+.cateList img{width: 100%;vertical-align: top;box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.50);border-radius: 5px;}
+/* max-width:600px; */
+.cateList div.description{position:absolute;bottom: 0;padding: 20px;max-width:600px;left: 0;right: 0;margin:auto;}
+ 
+
+
+/* 专题详情页 */
+.topicHead{background: #fff;margin: 0 0 5px 0;}
+.topicHead div.imgHead{position: relative;height: 100%;overflow: hidden}
+.topicHead div.imgHead img{ width: 100% }
+.topicHead div.imgHead div {position: absolute;top: 0;height: 100%;width: 100%; display: flex; justify-content: center; align-items: center;}
+.topicHead div.imgHead div h1{font-size: 28px;color: #FFFFFF;line-height: 34px;text-shadow: 0px 2px 4px rgba(0,0,0,0.48);text-align: center;} 
+/* .topicHead div.imgHead h1{position: absolute;margin:auto;top: 0;bottom: 0;text-align: center;
+font-size: 28px;color: #FFFFFF;line-height: 34px;width: 100%;height: 34px;
+text-shadow: 0px 2px 4px rgba(0,0,0,0.48);} 这是固定高height: 34px;的情况 外面没有DIV */
+.topicHead .conP{padding: 10px;}
+.topicHead .conP p{font-size: 13px;color: #8B8687;line-height: 18px;}
+
+.topicBody{}
+.topicBody li{padding: 15px;background: #fff;margin-bottom: 5px;}
+.topicBody li img{width: 100%;}
+.topicBody li h2{font-size: 22px;color: #404146;line-height: 28px;padding: 10px 0}
+.topicBody li p{ font-size: 13px;color: #8B8687;line-height: 18px;padding: 0 0 10px 0}
+.topicBody li div.artInfo,
+  .selfFav li div.artInfo{display: flex;line-height: 20px;}
+.topicBody li div.artInfo span,
+  .selfFav li div.artInfo span{flex: 1;display: inline-block;}
+.topicBody li div.artInfo span:last-child,
+  .selfFav li div.artInfo span:last-child{text-align: right;font-size: 13px;color: #8B8687;line-height: 18px;}
+.topicBody li div.artInfo span:first-child,
+  .selfFav li div.artInfo span:first-child{font-size: 13px;color: #3F72AF;line-height: 18px;}
+.topicBody .articleImg{margin-top:0;}
 
 
 
+/* 个人评论样式 */
+.selfCom{ }
+.selfCom li.looked *{color: #8B8687!important;}
+.selfCom li{border-bottom: 1px solid #E3DEDE; background: #fff;padding: 10px;line-height: 30px;}
+.selfCom .comHead{display: flex;line-height: 20px;padding: 8px 0;}
+.selfCom .comHead .whoCom{flex: 1;font-size: 15px;color: #404146;}
+.selfCom .comHead .whoCom span{font-weight: bold}
+.selfCom .comHead .whoCom span.title{color: #3F72AF;}
+.selfCom .comHead .time{flex: 0 0 80px;text-align: right;}
+.selfCom .comBody{font-size: 15px;color: #404146;overflow: hidden;width: 100%;text-overflow: ellipsis;#fff-space: nowrap; }
+
+/* 收藏列表样式 */
+.selfFav{background: #fff;}
+.selfFav li{ display: flex; padding: 15px; border-top: 1px solid #E3DEDE;}
+.selfFav li div.favCon{flex: 1;padding: 0 5px 0 0;}
+.selfFav li div.favCon h2{font-size: 17px;color: #404146;line-height:26px;}
+.selfFav li div.favCon p{font-size: 13px;color: #8B8687;line-height:20px;padding: 5px 0; }
+.selfFav li div.favImg{flex: 0 0 100px;position: relative}
+.selfFav li div.favImg div.play{ }
+.selfFav li div.favImg img{ width:100px; height:100px; }
+.selfFav li div.artInfo span:last-child{padding: 0 10px 0 0}
 
 
+/* 文章详情页 */
+.articleContent{margin-bottom: 10px;background: #fff;}
+.articleContent .articleHead{ position: relative }
+.articleContent .articleHead .articleImage{}
+.articleContent .articleHead img{ width: 100%  }
+.articleContent .articleHead .articleTitle{position: absolute;top: 0;height: 100%;width: 100%; display: flex; justify-content: center; align-items: center;}
+.articleContent .articleHead .articleTitle h1{font-size: 28px;color: #FFFFFF;line-height: 34px;text-shadow: 0px 2px 4px rgba(0,0,0,0.48);text-align: center;}
+.articleContent .articleHead .selfAuthor{position: absolute;bottom: 17px;font-size: 15px;color: #FFFFFF;height: 46px; line-height: 46px;
+display: flex;width: 100%;padding: 0 15px;}
+.articleContent .articleHead .selfAuthor .oAvatar{flex:1;}
+.articleContent .articleHead .selfAuthor .oAvatar img{width: 46px;height: 46px; border-radius: 50%;float: left; margin: 0 10px 0 0;border:1px solid #fff;}
+.articleContent .articleHead .selfAuthor .oTime{flex:0 0 80px;text-align: right}
+.articleContent .articleBody{padding: 20px 16px 26px 16px;font-size: 16px;color: #404146;letter-spacing: -0.32px;line-height: 26px;
+  text-align:justify; text-justify:inter-ideograph;}
 
+.artComs{background: #fff;padding: 15px 0 0 15px;}
+.artComs h2{font-size: 15px;color: #404146;line-height: 20px; font-weight: normal}
+.artComs ul{}
+.artComs ul li{display: flex; border-bottom: 1px solid #ededed;padding: 15px 20px 15px 0;}
+.artComs ul li:last-child{border-bottom: none;}
+.artComs ul li .comAvatar{flex:0 0 60px;}
+.artComs ul li .comAvatar img{width:46px;height:46px;border-radius:100%;}
+.artComs ul li .comContent{flex: 1;}
+.artComs ul li .comContent p{font-size: 15px;color: #404146;line-height: 24px;}
+.artComs ul li .comContent .extraInfo{ font-size: 13px;color: #8B8687;line-height: 18px; padding: 5px 0;}
+.artComs ul li .comContent .extraInfo span{margin-right: 20px;}
+.artComs ul li .comContent .extraInfo .comTime{}
+.artComs ul li .comContent .extraInfo .comLike{}
+.artComs ul li .comContent .extraInfo .spanReply,
+.artComs ul li .comContent .extraInfo a{color: #3F72AF;}
+.comReply{ margin: 0 0 10px 0;}
+.comReply button{border-top:  1px solid #ededed;border-bottom:  1px solid #ededed;width: 100%;border-left: none;border-right: none;
+  line-height: 20px;padding: 10px;background: #fff;text-align: left;font-size: 15px;color: #8B8687;}
 
-
+.shareBar{height: 50px; display: flex;background: #fff; padding: 14px 10px}
+.shareBar span{height:50px;line-height: 22px;margin-right: 10px;}
+.shareBar .shareBtn{flex:0;}
+.shareBar .comBtn{flex:1;font-size: 13px;line-height: 18px;}
+.shareBar .comBtn span{color: #8B8687;}
+.shareBar .addFavBtn{flex:0;margin-right: 0;}
 
 
 

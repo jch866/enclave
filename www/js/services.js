@@ -11,75 +11,98 @@ angular.module('starter.services', [])
             BaseService.doRefresh();
         };
     })
-    .service('BaseService', function($http) {
+.service('BaseService', function($http) {
         this.loadMore = function($this) {
             console.log("正在加载更多数据..." + $this.page);
-            $http.get($this.url + "?page=" + $this.page + "&rows=" + settings.rows).success(function(response) {
+            $http.get($this.urlApi + "?page=" + $this.page + "&rows=" + settings.rows).then(function(response) {
                 console.log(response);
-                if (response.articles.length > 0) {
-                    $this.items = $this.items.concat(response.articles);
+                var newData = response.data.result.data;
+                if (newData > 0) {
+                    $this.items = $this.items.concat(newData);
                     $this.page++;
                 } else {
                     console.log("没有数据了...")
                     $this.isload = true;
                 }
-                $this.callback();
+            },function(err){
+                console.log("loadMore error");
+            }).finally(function(){
+                 $scope.$broadcast('scroll.infiniteScrollComplete');
             });
         }
 
         this.doRefresh = function($this) { //todo
             console.log("正在执行refresh操作...");
-            
-            //使用jsonp的方式请求
-            $http.get($this.urlApi).success(function(response) {
+            $http.get($this.urlApi).then(function(response) {
                 console.log(response);
-                $this.items = response.result.categories.data; //不能这么写，不是通用的
                 $this.page = 2;
-                //$this.items = response.article;
-                $this.callback();
+                $this.items = response.article;
                 $this.isload = false;
+            },function(error){
+                console.log("doRefresh error");
+            }).finally(function(){
+            $scope.$broadcast('scroll.refreshComplete');
             });
         }
     })
-    .service('categoryDate', function($http, BaseService) {
-        this.getCate = function() {
-           
-            var categoryDate = [{
-                title: "推荐",
-                page: 1,
-                count: 10,
-                type: "article",
-                isload: true,
-                urlApi: urls.getArticles,
-                loadMore: function() {
-                    BaseService.loadMore(this);
-                },
-                doRefresh: function() {
-                    BaseService.doRefresh(this);
-                },
-                callback : function() {
-                   
-                }
-            }, {
-                title: "专题",
-                page: 1,
-                count: 5,
-                type: "article",
-                isload: true,
-                urlApi: urls.getCategory+"?have_data=0",
-                loadMore: function() {
-                    BaseService.loadMore(this);
-                },
-                doRefresh: function() {
-                    BaseService.doRefresh(this);
-                },
-                callback: function() {
-                   
-                }
-            }];
-            return categoryDate;
-        }
-    })
+// .service('categoryDate', function($http, BaseService) {
+//     this.getCate = function() {
+//         var categoryDate = [{
+//             title: "推荐",
+//             page: 1,
+//             count: 10,
+//             type: "article",
+//             isload: true,
+//             items:[],
+//             urlApi: urls.getArticles,
+//             loadMore: function() {
+//                 BaseService.loadMore(this);
+//             },
+//             doRefresh: function() {
+//                 BaseService.doRefresh(this);
+//             }
+//         }, {
+//             title: "专题",
+//             //page: 1,
+//             //count: 5,
+//             // items:[],
+//             type: "article",
+//             isload: true,
+//             urlApi: urls.getCategory + "?have_data=0",
+//             loadMore: function($this) {
+//                 console.log("正在加载更多数据..." + $this.page);
+//                 $http.get($this.urlApi).then(function(response) {
+//                     console.log(response);
+//                     var newData = response.data.result.categories.data;
+//                     if (newData > 0) {
+//                         $this.items = $this.items.concat(newData);
+//                         $this.page++;
+//                     } else {
+//                         console.log("没有数据了...")
+//                         $this.isload = true;
+//                     }
+//                 }, function(err) {
+//                     console.log("loadMore error");
+//                 }).finally(function() {
+//                     $scope.$broadcast('scroll.infiniteScrollComplete');
+//                 });
+//             },
+//             doRefresh: function($this) {
+//                 console.log("正在执行refresh操作...");
+//                 $http.get($this.urlApi).then(function(response) {
+//                     console.log(response);
+//                     $this.items = response.data.result.categories.data; 
+//                 }, function(error) {
+//                     console.log("doRefresh error");
+//                 }).finally(function() {
+//                     $scope.$broadcast('scroll.refreshComplete');
+//                 });
+//             }
+//         }];
+//         return categoryDate;
+//     }
+// })
+
 
 
 .service('AccountService', function($http, $ionicPopup, $rootScope, $state, $timeout, $ionicLoading) {
@@ -163,6 +186,13 @@ angular.module('starter.services', [])
 
         }
     })
+.service('cateService', function($http) {
+    this.getCateList = function(have_data,cate_id){
+        var url = urls.getCategory + "?have_data="+have_data+"&cate_id="+cate_id;
+        return $http.get(url);
+    }
+      
+})
     .service('FavService', function($http) {
 
         //获取收藏列表

@@ -1,0 +1,41 @@
+<ion-view view-title="{{}}">
+    <ion-content>
+        <div ng-if="noArt" class="noComMsg"> {{noArtMsg}} </div>
+        <div class="topicHead" ng-if="!noArt">
+            <div class="imgHead">
+                <img ng-src="{{info.cateHead.cate_thumb}}" alt="">
+                <div><h1>{{info.cateHead.cate_name}}</h1></div>
+            </div>
+            <div class="conP">
+                <p>{{info.cateHead.cate_description}}</p>
+            </div>
+        </div>
+        <div class="topicBody">
+            <ion-list>
+                <ion-item ng-repeat="item in info.cateArts">
+                    <div class="articleImg">
+                        <a href="#/article/{{item.art_id}}"><img ng-src = "{{item.art_thumb}}" alt=""></a>
+                        <div class="play" ng-if="item.art_type!=='1'"></div>
+                    </div>
+                    <h2>{{item.art_title}}</h2>
+                    <p>{{item.art_description}}</p>
+                    <div class="artInfo">
+                        <span>{{item.art_type}}</span>
+                        <span>{{item.art_time*1000 | date:"yyyy年MM月dd日"}}</span>
+                    </div>
+                </ion-item>
+                <!-- <li>
+                    <div class="articleImg">
+                        <img src="img/test.png" alt="">
+                    </div>
+                    <h2>降维：蔡磊的空间语法</h2>
+                    <p>质感本质上是一种触觉性，在艺术史家沃尔夫林队艺术视知觉的划分中，触觉性源于雕塑，因为人们在观看雕塑的时候，就像是用目光去…</p>
+                    <div class="artInfo">
+                        <span>影像</span>
+                        <span>1天</span>
+                    </div>
+                </li> -->
+            </ion-list>
+        </div>
+    </ion-content>
+</ion-view>

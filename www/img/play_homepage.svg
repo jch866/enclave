@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
+    <title>play_homepage</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="play_homepage">
+            <g id="Group">
+                <circle id="Oval" fill-opacity="0.800000012" fill="#FFFFFF" cx="30" cy="30" r="30"></circle>
+                <path d="M39.484211,27.7196473 L27.502256,20.4265785 C25.49624,19.2062626 23,20.7500743 23,23.2067206 L23,37.7928584 C23,40.2527075 25.49624,41.7933164 27.502256,40.5730004 L39.484211,33.2831345 C41.505263,32.0532098 41.505263,28.9495719 39.484211,27.7196473" id="play-[#1003]" fill="#404146"></path>
+            </g>
+        </g>
+    </g>
+</svg>

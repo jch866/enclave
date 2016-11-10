@@ -37,6 +37,18 @@ enclaveApp.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvid
         templateUrl: 'templates/articleDetail.html',
         controller: 'articleDetailCtrl'
     })
+    .state('category', {
+        url: '/category/:cate_id',
+        //params:{'cate_id':item.cate_id,"cate_name":item.cate_name},
+        templateUrl: 'templates/categoryList.html',
+        controller: 'categoryArticleListCtrl'
+    })
+    // .state('categoryDetail', {
+    //     url: '/category/:cate_id/:art_id',
+    //     //params:{'data':null},
+    //     templateUrl: 'templates/articleDetail.html',
+    //     controller: 'categoryArticleDetailCtrl'
+    // })
     // .state('tab.tab1-details', {
     //     url: '/tab/tab1-details/:id/:title/:type',
     //     views: {

@@ -1,8 +1,8 @@
 <ion-view view-title="飞地11aa">
-<ion-slide-box show-pager="ture" delegate-handle="slide1"  on-slide-changed="slideChanged($index)" style="height:100%;">
+<ion-slide-box show-pager="ture" delegate-handle="slide1"  on-slide-changed="slideChanged($index)" class="h100">
     <!-- 推荐 -->
     <ion-slide>
-    <ion-content class="padding">
+    <ion-content class="padding" has-subheader="true">
         <!-- <input type="text" class="inputC" timePicker> -->
         <!-- <a href="a111.html" >测试</a> -->
         <ion-refresher pulling-text="下拉刷新..." on-refresh="topTabs[0].doRefresh()">
@@ -12,9 +12,9 @@
             <!-- todo最好放一个加载中的图片，做背景 -->
         </div>
         <ion-list class="list-borderless" ng-if="hasContent">
-            <ion-item ng-repeat="item in items" class="item">
+            <ion-item ng-repeat="item in items.articles" class="item has-header">
                 <div class="textPic">
-                    <a href="#/article/{{item.art_id}}" ng-click=""><img ng-src="{{imgUrl+item.art_thumb}}" alt=""></a>
+                    <a href="#/article/{{item.art_id}}" ng-click=""><img ng-src="{{item.art_thumb}}" alt=""></a>
                 </div>
                 <div class="imgShowMore">
                     <div class="authorInfor">
@@ -23,8 +23,8 @@
                     </div>
                     <a href="#/article/{{item.art_id}}" ng-click=""><h2>{{item.art_title}}</h2></a>
                     <div class="hits">
-                        <span><i class="iconfont icon-shoucang fontSize"></i><em>{{item.collectionCount}}</em></span>
-                        <span><i class="iconfont icon-comment fontSize"></i> <em>{{item.art_view}}</em></span>
+                        <span><i class="iconfont icon-shoucang fs26"></i><em>{{item.collectionCount}}</em></span>
+                        <span><i class="iconfont icon-comment fs26"></i> <em>{{item.art_view}}</em></span>
                         <span>{{item.art_view}} 阅读</span>
                     </div>
                 </div>   
@@ -47,22 +47,14 @@
             <!-- todo最好放一个加载中的图片，做背景 -->
         </div>
         <ion-list class="list-borderless" ng-if="hasContent">
-            <ion-item ng-repeat="item in items" class="item">
-                <div class="textPic">
-                    <a href="#/article/{{item.art_id}}" ng-click=""><img ng-src="{{imgUrl+item.art_thumb}}" alt=""></a>
-                </div>
-                <div class="imgShowMore">
-                    <div class="authorInfor">
-                        <div>{{item.art_editor}}</div>
-                        <div>{{item.art_time*1000 | date:"yyyy年MM月dd日"}}</div>
-                    </div>
-                    <a href="#/article/{{item.art_id}}" ng-click=""><h2>{{item.art_title}}</h2></a>
-                    <div class="hits">
-                        <span><i class="iconfont icon-shoucang fontSize"></i><em>{{item.collectionCount}}</em></span>
-                        <span><i class="iconfont icon-comment fontSize"></i> <em>{{item.art_view}}</em></span>
-                        <span>{{item.art_view}} 阅读</span>
-                    </div>
-                </div>   
+            <ion-item ng-repeat="item in items.categories" class="item has-header cateList">
+                   <a href="#/category/{{item.cate_id}}">
+                   <img ng-src="{{item.cate_thumb}}" alt="">
+                   <div class="description">
+                       <h1>{{item.cate_name}}</h1>
+                       <p>{{item.cate_description}}</p> 
+                   </div>
+                   </a>
             </ion-item>
         </ion-list>
         <ion-infinite-scroll ng-if="hasMore" on-infinite="topTabs[1].loadMore()" distance="1%" immediate-check="false" >
@@ -70,7 +62,9 @@
     </ion-content>
     </ion-slide>
   </ion-slide-box>
-  <ion-tabs delegate-handle="tab1" id="{{currentTabId}}" class="tabs-striped tabs-top">
-        <ion-tab ng-repeat="item in topTabs" on-select="selectedTab($index)" title="{{item.title}}"></ion-tab>
+  <ion-tabs delegate-handle="tab1" id="{{currentTabId}}" class="tabs-striped tabs-top tabs-bottom tabs-standard">
+        <!-- <ion-tab ng-repeat="item in topTabs" on-select="selectedTab($index)" title="{{item.title}}"></ion-tab> -->
+        <ion-tab   on-select="selectedTab(0)" title="推荐"></ion-tab>
+        <ion-tab   on-select="selectedTab(1)" title="专题"></ion-tab>
   </ion-tabs>
 </ion-view>

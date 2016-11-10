@@ -1,26 +1,40 @@
 var myApp = angular.module('starter.controllers', []);
 myApp.controller('homeCtrl', function($scope, $ionicTabsDelegate, getArticleList, $http, $ionicPopup, $timeout,
-    $cordovaDatePicker, $rootScope, $cordovaNetwork, AccountService, $ionicLoading, $ionicPlatform,categoryDate, $ionicSlideBoxDelegate ) {
-    $scope.imgUrl = urls.imgUrl;
+    $cordovaDatePicker, $rootScope, $cordovaNetwork, AccountService, $ionicLoading, $ionicPlatform,$ionicSlideBoxDelegate ) {
+    //categoryDate, 
     var userId = window.localStorage[cache.userId];
     var page = 1,
         count = 10;
     var isLock = false;
-    $scope.items = [];
+    $scope.items ={
+        articles:[],
+        categories:[]
+    };
+    var cate = {
+
+             title: "专题",
+             type: "article",
+             isload: true,
+           urlApi: urls.getCategory + "?have_data=0",
+    };
+    //items.categories
     $scope.hasMore = true;
     $scope.currentSlide = "slide1";
-    $scope.topTabs = categoryDate.getCate();
+    // $scope.topTabs = categoryDate.getCate();
     $scope.slideChanged = function(index) {
        // 获取对象配置
-       
-      var oSlide =categoryDate.getCate()[index];
-      if(index == 1){
-        //专题请求
-        oSlide.doRefresh(this);
-      }else{
-        //文章请求
-         
-      }
+      if(index ==1){
+        $http.get(cate.urlApi).then(function(response) {
+                    console.log(response);
+                     $scope.items.categories = response.data.result.categories.data; 
+                }, function(error) {
+                    console.log("doRefresh error");
+                }).finally(function() {
+                    $scope.$broadcast('scroll.refreshComplete');
+                });
+            }else{
+                hasArtCache($scope);
+            }
         //选中tabs
         //$ionicTabsDelegate.select(index);
     };
@@ -39,13 +53,11 @@ myApp.controller('homeCtrl', function($scope, $ionicTabsDelegate, getArticleList
        // $ionicTabsDelegate.showBar(true);
     });
 
-
-
     var fresh = function() {
         return getArticleList.getArticles(userId, 1, count).success(function(resp) {
             console.log(resp);
             if (resp.code == "200") {
-                $scope.items = resp.result.data;
+                $scope.items.articles = resp.result.data;
                 window.localStorage[articleCache.list] = JSON.stringify(resp.result.data);
                 $scope.hasContent = true;
                 $scope.hasMore = true;
@@ -60,9 +72,12 @@ myApp.controller('homeCtrl', function($scope, $ionicTabsDelegate, getArticleList
         })
     }
     fresh();
-    if (window.localStorage[articleCache.list]) {
-        $scope.items = angular.fromJson(window.localStorage[articleCache.list])
-    } else { fresh() };
+    var hasArtCache = function($scope) {
+        if (window.localStorage[articleCache.list]) {
+            $scope.items.articles = angular.fromJson(window.localStorage[articleCache.list])
+        } else { fresh() };
+    }
+    hasArtCache($scope);
 
     $scope.$on('$ionicView.beforeEnter', function() {
         var _user = AccountService.getCacheUser();
@@ -74,7 +89,7 @@ myApp.controller('homeCtrl', function($scope, $ionicTabsDelegate, getArticleList
         getArticleList.getArticles(userId, page, count).success(function(resp) {
             if (resp.code == "200") {
                 if (resp.result.data.length > 0) {
-                    $scope.items = $scope.items.concat(resp.result.data);
+                    $scope.items.articles = $scope.items.articles.concat(resp.result.data);
                     page++;
                 } else {
                     console.log("没有数据了...")
@@ -107,6 +122,46 @@ myApp.controller('homeCtrl', function($scope, $ionicTabsDelegate, getArticleList
 
 });
 
+myApp.controller('categoryArticleListCtrl', function($scope, $state,$stateParams,cateService) {
+    $scope.info = {
+        cateArts:[],
+        cateHead:null
+    }
+    var cateId = $stateParams.cate_id - 0;
+    cateService.getCateList(1,cateId).then(function(res){
+        console.log(res);
+        if(res.data.code ==404){
+             $scope.noArt = true;
+            $scope.noArtMsg = res.data.message;
+        }
+        if(res.status == 200 && res.data.code !==404){
+            $scope.info.cateArts = res.data.result.articles.data;
+            $scope.info.cateHead = res.data.result.category[0];
+        }else{
+            var tip = res.message;
+            console.log(tip);
+        }       
+    },function(err){
+        console.log("categoryArticleList error");
+    }).finally(function(){
+
+    })
+
+})
+myApp.controller('categoryArticleDetailCtrl', function($scope, $state,$stateParams,cateService) {
+    var cateId =  $stateParams.cate_id;
+    var artId =  $stateParams.art_id;
+    console.log($stateParams);
+
+    cateService.getCateArtDetail().then(function(res){
+        console.log(res);
+    },function(){
+
+    }).finally(function(){
+
+    })
+
+})
 myApp.controller('loginCtrl', function($scope, AccountService, $state, $ionicPopup, $ionicHistory) {
     $scope.phone = {
         tel: ''
@@ -412,8 +467,6 @@ myApp.controller('articleDetailCtrl', function($scope, $state, $stateParams, $io
     var page = 1;
     var count = 10;
     $scope.hasMedia = true;
-    $scope.imgUrl = urls.imgUrl;
-    //console.log($stateParams);
     var art_id = $stateParams.art_id - 0;
     //var isAdd = $stateParams.data?$stateParams.data.isAdd:false;
     var userId = window.localStorage[cache.userId] ? (window.localStorage[cache.userId] - 0) : undefined;
@@ -461,7 +514,7 @@ myApp.controller('articleDetailCtrl', function($scope, $state, $stateParams, $io
             $scope.item = resp.result;
             artId = resp.result.art_id;
             mediaOption.file = resp.result.art_media;
-            mediaOption.image = $scope.imgUrl + resp.result.art_thumb;
+            mediaOption.image = resp.result.art_thumb;
             $scope.hasMedia = resp.result.art_media ? true : false;
             $scope.flag.isAdd = (resp.result.collected == 0) ? false : true;
         }).success(function() {
@@ -608,7 +661,6 @@ myApp.controller('favListCtrl', function($scope, $state, $stateParams, $ionicHis
 
 //回复评论
 myApp.controller('replyCommentCtrl', function($scope, $state, $stateParams, ComService, $ionicHistory, $ionicPopup) {
-    $scope.imgUrl = urls.imgUrl;
     var data = $stateParams.data;
     $scope.commentItem = data;
     $scope.replyComment = {
@@ -638,7 +690,6 @@ myApp.controller('replyCommentCtrl', function($scope, $state, $stateParams, ComS
 
 //发布评论
 myApp.controller('pubCommentCtrl', function($scope, $state, $stateParams, ComService, $ionicHistory, $ionicPopup) {
-        $scope.imgUrl = urls.imgUrl;
         var data = $stateParams.data;
         $scope.item = data;
         $scope.pubCom = {

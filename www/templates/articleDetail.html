@@ -1,21 +1,17 @@
-<ion-view view-title="文章详情">
+<ion-view view-title="{{}}">
     <!--     <ion-nav-buttons side="left">
-      <span class="iconfont icon-back fontSize backBtn" onclick="javascript:history.go(-1)"></span>
+      <span class="iconfont icon-back fs26 backBtn" onclick="javascript:history.go(-1)"></span>
     </ion-nav-buttons> -->
     <ion-nav-buttons side="right">
-        <span class="iconfont icon-share fontSize" ng-click="share()" id="btn"></span>
-        <span class="iconfont icon-comment fontSize" ng-click="pubComment()"></span>
-        <span ng-class="{true:'icon-shoucanghou comment-red', false:'icon-shoucang'}[flag.isAdd]" class="iconfont fontSize" ng-model="flag.isAdd" ng-click="addFavorites()"></span>
+        <span class="iconfont icon-share fs26" ng-click="share()" id="btn"></span>
+        <span class="iconfont icon-comment fs26" ng-click="pubComment()"></span>
+        <span ng-class="{true:'icon-shoucanghou comment-red', false:'icon-shoucang'}[flag.isAdd]" class="iconfont fs26" ng-model="flag.isAdd" ng-click="addFavorites()"></span>
     </ion-nav-buttons>
     <ion-content>
         <div class="articleWrap">
             <div class="articlePic" id="articleCon">
-                <!-- ng-bind-html="html | to_trusted" -->
-                <!-- <div class="articlePic" on-render-finish>-->
-                <div ng-if="hasMedia">
-                    <div id="art_media"></div>
-                </div>
-                <img ng-if="!hasMedia" alt="" ng-src="{{imgUrl+item.art_thumb}}">
+                <div ng-if="hasMedia"><div id="art_media"></div></div>
+                <img ng-if="!hasMedia" alt="" ng-src="{{item.art_thumb}}">
             </div>
             <div class="contentArticle">
                 <h1>{{item.art_title}}</h1>
@@ -28,7 +24,7 @@
         </div>
         <div class="comments">
             <h3>- 评论 ({{currentArticleComTotal}}) -  </h3>
-            <div class="noComments">
+            <div class="noComMsg">
                 <span ng-if="!hasComment" ng-bind="noComment"></span>
             </div>
             <ul ng-if="hasComment">
@@ -37,7 +33,7 @@
                     <div class="detail">
                         <div class="title">
                             <time>{{comment.publishTime*1000 | date:"yyyy-MM-dd HH:mm"}}</time>{{comment.nickname}}</div>
-                        <p  ng-click="replyCom()">{{comment.content}}</p>
+                        <p ng-click="replyCom()">{{comment.content}}</p>
                         <div class="like"><i class="iconfont icon-like" ng-click="getLike(comment)"></i>
                         {{comment.likecount}}</div>
                         <div class="commentsBox" ng-hide="{{comment.comments.length==0}}"> 
